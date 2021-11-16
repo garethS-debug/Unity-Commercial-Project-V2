@@ -361,6 +361,7 @@ MonoBehaviour:
   bonfireHuman: {fileID: 1437208105260186494}
   isHostVersion: 0
   remainingPlayerID: 0
+  playerCurrentlyInRoom: 0
   DebugMode: 0
 --- !u!65 &4902874812327242995
 BoxCollider:
@@ -6375,6 +6376,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BonfireHuman
       objectReference: {fileID: 0}
+    - target: {fileID: 1648103272126973518, guid: 0f8032ecd2cd99f4885ecaea49bc4fc6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2131589783073971444, guid: 0f8032ecd2cd99f4885ecaea49bc4fc6,
         type: 3}
       propertyPath: m_RootOrder
@@ -6743,7 +6749,7 @@ PrefabInstance:
     - target: {fileID: 7605801967231495552, guid: f4d84259a5f58a5489417586c4b5de47,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4d84259a5f58a5489417586c4b5de47, type: 3}

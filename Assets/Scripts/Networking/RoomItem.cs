@@ -38,6 +38,7 @@ public class RoomItem : MonoBehaviour
 
     [Header("RequiredPlayer")]
     public int remainingPlayerID;
+    public int playerCurrentlyInRoom;
     public bool DebugMode;
 
 
@@ -70,13 +71,13 @@ public class RoomItem : MonoBehaviour
         //Room ID required (opposite to joining player)
         //----HUman = 1
         //----Ghost = 2
-        if (remainingPlayerID == 1)
+        if (remainingPlayerID == 2)
         {
             bonfireHuman.SetActive(true);
             bonfireGhost.SetActive(false);
         }
 
-        if (remainingPlayerID == 2)
+        if (remainingPlayerID == 1)
         {
             bonfireHuman.SetActive(false);
             bonfireGhost.SetActive(true);
@@ -101,9 +102,7 @@ public class RoomItem : MonoBehaviour
   
     public void OnClickItem()
     {
-        roomButton.SetActive(false);
-
-        PasswordBox.gameObject.SetActive(false);
+    
 
 
         //Check for remaining player ID
@@ -124,8 +123,11 @@ public class RoomItem : MonoBehaviour
             {
                 Debug.Log("WELL DONE PASSWORD CORRECT");
                 manager.JoinRoom(roomName.text);
-        
-            }
+                    roomButton.SetActive(false);
+
+                    PasswordBox.gameObject.SetActive(false);
+
+                }
 
             else
             {
@@ -137,8 +139,11 @@ public class RoomItem : MonoBehaviour
         if (!passwordRequired)
         {
             manager.JoinRoom(roomName.text);
+                roomButton.SetActive(false);
 
-        }
+                PasswordBox.gameObject.SetActive(false);
+
+            }
         }
 
     }

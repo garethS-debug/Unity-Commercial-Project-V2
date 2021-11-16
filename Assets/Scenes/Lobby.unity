@@ -16631,7 +16631,7 @@ PrefabInstance:
     - target: {fileID: 4907084343292006732, guid: 1a4fb0460d1348740be801d624cb7e31,
         type: 3}
       propertyPath: cutSceneDelayAtStart
-      value: 30
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 6798919840520073586, guid: 1a4fb0460d1348740be801d624cb7e31,
         type: 3}
