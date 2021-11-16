@@ -146,6 +146,43 @@ public class RoomItem : MonoBehaviour
             }
         }
 
+        if (DebugMode == true) 
+        
+        
+        {
+            if (passwordRequired)
+            {
+                passwordtext = password.text;
+
+                if (passwordtext == thePasswordDummy)
+                {
+                    Debug.Log("WELL DONE PASSWORD CORRECT");
+                    manager.JoinRoom(roomName.text);
+                    roomButton.SetActive(false);
+
+                    PasswordBox.gameObject.SetActive(false);
+
+                }
+
+                else
+                {
+                    Debug.Log("PASSWORD INCORRECT");
+                    Debug.Log("You Entered " + passwordtext);
+                }
+
+            }
+            if (!passwordRequired)
+            {
+                manager.JoinRoom(roomName.text);
+                roomButton.SetActive(false);
+
+                PasswordBox.gameObject.SetActive(false);
+
+            }
+
+
+        }
+
     }
 
     public void onClickLeaveRoom()
