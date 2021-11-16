@@ -18,7 +18,7 @@ public class NetWorkedPlayerManager : MonoBehaviour
 
     public List<GameObject> spawnPoints = new List<GameObject>();
 
-
+    public GameObject playerInScene;
 
     PhotonView PV;
 
@@ -83,6 +83,6 @@ public class NetWorkedPlayerManager : MonoBehaviour
         Debug.Log("Im located on " + this.gameObject);
         //  PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerController"), Vector3.zero, Quaternion.identity);
 
-        PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoint.position, Quaternion.identity);
+        playerInScene = PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoint.position, Quaternion.identity);
     }
 }

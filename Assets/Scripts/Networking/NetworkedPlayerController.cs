@@ -221,13 +221,12 @@ public class NetworkedPlayerController : MonoBehaviour
 	void Update()
 	{
 
-	
 
 	}
 
 	private void LateUpdate()
 	{
-
+		
 	}
 
 
@@ -254,6 +253,7 @@ public class NetworkedPlayerController : MonoBehaviour
 		Move5();
 		Jump();
 		PerformActionCheck();
+
 
 	}
 

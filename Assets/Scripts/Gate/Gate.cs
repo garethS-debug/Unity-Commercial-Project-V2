@@ -28,15 +28,15 @@ public class Gate : MonoBehaviour
 
     public void Start()
     {
-        if (roomManager.networkedPlayer != null)
-        {
-            player = roomManager.networkedPlayer;                   //This gets the player from the Room Manager, which spawns the player
-        }
+      
 
-        else
-        {
-            print("Error!");
-        }
+
+      //  player = roomManager.networkedPlayerManager.gameObject.GetComponent<NetWorkedPlayerManager>().playerInScene;                   //This gets the player from the Room Manager, which spawns the player
+
+
+  
+
+       
     
     }
 
