@@ -5157,13 +5157,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 967515333}
-  m_LocalRotation: {x: -0.14635435, y: -0.8169576, z: 0.50275093, w: 0.2416657}
+  m_LocalRotation: {x: 0.06230135, y: -0.79987305, z: 0.59668386, w: 0.017033247}
   m_LocalPosition: {x: 7600.1, y: 27964.1, z: -9513.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 954518855}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 48.652, y: -124.869, z: 46.87}
+  m_LocalEulerAnglesHint: {x: 73.071, y: -189.308, z: -15.811}
 --- !u!114 &967515335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5297,14 +5297,14 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.8113208, g: 0.6949813, b: 0.42607093, a: 1}
+  m_Color: {r: 0.8930817, g: 0.9746761, b: 1, a: 1}
   m_Intensity: 1353.6157
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -9170,6 +9170,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7325134344758725574, guid: e3db3222b3467604a97161847ac3d09e,
         type: 3}
+      propertyPath: gateRend
+      value: 
+      objectReference: {fileID: 7325134343403450173}
+    - target: {fileID: 7325134344758725574, guid: e3db3222b3467604a97161847ac3d09e,
+        type: 3}
+      propertyPath: gateRend2
+      value: 
+      objectReference: {fileID: 7325134343403450173}
+    - target: {fileID: 7325134344758725574, guid: e3db3222b3467604a97161847ac3d09e,
+        type: 3}
       propertyPath: roomManager
       value: 
       objectReference: {fileID: 482707163}
@@ -9192,6 +9202,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3db3222b3467604a97161847ac3d09e, type: 3}
+--- !u!23 &7325134343403450173 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7325134344758725579, guid: e3db3222b3467604a97161847ac3d09e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7325134343403450172}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9050256769211929971
 PrefabInstance:
   m_ObjectHideFlags: 0

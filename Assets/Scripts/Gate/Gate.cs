@@ -4,7 +4,8 @@ using UnityEngine;
 using Photon.Pun;
 public class Gate : MonoBehaviour
 {
-    private MeshRenderer gateRend;
+    public MeshRenderer gateRend;
+    public Renderer gateRend2;
     private static Gate instance;
     private GameObject player;
     public InventoryObject inventoryHuman;
@@ -17,7 +18,7 @@ public class Gate : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        gateRend = GetComponent<MeshRenderer>();
+       // gateRend = GetComponent<MeshRenderer>();
        // player = GameObject.FindGameObjectWithTag("Player");                //Players dont spawn on load, so this might miss the players. 
         anim = GetComponent<Animator>();
         photonView = PhotonView.Get(this);       //Get PhotonView on this gameobject
@@ -87,14 +88,16 @@ public class Gate : MonoBehaviour
   void ChangeTheColor()                                      //Making sure the object is destroyed on everyones copy of the game
   {
       gateRend.material.color = Color.yellow;
-
-  }
+        gateRend2.material.color = Color.yellow;
+    }
 
 
     [PunRPC]
     void PauseAnimation()                                      //Making sure the object is destroyed on everyones copy of the game
     {
-        anim.enabled = false;
+      //  anim.enabled = false;                         //This removes the transform psotions that the animation was giving the door, and the door literally falls over. 
+
+        print("Stop Door Closing");
 
     }
     /*
