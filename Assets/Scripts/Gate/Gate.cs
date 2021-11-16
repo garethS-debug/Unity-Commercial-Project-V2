@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class Gate : MonoBehaviour
 {
     private MeshRenderer gateRend;
@@ -12,7 +12,7 @@ public class Gate : MonoBehaviour
     private Animator anim;
 
     public RoomManager roomManager;
-
+    PhotonView photonView;
 
     private void Awake()
     {
@@ -20,6 +20,8 @@ public class Gate : MonoBehaviour
         gateRend = GetComponent<MeshRenderer>();
        // player = GameObject.FindGameObjectWithTag("Player");                //Players dont spawn on load, so this might miss the players. 
         anim = GetComponent<Animator>();
+        photonView = PhotonView.Get(this);       //Get PhotonView on this gameobject
+
     }
 
 
@@ -43,7 +45,8 @@ public class Gate : MonoBehaviour
     {
         if (inventoryHuman.twoKeysCollected || inventoryGhost.twoKeysCollected)
         {
-            ChangeColor();
+           // ChangeColor();
+            photonView.RPC("ChangeTheColor", RpcTarget.All);    //Send an RPC call to everyone 
         }
     }
 
@@ -51,19 +54,57 @@ public class Gate : MonoBehaviour
     {
         if ((inventoryHuman.twoKeysCollected || inventoryGhost.twoKeysCollected) && other.gameObject.tag == "Player")
         {
-            print("Door Open");
-            anim.SetTrigger("OpenDoor");
+         
+            photonView.RPC("OpenDoor", RpcTarget.All);    //Send an RPC call to everyone 
+
         }
     }
 
     public void pauseAnimationEvent()
     {
-        anim.enabled = false;
+      //  anim.enabled = false;
+        photonView.RPC("PauseAnimation", RpcTarget.All);    //Send an RPC call to everyone 
     }
 
-    public void ChangeColor()
+    /*
+  public void ChangeColor()
+  {
+      gateRend.material.color = Color.yellow;
+  }
+      */
+
+    [PunRPC]
+  void OpenDoor()                                      //Making sure the object is destroyed on everyones copy of the game
+  {
+      print("Door Open");
+      anim.SetTrigger("OpenDoor");
+
+  }
+
+
+
+  [PunRPC]
+  void ChangeTheColor()                                      //Making sure the object is destroyed on everyones copy of the game
+  {
+      gateRend.material.color = Color.yellow;
+
+  }
+
+
+    [PunRPC]
+    void PauseAnimation()                                      //Making sure the object is destroyed on everyones copy of the game
     {
-        gateRend.material.color = Color.yellow;
+        anim.enabled = false;
+
     }
+    /*
+      [PunRPC]
+      void DestroyObject()                                      //Making sure the object is destroyed on everyones copy of the game
+      {
+          print("Item being destroyed");
+          this.gameObject.SetActive(false);
+
+      }
+      */
 
 }
