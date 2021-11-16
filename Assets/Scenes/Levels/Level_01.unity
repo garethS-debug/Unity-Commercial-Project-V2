@@ -4504,7 +4504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &831108743
 Transform:
   m_ObjectHideFlags: 0
@@ -8945,6 +8945,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 53298884}
     m_Modifications:
+    - target: {fileID: 5507360882064365073, guid: 2dded3f388ee9714087dfb16e35ed82a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5507360882064365077, guid: 2dded3f388ee9714087dfb16e35ed82a,
         type: 3}
       propertyPath: RespawnPOints.Array.data[0]
@@ -8978,7 +8983,7 @@ PrefabInstance:
     - target: {fileID: 5507360882064365551, guid: 2dded3f388ee9714087dfb16e35ed82a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -285
+      value: -526
       objectReference: {fileID: 0}
     - target: {fileID: 5507360882064365551, guid: 2dded3f388ee9714087dfb16e35ed82a,
         type: 3}
@@ -9112,7 +9117,7 @@ PrefabInstance:
     - target: {fileID: 9050256769362246093, guid: d401395dc152ffb4f88e9405b4b23e8e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.8
+      value: 4.1
       objectReference: {fileID: 0}
     - target: {fileID: 9050256769362246093, guid: d401395dc152ffb4f88e9405b4b23e8e,
         type: 3}
