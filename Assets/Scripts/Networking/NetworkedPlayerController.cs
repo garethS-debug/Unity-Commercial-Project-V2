@@ -220,18 +220,6 @@ public class NetworkedPlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-
-
-	}
-
-	private void LateUpdate()
-	{
-		
-	}
-
-
-	void FixedUpdate()
-	{
 		//Move();
 
 
@@ -253,6 +241,18 @@ public class NetworkedPlayerController : MonoBehaviour
 		Move5();
 		Jump();
 		PerformActionCheck();
+
+	}
+
+	private void LateUpdate()
+	{
+		
+	}
+
+
+	void FixedUpdate()
+	{
+	
 
 
 	}
