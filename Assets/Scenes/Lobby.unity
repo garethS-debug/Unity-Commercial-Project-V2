@@ -1052,7 +1052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 107
+    m_Left: 190
     m_Right: -56
     m_Top: 154
     m_Bottom: 0
@@ -1314,8 +1314,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 454, y: -208}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 65.7, y: -190.6}
+  m_SizeDelta: {x: 127.4564, y: 18.814}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &201567668
 MonoBehaviour:
@@ -2613,8 +2613,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -13121,14 +13121,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 4b86ac945c0616e4ba7db2a213d3541e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13357,7 +13357,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -18.4602, y: -223}
+  m_AnchoredPosition: {x: -54.6, y: -200.01}
   m_SizeDelta: {x: 123.0795, y: 18.812}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1595402437
@@ -16614,11 +16614,11 @@ PrefabInstance:
     - target: {fileID: 4907084343292006732, guid: 1a4fb0460d1348740be801d624cb7e31,
         type: 3}
       propertyPath: story
-      value: "\r\nThe Trainstation, a mystical realm where a sleeping human and the
-        recently departed spirits of their family can commune, one last time, to
-        help both move on. \r\n\r\nAll one has to do is enter the grove behind the
-        train station and set a campfire, their family will be drawn to this fire
-        and they can then begin their journey to overcome grief.\r\n"
+      value: "\nThe Train Station, a mystical realm where any sleeping human and
+        the recently departed spirits of their family can commune, one last time,
+        to help them both move on. \n\nAll one has to do is enter the grove behind
+        the train station and create a campfire, their family will be drawn to this
+        fire to begin their long journey to overcome their grief."
       objectReference: {fileID: 0}
     - target: {fileID: 4907084343292006732, guid: 1a4fb0460d1348740be801d624cb7e31,
         type: 3}

@@ -293,7 +293,7 @@ RectTransform:
   m_GameObject: {fileID: 7811040095325805318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.57214, y: 0.57214, z: 0.57214}
+  m_LocalScale: {x: 0.60761267, y: 0.57214, z: 0.57214}
   m_Children:
   - {fileID: 7811040096229009620}
   - {fileID: 7811040097353156961}
@@ -328,9 +328,9 @@ MonoBehaviour:
   rightArrowButton: {fileID: 7811040097278284772}
   playerAvatar: {fileID: 7811040095426152701}
   avatars:
-  - {fileID: 21300000, guid: 20134e6beed114c4db17cf39babeaa68, type: 3}
-  - {fileID: 21300000, guid: 2b8aeaeda9b67457095df13085517414, type: 3}
-  - {fileID: 21300000, guid: 8a2d881dc3f4442d7912658423e6408a, type: 3}
+  - {fileID: 21300000, guid: 6d76a67eba80d5d4780d445ea8d6af9c, type: 3}
+  - {fileID: 21300000, guid: 4b86ac945c0616e4ba7db2a213d3541e, type: 3}
+  - {fileID: 21300000, guid: 9297f8d9d30ad4642896a178a06a4c39, type: 3}
   KickButton: {fileID: 5666742609160195068}
   playerSOData: {fileID: 11400000, guid: f6bbc180c160720489c9048e80112be2, type: 2}
 --- !u!1 &7811040095426152703
@@ -360,7 +360,7 @@ RectTransform:
   m_GameObject: {fileID: 7811040095426152703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.7776, y: 2.7776, z: 2.7776}
   m_Children: []
   m_Father: {fileID: 7811040095325805317}
   m_RootOrder: 2
@@ -559,7 +559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7811040096229009620
 RectTransform:
   m_ObjectHideFlags: 0

@@ -12,8 +12,8 @@ public class Item : MonoBehaviour
 
     public void DestroyItem()
     {
-         PhotonView photonView = PhotonView.Get(this);       //Get PhotonView on this gameobject
-         photonView.RPC("DestroyObject", RpcTarget.All);    //Send an RPC call to everyone 
+         PhotonView photonView = PhotonView.Get(this);          //Get PhotonView on this gameobject
+         photonView.RPC("DestroyObject", RpcTarget.All);        //Send an RPC call to everyone 
     }
 
 
