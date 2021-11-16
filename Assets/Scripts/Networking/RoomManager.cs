@@ -11,6 +11,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public static RoomManager Instance;
 
+    public GameObject networkedPlayer;
+
     private void Awake()
     {
         if (Instance)                                   //If room manager already in scene
@@ -61,7 +63,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         print("Creating Player : ".Color("Green"));
 
-        GameObject networkedPlayer = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+         networkedPlayer = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
        // networkedPlayer.gameObject.GetComponent<NetworkedPlayerController>().isInLobby = false;
     }
 
