@@ -222,11 +222,26 @@ public class NetworkedPlayerController : MonoBehaviour
 	{
 
 		//Move();
-	
+
 
 		//this wont allow for backwards movement
 		//Rotate(toRot);
+		if (isInLobby == false)
+		{
+			if (!PV.IsMine)
+			{
+				return;
+			}
+		}
 
+
+		//Existing Movement Script
+		//m_Rigidbody.MovePosition(m_Rigidbody.position + transform.TransformDirection(movementWithInversion) * Time.fixedDeltaTime);
+
+		//Move 3 is the current edition 
+		Move5();
+		Jump();
+		PerformActionCheck();
 
 	}
 
@@ -238,28 +253,13 @@ public class NetworkedPlayerController : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if (isInLobby == false)
-        {
-			if (!PV.IsMine)
-			{
-				return;
-			}
-		}
 		
 
-		//Existing Movement Script
-		//m_Rigidbody.MovePosition(m_Rigidbody.position + transform.TransformDirection(movementWithInversion) * Time.fixedDeltaTime);
-
-		//Move 3 is the current edition 
-		Move5();
-		Jump();
-		PerformActionCheck();
-	
 	}
 
 
 
-    public void Move5()
+	public void Move5()
     {
 		float horizontalInput = Input.GetAxisRaw("Horizontal"); //-1 and +1 (-1 for left , + 1 for right)
 		float verticalInput = Input.GetAxisRaw("Vertical"); // -1 and +1  (+ 1 up, - 1 down) 
