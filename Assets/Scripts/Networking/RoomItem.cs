@@ -33,11 +33,13 @@ public class RoomItem : MonoBehaviour
     public GameObject LobbySpawnPoint;
     public GameObject BonfireGO;
     public GameObject bonfireGhost;
+    public GameObject bonfireHuman;
     public bool isHostVersion;
 
     [Header("RequiredPlayer")]
     public int remainingPlayerID;
     public bool DebugMode;
+
 
     private void Start()
     {
@@ -63,6 +65,22 @@ public class RoomItem : MonoBehaviour
 
         roomButton.SetActive(false);
         PasswordBox.gameObject.SetActive(false);
+
+
+        //Room ID required (opposite to joining player)
+        //----HUman = 1
+        //----Ghost = 2
+        if (remainingPlayerID == 1)
+        {
+            bonfireHuman.SetActive(true);
+            bonfireGhost.SetActive(false);
+        }
+
+        if (remainingPlayerID == 2)
+        {
+            bonfireHuman.SetActive(false);
+            bonfireGhost.SetActive(true);
+        }
     }
 
 
