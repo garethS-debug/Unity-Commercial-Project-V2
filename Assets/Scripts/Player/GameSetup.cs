@@ -119,6 +119,7 @@ public class GameSetup : MonoBehaviour
     {
 
 		PlayerCharacter = 1;
+		playerSOData.PlayerCharacterChoise = PlayerCharacter;
 		//Debug.Log("Saving....");
 		playerName = ChildNameInput.text;
 		SaveGameManager.Save();
@@ -129,6 +130,7 @@ public class GameSetup : MonoBehaviour
 	public void SELECT_GHOSTCHARACTER()
 	{
 		PlayerCharacter = 2;
+		playerSOData.PlayerCharacterChoise = PlayerCharacter;
 		//Debug.Log("Saving....");
 		playerName = GhostNameInput.text;
 		SaveGameManager.Save();
