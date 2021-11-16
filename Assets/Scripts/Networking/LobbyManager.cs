@@ -405,7 +405,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             //Room ID required (opposite to joining player)
             //----HUman = 1
             //----Ghost = 2
-
+            // --- When updating room it will spawn the opposite 
             if ((int)info.CustomProperties["playerType"] == 1)
             {
                 print("Ghost Needed");

@@ -14,10 +14,13 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
     bool SpawnedPiece;
 
+    public GameObject UI;
+
     // Start is called before the first frame update
     void Start()
     {
         SpawnedPiece = false;
+        UI.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -39,7 +42,7 @@ public class BidgePuzzle_Lever : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-
+            UI.gameObject.SetActive(true);
             //Open UI
 
             NetworkedPlayerController controller = other.gameObject.GetComponent<NetworkedPlayerController>();
@@ -61,7 +64,7 @@ public class BidgePuzzle_Lever : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            //Close UI
+            UI.gameObject.SetActive(false);  //Close UI
         }
     }
 }
