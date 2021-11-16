@@ -20,6 +20,7 @@ public class Item : MonoBehaviour
     [PunRPC]
     void DestroyObject()                                      //Making sure the object is destroyed on everyones copy of the game
     {
+        print("Item being destroyed");
         this.gameObject.SetActive(false);
 
     }

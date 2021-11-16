@@ -47,7 +47,7 @@ public class Gate : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         if ((inventoryHuman.twoKeysCollected || inventoryGhost.twoKeysCollected) && other.gameObject.tag == "Player")
         {
