@@ -12,4 +12,6 @@ public class CharacterID : MonoBehaviour
     public bool isHumanCharater;
 
 
+    [Header("SO")]
+    public PlayerSO playerSOData;
 }

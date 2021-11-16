@@ -26,6 +26,8 @@ public class IntroCutScene : MonoBehaviour
     [TextArea]
     public string story;
 
+    [Header("Debug")]
+     bool SkipCutScene;
     /*
      * 
      *   
@@ -48,7 +50,16 @@ public class IntroCutScene : MonoBehaviour
     {
      //   trainAnimator.SetBool("StartEntry", false);
         //Start the coroutine we define below named ExampleCoroutine.
-        StartCoroutine(CutSceneCoRoutine());
+        if (SkipCutScene == false)
+        {
+            StartCoroutine(CutSceneCoRoutine());
+        }
+
+        if (SkipCutScene == true)
+        {
+            lobbyManager.OnTriggerSpawnPlayers();
+        }
+
 
     }
 

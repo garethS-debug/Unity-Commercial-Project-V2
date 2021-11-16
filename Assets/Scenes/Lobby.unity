@@ -155,7 +155,7 @@ Transform:
   m_LocalScale: {x: 53.834614, y: 28.623947, z: 14.262277}
   m_Children: []
   m_Father: {fileID: 609571561}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &26814049
 MonoBehaviour:
@@ -3545,7 +3545,6 @@ Transform:
   - {fileID: 1956873785}
   - {fileID: 889676381}
   - {fileID: 395979800}
-  - {fileID: 750521920}
   - {fileID: 26814048}
   m_Father: {fileID: 0}
   m_RootOrder: 11
@@ -4290,6 +4289,7 @@ Transform:
   m_LocalPosition: {x: 231, y: 1.4, z: -232}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 750521920}
   - {fileID: 2077754618}
   - {fileID: 2014218511}
   - {fileID: 1125524724}
@@ -5308,11 +5308,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750521919}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 52.3916, y: -214.44687, z: -119.87793}
-  m_LocalScale: {x: 53.834614, y: 28.623947, z: 14.262277}
+  m_LocalPosition: {x: -40.100006, y: -3.9, z: 49.700012}
+  m_LocalScale: {x: 53.834614, y: 28.623943, z: 14.262275}
   m_Children: []
-  m_Father: {fileID: 609571561}
-  m_RootOrder: 5
+  m_Father: {fileID: 668998100}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &750521921
 MonoBehaviour:
@@ -7541,7 +7541,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 668998100}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1151477134
 GameObject:
@@ -13789,7 +13789,7 @@ GameObject:
   - component: {fileID: 1696859226}
   m_Layer: 0
   m_Name: LobbyManager
-  m_TagString: Untagged
+  m_TagString: LobbyManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13860,6 +13860,7 @@ MonoBehaviour:
   - {fileID: 2051517012}
   - {fileID: 31682055}
   - {fileID: 1109326015}
+  spawnedLobbyPlayer: {fileID: 0}
   regionTextbox: {fileID: 939446150}
   lobbyUI: {fileID: 312508759}
 --- !u!114 &1696859226
@@ -15789,7 +15790,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 668998100}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2051517012
 GameObject:
@@ -16029,7 +16030,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 668998100}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2093779159 stripped
 GameObject:
@@ -16593,6 +16594,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CutScene
       objectReference: {fileID: 0}
+    - target: {fileID: 2710013671130269145, guid: 1a4fb0460d1348740be801d624cb7e31,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4907084343292006732, guid: 1a4fb0460d1348740be801d624cb7e31,
         type: 3}
       propertyPath: txt
@@ -16611,6 +16617,11 @@ PrefabInstance:
         help both move on. \r\n\r\nAll one has to do is enter the grove behind the
         train station and set a campfire, their family will be drawn to this fire
         and they can then begin their journey to overcome grief.\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907084343292006732, guid: 1a4fb0460d1348740be801d624cb7e31,
+        type: 3}
+      propertyPath: SkipCutScene
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4907084343292006732, guid: 1a4fb0460d1348740be801d624cb7e31,
         type: 3}

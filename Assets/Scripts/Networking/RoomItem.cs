@@ -35,6 +35,10 @@ public class RoomItem : MonoBehaviour
     public GameObject bonfireGhost;
     public bool isHostVersion;
 
+    [Header("RequiredPlayer")]
+    public int remainingPlayerID;
+    public bool DebugMode;
+
     private void Start()
     {
         manager = FindObjectOfType<LobbyManager>();
@@ -84,6 +88,16 @@ public class RoomItem : MonoBehaviour
         PasswordBox.gameObject.SetActive(false);
 
 
+        //Check for remaining player ID
+        //get your instance of lobby manager
+        LobbyManager lobbymanager = GameObject.FindGameObjectWithTag("LobbyManager").GetComponent<LobbyManager>();
+        print("Your ID is : " + lobbymanager.spawnedLobbyPlayer.GetComponent<CharacterID>().playerSOData.PlayerCharacterChoise + "Remaining ID is " + remainingPlayerID);
+
+        if (DebugMode == false && lobbymanager.spawnedLobbyPlayer.GetComponent<CharacterID>().playerSOData.PlayerCharacterChoise == remainingPlayerID)
+        {
+
+        
+
         if (passwordRequired)
         {
             passwordtext = password.text;
@@ -107,9 +121,9 @@ public class RoomItem : MonoBehaviour
             manager.JoinRoom(roomName.text);
 
         }
-
-
         }
+
+    }
 
     public void onClickLeaveRoom()
     {
