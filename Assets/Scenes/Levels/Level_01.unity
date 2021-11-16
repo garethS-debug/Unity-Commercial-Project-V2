@@ -1957,7 +1957,7 @@ PrefabInstance:
     - target: {fileID: 1648103272126973518, guid: 97ff5e5dccbc6c4498a45186ba4cd06a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2131589783073971444, guid: 97ff5e5dccbc6c4498a45186ba4cd06a,
         type: 3}
@@ -6287,25 +6287,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1365509009}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1372071155 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7325134344758725583, guid: e3db3222b3467604a97161847ac3d09e,
-    type: 3}
-  m_PrefabInstance: {fileID: 7325134343403450172}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &1372071156
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1372071155}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.527002
-  m_Center: {x: -0.7741699, y: 0, z: 0}
 --- !u!1001 &1379687644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9063,6 +9044,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1372071156, guid: e3db3222b3467604a97161847ac3d09e, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7325134344758725573, guid: e3db3222b3467604a97161847ac3d09e,
         type: 3}
       propertyPath: m_RootOrder
@@ -9118,24 +9103,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7325134344758725574, guid: e3db3222b3467604a97161847ac3d09e,
+    - target: {fileID: 7325134344758725577, guid: e3db3222b3467604a97161847ac3d09e,
         type: 3}
-      propertyPath: inventoryGhost
-      value: 
-      objectReference: {fileID: 11400000, guid: 70956a508eb072542b381630a9824f78,
-        type: 2}
-    - target: {fileID: 7325134344758725574, guid: e3db3222b3467604a97161847ac3d09e,
-        type: 3}
-      propertyPath: inventoryHuman
-      value: 
-      objectReference: {fileID: 11400000, guid: 5dea348939dc7a84ba7f335378ccea4f,
-        type: 2}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7325134344758725583, guid: e3db3222b3467604a97161847ac3d09e,
         type: 3}
       propertyPath: m_Name
       value: Gate
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7325134344758725578, guid: e3db3222b3467604a97161847ac3d09e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e3db3222b3467604a97161847ac3d09e, type: 3}
 --- !u!1001 &9050256769211929971
 PrefabInstance:
