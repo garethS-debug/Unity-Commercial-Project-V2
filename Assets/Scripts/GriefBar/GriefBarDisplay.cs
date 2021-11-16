@@ -11,12 +11,15 @@ public class GriefBarDisplay : MonoBehaviour
     public int maxGrief = 100;
     public int currentGrief;
 
+    public RoomManager room;
+
+
     public void Start()
     {
-        CreateDisplay();
+       
         currentGrief = maxGrief;
         SetMaxGrief(maxGrief);
-
+     //   CreateDisplay();          // moving this to the room manager to ensure it runs after player spawn
     }
 
     private void Update()
@@ -29,6 +32,37 @@ public class GriefBarDisplay : MonoBehaviour
 
     public void CreateDisplay()
     {
+
+       // if (room.networkedPlayer!= null)
+       // {
+
+            if (room.networkedPlayer.gameObject.GetComponent<CharacterID>().isHumanCharater)
+            {
+                print("Setting Human Cnadle");
+                var obj = Instantiate(griefBarHuman.griefBarPrefab, Vector3.zero, Quaternion.identity, transform);
+                obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
+                slider.fillRect = obj.GetComponent<RectTransform>();
+            }
+
+            if (room.networkedPlayer.gameObject.GetComponent<CharacterID>().isGhostCharacer)
+            {
+
+                print("Setting Ghost Cnadle");
+                var obj = Instantiate(griefBarGhost.griefBarPrefab, Vector3.zero, Quaternion.identity, transform);
+                obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
+                slider.fillRect = obj.GetComponent<RectTransform>();
+          //  }
+
+
+        }
+
+       // else
+      //  {
+          //  print("is null");
+      //  }
+
+
+        /*
         if (GameObject.Find("HumanPlayerCharacter"))
         {
             var obj = Instantiate(griefBarHuman.griefBarPrefab, Vector3.zero, Quaternion.identity, transform);
@@ -42,6 +76,7 @@ public class GriefBarDisplay : MonoBehaviour
             obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
             slider.fillRect = obj.GetComponent<RectTransform>();
         }
+        */
     }
 
     private void SetMaxGrief(int grief)
