@@ -703,7 +703,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //  PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerController"), Vector3.zero, Quaternion.identity);
 
 
-        print("Spawned Player ID = " + (int)playerproperties["playerAvatar"]);
+            print("Spawned Player ID = " + (int)playerproperties["playerAvatar"]);
 
           spawnedLobbyPlayer =  Instantiate(playerToSpawn, spawnPoint.position, spawnPoint.rotation);
             spawnedLobbyPlayer.gameObject.GetComponent<NetworkedPlayerController>().isInLobby = true;
