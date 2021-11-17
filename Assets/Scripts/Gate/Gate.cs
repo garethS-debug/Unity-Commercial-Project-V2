@@ -48,7 +48,7 @@ public class Gate : MonoBehaviour
     {
         if (inventoryHuman.twoKeysCollected || inventoryGhost.twoKeysCollected)
         {
-            if (hasCollectedItems = false)
+            if (hasCollectedItems == false)
             {
                 // ChangeColor();
                 photonView.RPC("ChangeTheColor", RpcTarget.All);    //Send an RPC call to everyone 
