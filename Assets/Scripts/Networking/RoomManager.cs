@@ -15,6 +15,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public GriefBarDisplay griefBar;
 
+
+    public bool SinglePLayerMode;
+
+
     private void Awake()
     {
         if (Instance)                                   //If room manager already in scene
@@ -60,7 +64,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         // if (scene.buildIndex == 1) // if we are in the game scene
         // {
-        networkedPlayerManager  =   PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+
+        if (SinglePLayerMode == false)
+        {
+            networkedPlayerManager = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+        }
+      
      //   networkedPlayer.gameObject.GetComponent<NetworkedPlayerController>().isInLobby = false;
       //  }
     }
