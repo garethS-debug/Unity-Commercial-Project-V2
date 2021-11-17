@@ -50,10 +50,10 @@ public class IntroCutScene : MonoBehaviour
     {
      //   trainAnimator.SetBool("StartEntry", false);
         //Start the coroutine we define below named ExampleCoroutine.
-        if (SkipCutScene == false)
-        {
+       // if (SkipCutScene == false)
+      //  {
             StartCoroutine(CutSceneCoRoutine());
-        }
+      //  }
 
         if (SkipCutScene == true)
         {

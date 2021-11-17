@@ -8,6 +8,8 @@ TagManager:
   - LobbyCharacter
   - Bullet
   - LobbyManager
+  - PlayerManager
+  - GriefBar
   layers:
   - Default
   - TransparentFX

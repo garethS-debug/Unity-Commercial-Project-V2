@@ -11,7 +11,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public static RoomManager Instance;
 
-    public GameObject networkedPlayer;
+    public GameObject networkedPlayerManager;
+
+    public GriefBarDisplay griefBar;
 
     private void Awake()
     {
@@ -33,6 +35,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
 
         CreatePlayer();
+        
     }
 
     //private void OnEnable()
@@ -54,7 +57,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         // if (scene.buildIndex == 1) // if we are in the game scene
         // {
-     GameObject networkedPlayer =   PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+        GameObject networkedPlayer =   PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
         networkedPlayer.gameObject.GetComponent<NetworkedPlayerController>().isInLobby = false;
       //  }
     }
@@ -63,8 +66,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         print("Creating Player : ".Color("Green"));
 
-         networkedPlayer = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
-       // networkedPlayer.gameObject.GetComponent<NetworkedPlayerController>().isInLobby = false;
+         networkedPlayerManager = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+        // networkedPlayer.gameObject.GetComponent<NetworkedPlayerController>().isInLobby = false
+
+        //griefBar.CreateDisplay();
+
     }
 
 

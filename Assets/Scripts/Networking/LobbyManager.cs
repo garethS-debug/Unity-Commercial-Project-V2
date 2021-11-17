@@ -108,6 +108,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void Start()
     {
 
+
+        lobbyPanel.SetActive(false);
+
         playerproperties["playerAvatar"] = 0; //ensures it exists
       
 

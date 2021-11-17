@@ -15,6 +15,8 @@ public class Gate : MonoBehaviour
     public RoomManager roomManager;
     PhotonView photonView;
 
+    public bool hasCollectedItems;
+
     private void Awake()
     {
         instance = this;
@@ -28,16 +30,16 @@ public class Gate : MonoBehaviour
 
     public void Start()
     {
-        if (roomManager.networkedPlayer != null)
-        {
-            player = roomManager.networkedPlayer;                   //This gets the player from the Room Manager, which spawns the player
-        }
+        hasCollectedItems = false;
 
-        else
-        {
-            print("Error!");
-        }
-    
+
+      //  player = roomManager.networkedPlayerManager.gameObject.GetComponent<NetWorkedPlayerManager>().playerInScene;                   //This gets the player from the Room Manager, which spawns the player
+
+
+
+
+
+
     }
 
 
@@ -46,8 +48,13 @@ public class Gate : MonoBehaviour
     {
         if (inventoryHuman.twoKeysCollected || inventoryGhost.twoKeysCollected)
         {
-           // ChangeColor();
-            photonView.RPC("ChangeTheColor", RpcTarget.All);    //Send an RPC call to everyone 
+            if (hasCollectedItems = false)
+            {
+                // ChangeColor();
+                photonView.RPC("ChangeTheColor", RpcTarget.All);    //Send an RPC call to everyone 
+                hasCollectedItems = true;
+            }
+
         }
     }
 
@@ -87,7 +94,7 @@ public class Gate : MonoBehaviour
   [PunRPC]
   void ChangeTheColor()                                      //Making sure the object is destroyed on everyones copy of the game
   {
-      gateRend.material.color = Color.yellow;
+     // gateRend.material.color = Color.yellow;
         gateRend2.material.color = Color.yellow;
     }
 
