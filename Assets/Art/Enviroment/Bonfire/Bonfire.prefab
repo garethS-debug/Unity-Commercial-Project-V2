@@ -362,7 +362,7 @@ MonoBehaviour:
   isHostVersion: 0
   remainingPlayerID: 0
   playerCurrentlyInRoom: 0
-  DebugMode: 0
+  DebugMode: 1
 --- !u!65 &4902874812327242995
 BoxCollider:
   m_ObjectHideFlags: 0
