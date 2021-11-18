@@ -10,6 +10,7 @@ TagManager:
   - LobbyManager
   - PlayerManager
   - GriefBar
+  - item
   layers:
   - Default
   - TransparentFX

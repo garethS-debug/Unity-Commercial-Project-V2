@@ -68,6 +68,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     ExitGames.Client.Photon.Hashtable table = new ExitGames.Client.Photon.Hashtable();
 
     [Header("Bonfires")]
+    public GameObject bonfireTrigger;
     public GameObject Lobby_PLayer;
     public GameObject[] Bonfire_GameObjects;
     int Bonfire_Index, Bonfire_SpawnIndex;
@@ -93,6 +94,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public GameObject lobbyUI;
 
+   
+
     public void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -100,6 +103,19 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         roomListEntries = new Dictionary<string, RoomItem>();
         //Bonfire
         bonfireEntries = new Dictionary<int, GameObject>();
+
+        if (playerSOData.SingleOrMultiPlayer == 1)
+        {
+            // 1 = multiplayer
+            //2 = single player
+            SceneSettings.Instance.isMultiPlayer = true;
+
+        }
+
+       else if (playerSOData.SingleOrMultiPlayer == 2)
+        {
+            SceneSettings.Instance.isSinglePlayer = true;
+        }
     }
 
  
@@ -108,11 +124,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void Start()
     {
 
-
+       if( SceneSettings.Instance.isMultiPlayer == true)
+        {
+            bonfireTrigger.SetActive(true);
         lobbyPanel.SetActive(false);
-
         playerproperties["playerAvatar"] = 0; //ensures it exists
-      
 
         if (playerSOData.AutoConnect == true)
         {
@@ -120,25 +136,23 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             //print("PLayer ID = " + (int)playerproperties["playerAvatar"]);
         }
 
-       // print("Start ID = " + (int)playerproperties["playerAvatar"]);
-
-
         roomPanel.SetActive(false); //set to false in case
-
 
         // if (!PhotonNetwork.IsConnected)
         // {
         PhotonNetwork.JoinLobby();
         // }
-
-
-
         maxPlayerCount = 1;
 
         DebuggingFunction();
+        }
 
 
-    }
+        if (SceneSettings.Instance.isSinglePlayer == true)
+        {
+            Destroy(bonfireTrigger);
+        }
+        }
 
     
     public void OnClickCreate()

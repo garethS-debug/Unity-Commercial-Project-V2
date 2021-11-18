@@ -14,6 +14,10 @@ public class PlayerInventory : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "item")
+        {
+
+    
         var item = other.GetComponent<Item>();
 
         if (SceneSettings.Instance.isMultiPlayer == true)
@@ -48,6 +52,7 @@ public class PlayerInventory : MonoBehaviour
 
                 item.DestroyItem();
             }
+        }
         }
     }
 

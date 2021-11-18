@@ -4003,6 +4003,7 @@ Transform:
   - {fileID: 2077754618}
   - {fileID: 2014218511}
   - {fileID: 1125524724}
+  - {fileID: 1244626027}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5004,12 +5005,12 @@ GameObject:
   - component: {fileID: 750521922}
   - component: {fileID: 750521921}
   m_Layer: 0
-  m_Name: BonfireTrigger (1)
+  m_Name: m_BonfireTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &750521920
 Transform:
   m_ObjectHideFlags: 0
@@ -5763,7 +5764,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1165904322}
-  - {fileID: 1244626027}
   - {fileID: 1476758624}
   - {fileID: 995552054}
   m_Father: {fileID: 0}
@@ -6666,7 +6666,7 @@ Transform:
   - {fileID: 668280206}
   - {fileID: 1905167616}
   m_Father: {fileID: 860997985}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1012925908
 GameObject:
@@ -8003,7 +8003,7 @@ GameObject:
   - component: {fileID: 1244626028}
   - component: {fileID: 1244626031}
   m_Layer: 0
-  m_Name: BonfireTrigger
+  m_Name: m_BonfireTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8017,11 +8017,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244626026}
   m_LocalRotation: {x: -0.6411648, y: -0.2981743, z: -0.2981743, w: 0.6411646}
-  m_LocalPosition: {x: 6912.1978, y: 27839.9, z: -9917.819}
+  m_LocalPosition: {x: -33.11084, y: -3.946875, z: 45.00293}
   m_LocalScale: {x: 53.834614, y: 58.16959, z: 14.262277}
   m_Children: []
-  m_Father: {fileID: 860997985}
-  m_RootOrder: 1
+  m_Father: {fileID: 668998100}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -49.882}
 --- !u!65 &1244626028
 BoxCollider:
@@ -9389,7 +9389,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 2cffaed0f713a484e80f91c14bf4a359,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2cffaed0f713a484e80f91c14bf4a359,
         type: 3}
@@ -13209,6 +13209,7 @@ MonoBehaviour:
   public_Toggle: {fileID: 2123376173}
   private_Toggle: {fileID: 401174532}
   passwordField: {fileID: 210158663}
+  bonfireTrigger: {fileID: 1244626026}
   Lobby_PLayer: {fileID: 0}
   Bonfire_GameObjects:
   - {fileID: 2295544470678287887, guid: b282b977ffe98174a808fdd634f7cb1d, type: 3}
