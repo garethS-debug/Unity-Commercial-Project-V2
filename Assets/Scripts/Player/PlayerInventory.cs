@@ -16,18 +16,34 @@ public class PlayerInventory : MonoBehaviour
     {
         var item = other.GetComponent<Item>();
 
-        
-        if (this.gameObject.GetComponent<PhotonView>() != null)
+        if (SceneSettings.Instance.isMultiPlayer == true)
         {
-            PV = this.gameObject.GetComponent<PhotonView>();        //Get the photonview on the player
+            if (this.gameObject.GetComponent<PhotonView>() != null)
+            {
+                PV = this.gameObject.GetComponent<PhotonView>();        //Get the photonview on the player
+            }
+
         }
 
+        if (SceneSettings.Instance.isMultiPlayer == true)
+        {
+            if (PV.IsMine)                                          //Only run this script on the owning player who triggered the event
+            {
+                if (item)
+                {
+                    inventory.AddItem(item.item, 1);                    //Photon 
 
-        if (PV.IsMine)                                          //Only run this script on the owning player who triggered the event
+
+                    item.DestroyItem();
+                }
+            }
+        }
+
+        else if (SceneSettings.Instance.isSinglePlayer == true)
         {
             if (item)
             {
-                inventory.AddItem(item.item, 1);                    //Photon 
+                inventory.AddItem(item.item, 1);                    //singlePlayer
 
 
                 item.DestroyItem();

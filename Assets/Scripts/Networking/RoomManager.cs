@@ -8,11 +8,19 @@ using System.IO;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
-
+    [Header("Multi PLayer Instnace")]
     public static RoomManager Instance;
-
     public GameObject networkedPlayerManager;
 
+
+
+    [Header("Single PLayer Instnace")]
+  [HideInInspector]  public GameObject S_PlayerInstance;
+    public GameObject s_PlayerManager;
+
+
+
+    [Header("Grief Bar")]
     public GriefBarDisplay griefBar;
 
 
@@ -36,8 +44,18 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
 
 
-     //   CreatePlayer();                                   //Works but not on Claire's version
-        
+        //   CreatePlayer();                                   //Works but not on Claire's version
+
+
+        if (SceneSettings.Instance.isSinglePlayer == true)
+        {
+            SceneSettings.Instance.RemoveMultiplayerScript(this.gameObject);
+        }
+
+   
+
+
+
     }
 
 
@@ -72,19 +90,24 @@ public class RoomManager : MonoBehaviourPunCallbacks
            else
         {
             Debug.Log("Game Is Single Player : ".Bold().Color("white"));
+            s_CreatePlayer();
         }
 
         
+
+
       
      //   networkedPlayer.gameObject.GetComponent<NetworkedPlayerController>().isInLobby = false;
       //  }
     }
 
-    public void CreatePlayer()
+
+
+    public void s_CreatePlayer()
     {
    
         print("Creating Player : ".Color("Green"));
-         networkedPlayerManager = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+        S_PlayerInstance = Instantiate(s_PlayerManager, Vector3.zero, Quaternion.identity);
         // networkedPlayer.gameObject.GetComponent<NetworkedPlayerController>().isInLobby = false
 
         //griefBar.CreateDisplay();
