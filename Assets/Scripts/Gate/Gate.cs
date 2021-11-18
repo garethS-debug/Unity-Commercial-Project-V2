@@ -17,28 +17,43 @@ public class Gate : MonoBehaviour
 
     public bool hasCollectedItems;
 
+   
+
     private void Awake()
     {
         instance = this;
        // gateRend = GetComponent<MeshRenderer>();
        // player = GameObject.FindGameObjectWithTag("Player");                //Players dont spawn on load, so this might miss the players. 
         anim = GetComponent<Animator>();
-        photonView = PhotonView.Get(this);       //Get PhotonView on this gameobject
+
+     
+    
+
+   
 
     }
 
 
     public void Start()
     {
+
+        if (SceneSettings.Instance.isSinglePlayer == true)
+        {
+            Debug.Log("Removing Multiplayer");
+            SceneSettings.Instance.RemoveMultiplayerScript(this.gameObject);
+        }
+
+
+        if (SceneSettings.Instance.isMultiPlayer == true)
+        {
+            photonView = PhotonView.Get(this);       //Get PhotonView on this gameobject
+        }
+
+
         hasCollectedItems = false;
 
 
       //  player = roomManager.networkedPlayerManager.gameObject.GetComponent<NetWorkedPlayerManager>().playerInScene;                   //This gets the player from the Room Manager, which spawns the player
-
-
-
-
-
 
     }
 
@@ -48,11 +63,25 @@ public class Gate : MonoBehaviour
     {
         if (inventoryHuman.twoKeysCollected || inventoryGhost.twoKeysCollected)
         {
-            if (hasCollectedItems = false)
+            if (hasCollectedItems == false)
             {
-                // ChangeColor();
-                photonView.RPC("ChangeTheColor", RpcTarget.All);    //Send an RPC call to everyone 
-                hasCollectedItems = true;
+                // 
+
+
+                if (SceneSettings.Instance.isMultiPlayer == true)
+                {
+                    photonView.RPC("ChangeTheColor", RpcTarget.All);    //Send an RPC call to everyone 
+                    hasCollectedItems = true;
+                }
+
+                else
+                {
+                    ChangeColor();
+     
+                }
+
+
+            
             }
 
         }
@@ -63,23 +92,31 @@ public class Gate : MonoBehaviour
         if ((inventoryHuman.twoKeysCollected || inventoryGhost.twoKeysCollected) && other.gameObject.tag == "Player")
         {
          
-            photonView.RPC("OpenDoor", RpcTarget.All);    //Send an RPC call to everyone 
+          
+            if (SceneSettings.Instance.isMultiPlayer == true)
+            {
+                photonView.RPC("OpenDoor", RpcTarget.All);    //Send an RPC call to everyone
+            }
+
+            else
+            {
+                OpenTheDoor();
+            }
 
         }
     }
 
+
+
+
+    [PunRPC]
     public void pauseAnimationEvent()
     {
       //  anim.enabled = false;
         photonView.RPC("PauseAnimation", RpcTarget.All);    //Send an RPC call to everyone 
     }
 
-    /*
-  public void ChangeColor()
-  {
-      gateRend.material.color = Color.yellow;
-  }
-      */
+  
 
     [PunRPC]
   void OpenDoor()                                      //Making sure the object is destroyed on everyones copy of the game
@@ -89,13 +126,24 @@ public class Gate : MonoBehaviour
 
   }
 
+  public  void OpenTheDoor()                                    
+    {
+        print("Door Open");
+        anim.SetTrigger("OpenDoor");
+    }
 
 
-  [PunRPC]
+
+    [PunRPC]
   void ChangeTheColor()                                      //Making sure the object is destroyed on everyones copy of the game
-  {
+    {
      // gateRend.material.color = Color.yellow;
         gateRend2.material.color = Color.yellow;
+    }
+
+    public void ChangeColor()
+    {
+        gateRend.material.color = Color.yellow;
     }
 
 
@@ -107,6 +155,11 @@ public class Gate : MonoBehaviour
         print("Stop Door Closing");
 
     }
+   
+    
+    
+    
+    
     /*
       [PunRPC]
       void DestroyObject()                                      //Making sure the object is destroyed on everyones copy of the game

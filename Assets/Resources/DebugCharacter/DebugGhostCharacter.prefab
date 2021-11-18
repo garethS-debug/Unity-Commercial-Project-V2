@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1680464258}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.004, y: -0.1199, z: 0.027}
-  m_LocalScale: {x: 0.16959333, y: 0.23667447, z: 0.16959333}
+  m_LocalPosition: {x: 0.004, y: -0.06181, z: 0.027}
+  m_LocalScale: {x: 0.16959333, y: 0.120580025, z: 0.16959333}
   m_Children: []
   m_Father: {fileID: 2131589783073971444}
   m_RootOrder: 3
@@ -404,15 +404,12 @@ GameObject:
   - component: {fileID: 2131589783073971444}
   - component: {fileID: 1531644324875848131}
   - component: {fileID: 1531644324875848134}
-  - component: {fileID: 1531644324875848132}
   - component: {fileID: 1531644324875848133}
-  - component: {fileID: 26834336406587490}
-  - component: {fileID: 1531644324875848136}
   - component: {fileID: 3146407106650933442}
   - component: {fileID: 2043882406953346576}
   - component: {fileID: 5234310911718442505}
   m_Layer: 0
-  m_Name: GhostCharacter
+  m_Name: DebugGhostCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -470,22 +467,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1531644324875848132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1648103272126973518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!114 &1531644324875848133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,43 +507,6 @@ MonoBehaviour:
   smoothTime: 0.15
   PerformAction: 102
   PermormingAction: 0
---- !u!114 &26834336406587490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1648103272126973518}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c20378f2501dbf4fa835878d684fb80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  target: {fileID: 0}
---- !u!114 &1531644324875848136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1648103272126973518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 1
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 1531644324875848132}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!114 &3146407106650933442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,7 +553,6 @@ MonoBehaviour:
   CharaceterName: Ghost Character
   isGhostCharacer: 1
   isHumanCharater: 0
-  isSinglePlayer: 0
   playerSOData: {fileID: 11400000, guid: f6bbc180c160720489c9048e80112be2, type: 2}
 --- !u!1 &1729794143952959833
 GameObject:

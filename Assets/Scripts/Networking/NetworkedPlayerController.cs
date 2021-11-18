@@ -158,10 +158,14 @@ public class NetworkedPlayerController : MonoBehaviour
 
 		//sneak
 		//sneakHash = Animator.StringToHash("anim_sneak");                                      //Hash number for turning    
-	//	againstWallHash = Animator.StringToHash("anim_isAgainstWall");                                      //Hash number for turning   
+		//	againstWallHash = Animator.StringToHash("anim_isAgainstWall");                                      //Hash number for turning   
 
-		//Photon
-		PV = GetComponent<PhotonView>();
+		if (SceneSettings.Instance.isMultiPlayer == true)
+		{
+			//Photon
+			PV = GetComponent<PhotonView>();
+		}
+
 
 		//	controller
 		controller = this.gameObject.GetComponent<CharacterController>();
@@ -171,6 +175,16 @@ public class NetworkedPlayerController : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+
+
+
+		if (SceneSettings.Instance.isSinglePlayer == true)
+		{
+			SceneSettings.Instance.RemoveMultiplayerScript(this.gameObject);
+		}
+
+
+
 		if (isInLobby)
         {
 			CameraPrefab = Instantiate(camPrefab, this.transform.position, camPrefab.transform.rotation);
@@ -183,8 +197,12 @@ public class NetworkedPlayerController : MonoBehaviour
 			controller = this.gameObject.GetComponent<CharacterController>();
 		}
 
+
 		if (isInLobby == false)
         {
+			if (SceneSettings.Instance.isMultiPlayer == true)
+			{
+			
 
 			//If multiplayer and not my game object
 			if (!PV.IsMine)
@@ -206,6 +224,27 @@ public class NetworkedPlayerController : MonoBehaviour
 				cam = CameraPrefab.gameObject.transform;
 				controller = this.gameObject.GetComponent<CharacterController>();
 			}
+
+			}
+
+			else if (SceneSettings.Instance.isSinglePlayer == true)
+			{
+					if (GetComponentInChildren<Camera>() != null)
+					{
+						Destroy(GetComponentInChildren<Camera>().gameObject);
+					}
+
+					CameraPrefab = Instantiate(camPrefab, this.transform.position, camPrefab.transform.rotation);
+					//Camera
+					_camControll = CameraPrefab.GetComponent<PlayerCameraController>();
+					_camControll.parent = this.gameObject;
+
+					cam = CameraPrefab.gameObject.transform;
+					controller = this.gameObject.GetComponent<CharacterController>();
+			}
+
+
+
 		}
 	
 
@@ -227,9 +266,12 @@ public class NetworkedPlayerController : MonoBehaviour
 		//Rotate(toRot);
 		if (isInLobby == false)
 		{
-			if (!PV.IsMine)
+			if (SceneSettings.Instance.isMultiPlayer == true)
 			{
-				return;
+				if (!PV.IsMine)
+				{
+					return;
+				}
 			}
 		}
 
@@ -386,80 +428,9 @@ public class NetworkedPlayerController : MonoBehaviour
 	void Jump()
 	{
 
-
-		if (isInLobby == true)
+		if (SceneSettings.Instance.isMultiPlayer == true)
 		{
-			if (controller.isGrounded)
-			{
-				verticalVelocity = -gravity * Time.deltaTime;
-
-				if (Input.GetKey(JumpInput))
-				{
-					verticalVelocity = JumpForce;
-					anim.SetBool("anim_Jumping", true); // Set jumping 
-					
-					if (jumpDirForward == 0 && jumpDirLeftRight == 0)
-                    {
-						anim.SetFloat(jumpHash, 0);
-					}
-
-					if (jumpDirForward > 0 && jumpDirLeftRight <= 0)
-                    {
-						//	print("Jump foward " + jumpDirForward );
-						anim.SetFloat(jumpHash, 1);
-					}
-
-					if ( jumpDirForward < 0 && jumpDirLeftRight >= 0)
-                    {
-						//print("Jump Backwards " + jumpDirForward);
-						anim.SetFloat(jumpHash, 1);
-					}
-
-					if (jumpDirLeftRight > 0 && jumpDirForward >= 0)
-					{
-						//print("Jump Side - forward " + jumpDirLeftRight);
-						anim.SetFloat(jumpHash, 1);
-					}
-
-					if (jumpDirLeftRight < 0 && jumpDirForward <= 0)
-					{
-						//print("Jump Side - forward " + jumpDirLeftRight);
-						anim.SetFloat(jumpHash, 1);
-					}
-
-
-					//	anim.SetFloat(jumpHash, );
-
-				}
-			}
-
-			else
-			{
-				verticalVelocity -= gravity * Time.deltaTime;
-				anim.SetBool("anim_Jumping", false); // Set jumping 
-			}
-
-			Vector3 jumpvector = new Vector3(0, verticalVelocity, 0);
-			controller.Move(jumpvector * Time.deltaTime);
-			/*
-					if (Input.GetKeyDown(JumpInput) && grounded)
-					{
-					//	m_Rigidbody.AddForce(transform.up * jumpForce);
-					}
-
-					*/
-		}
-
-		if (isInLobby == false)
-		{
-
-			//If multiplayer and not my game object
-			if (!PV.IsMine)
-			{
-				return;
-			}
-
-			if (PV.IsMine)
+			if (isInLobby == true)
 			{
 				if (controller.isGrounded)
 				{
@@ -521,9 +492,159 @@ public class NetworkedPlayerController : MonoBehaviour
 
 						*/
 			}
+
+			if (isInLobby == false)
+			{
+
+				if (!PV.IsMine)
+				{
+					return; //If multiplayer and not my game object
+				}
+
+				if (PV.IsMine)
+				{
+					if (controller.isGrounded)
+					{
+						verticalVelocity = -gravity * Time.deltaTime;
+
+						if (Input.GetKey(JumpInput))
+						{
+							verticalVelocity = JumpForce;
+							anim.SetBool("anim_Jumping", true); // Set jumping 
+
+							if (jumpDirForward == 0 && jumpDirLeftRight == 0)
+							{
+								anim.SetFloat(jumpHash, 0);
+							}
+
+							if (jumpDirForward > 0 && jumpDirLeftRight <= 0)
+							{
+								//	print("Jump foward " + jumpDirForward );
+								anim.SetFloat(jumpHash, 1);
+							}
+
+							if (jumpDirForward < 0 && jumpDirLeftRight >= 0)
+							{
+								//print("Jump Backwards " + jumpDirForward);
+								anim.SetFloat(jumpHash, 1);
+							}
+
+							if (jumpDirLeftRight > 0 && jumpDirForward >= 0)
+							{
+								//print("Jump Side - forward " + jumpDirLeftRight);
+								anim.SetFloat(jumpHash, 1);
+							}
+
+							if (jumpDirLeftRight < 0 && jumpDirForward <= 0)
+							{
+								//print("Jump Side - forward " + jumpDirLeftRight);
+								anim.SetFloat(jumpHash, 1);
+							}
+
+
+							//	anim.SetFloat(jumpHash, );
+
+						}
+
+
+						else
+						{
+							verticalVelocity -= gravity * Time.deltaTime;
+							anim.SetBool("anim_Jumping", false); // Set jumping 
+						}
+
+						Vector3 jumpvector = new Vector3(0, verticalVelocity, 0);
+						controller.Move(jumpvector * Time.deltaTime);
+						/*
+								if (Input.GetKeyDown(JumpInput) && grounded)
+								{
+								//	m_Rigidbody.AddForce(transform.up * jumpForce);
+								}
+
+								*/
+					}
+				}
+
+
+				
+
+
+			}
+
 		}
+		//------------------------------------------------------->
 
 
+		if (SceneSettings.Instance.isSinglePlayer == true)
+		{
+			
+				if (controller.isGrounded)
+				{
+					verticalVelocity = -gravity * Time.deltaTime;
+
+					if (Input.GetKey(JumpInput))
+					{
+						verticalVelocity = JumpForce;
+						anim.SetBool("anim_Jumping", true); // Set jumping 
+
+						if (jumpDirForward == 0 && jumpDirLeftRight == 0)
+						{
+							anim.SetFloat(jumpHash, 0);
+						}
+
+						if (jumpDirForward > 0 && jumpDirLeftRight <= 0)
+						{
+							//	print("Jump foward " + jumpDirForward );
+							anim.SetFloat(jumpHash, 1);
+						}
+
+						if (jumpDirForward < 0 && jumpDirLeftRight >= 0)
+						{
+							//print("Jump Backwards " + jumpDirForward);
+							anim.SetFloat(jumpHash, 1);
+						}
+
+						if (jumpDirLeftRight > 0 && jumpDirForward >= 0)
+						{
+							//print("Jump Side - forward " + jumpDirLeftRight);
+							anim.SetFloat(jumpHash, 1);
+						}
+
+						if (jumpDirLeftRight < 0 && jumpDirForward <= 0)
+						{
+							//print("Jump Side - forward " + jumpDirLeftRight);
+							anim.SetFloat(jumpHash, 1);
+						}
+
+
+						//	anim.SetFloat(jumpHash, );
+
+					}
+				}
+
+				else
+				{
+					verticalVelocity -= gravity * Time.deltaTime;
+					anim.SetBool("anim_Jumping", false); // Set jumping 
+				}
+
+				Vector3 jumpvector = new Vector3(0, verticalVelocity, 0);
+				controller.Move(jumpvector * Time.deltaTime);
+				/*
+						if (Input.GetKeyDown(JumpInput) && grounded)
+						{
+						//	m_Rigidbody.AddForce(transform.up * jumpForce);
+						}
+
+						*/
+			}
+
+			
+
+
+
+
+	
 	}
 
 
