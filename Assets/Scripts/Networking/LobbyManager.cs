@@ -104,18 +104,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //Bonfire
         bonfireEntries = new Dictionary<int, GameObject>();
 
-        if (playerSOData.SingleOrMultiPlayer == 1)
-        {
-            // 1 = multiplayer
-            //2 = single player
-            SceneSettings.Instance.isMultiPlayer = true;
-
-        }
-
-       else if (playerSOData.SingleOrMultiPlayer == 2)
-        {
-            SceneSettings.Instance.isSinglePlayer = true;
-        }
+        
     }
 
  

@@ -11,6 +11,9 @@ public class SceneSettings : MonoBehaviour
     public static SceneSettings Instance { get { return _instance; } }
 
 
+    public PlayerSO playerSOData;
+
+
     public bool isSinglePlayer;
 
     public bool isMultiPlayer;
@@ -25,15 +28,23 @@ public class SceneSettings : MonoBehaviour
         {
             _instance = this;
 
-            if (isSinglePlayer == true)
+
+            if (playerSOData.SingleOrMultiPlayer == 1)
             {
+                // 1 = multiplayer
+                //2 = single player
+             isMultiPlayer = true;
+                isSinglePlayer = false;
+
+            }
+
+            else if (playerSOData.SingleOrMultiPlayer == 2)
+            {
+              isSinglePlayer = true;
                 isMultiPlayer = false;
             }
 
-            if (isMultiPlayer == true)
-            {
-                isSinglePlayer = false;
-            }
+
 
             if (isSinglePlayer == false && isMultiPlayer == false)
             {
