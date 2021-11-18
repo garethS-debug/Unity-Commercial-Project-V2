@@ -12,6 +12,8 @@ public class CharacterID : MonoBehaviour
 
     public bool isHumanCharater;
 
+    public bool isSinglePlayer;
+
 
     [Header("SO")]
     public PlayerSO playerSOData;

@@ -16,8 +16,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public GriefBarDisplay griefBar;
 
 
-    public bool SinglePLayerMode;
-
 
     private void Awake()
     {
@@ -65,10 +63,18 @@ public class RoomManager : MonoBehaviourPunCallbacks
         // if (scene.buildIndex == 1) // if we are in the game scene
         // {
 
-        if (SinglePLayerMode == false)
+           if (SceneSettings.Instance.isMultiPlayer == true)
         {
             networkedPlayerManager = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+            Debug.Log("Game Is Multiplayer : ".Bold().Color("green"));
         }
+
+           else
+        {
+            Debug.Log("Game Is Single Player : ".Bold().Color("white"));
+        }
+
+        
       
      //   networkedPlayer.gameObject.GetComponent<NetworkedPlayerController>().isInLobby = false;
       //  }

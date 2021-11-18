@@ -23,7 +23,19 @@ public class Gate : MonoBehaviour
        // gateRend = GetComponent<MeshRenderer>();
        // player = GameObject.FindGameObjectWithTag("Player");                //Players dont spawn on load, so this might miss the players. 
         anim = GetComponent<Animator>();
-        photonView = PhotonView.Get(this);       //Get PhotonView on this gameobject
+
+
+        if (SceneSettings.Instance.isMultiPlayer == true)
+        {
+            photonView = PhotonView.Get(this);       //Get PhotonView on this gameobject
+        }
+
+        else
+        {
+            SceneSettings.Instance.RemoveMultiplayerScript(this.gameObject);
+        }
+
+   
 
     }
 

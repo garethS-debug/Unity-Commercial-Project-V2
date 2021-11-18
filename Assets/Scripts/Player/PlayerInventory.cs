@@ -16,7 +16,12 @@ public class PlayerInventory : MonoBehaviour
     {
         var item = other.GetComponent<Item>();
 
-        PV = this.gameObject.GetComponent<PhotonView>();        //Get the photonview on the player
+        
+        if (this.gameObject.GetComponent<PhotonView>() != null)
+        {
+            PV = this.gameObject.GetComponent<PhotonView>();        //Get the photonview on the player
+        }
+
 
         if (PV.IsMine)                                          //Only run this script on the owning player who triggered the event
         {
