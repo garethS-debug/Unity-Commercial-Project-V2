@@ -12,4 +12,7 @@ public class PlayerSO : ScriptableObject
 
     public bool AutoConnect;
 
+    [Tooltip("1 = multiplayer 2= Single Player")]
+    public int SingleOrMultiPlayer;
+
 }

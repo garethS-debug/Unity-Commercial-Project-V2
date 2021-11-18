@@ -46,6 +46,8 @@ MonoBehaviour:
   - ChangeTheColor
   - OpenDoor
   - PauseAnimation
+  - pauseAnimationEvent
+  - m_DestroyObject
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

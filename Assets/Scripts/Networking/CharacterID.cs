@@ -12,6 +12,8 @@ public class CharacterID : MonoBehaviour
 
     public bool isHumanCharater;
 
+    public bool isSinglePlayer;
+
 
     [Header("SO")]
     public PlayerSO playerSOData;
@@ -25,28 +27,55 @@ public class CharacterID : MonoBehaviour
     {
         GameObject griefBar = GameObject.FindGameObjectWithTag("GriefBar");
 
-        //Photon
-        PV = GetComponent<PhotonView>();
 
 
-        //check if in lobby
-
-        if (this.gameObject.GetComponent<NetworkedPlayerController>().isInLobby == false)
+        if (SceneSettings.Instance.isMultiPlayer == true)
         {
-            if (PV.IsMine)
-            {
-                if (isGhostCharacer)
-                {
-                    griefBar.GetComponent<GriefBarDisplay>().CreateGhostCandle();
-                }
-         if (isHumanCharater)
-                {
-                    griefBar.GetComponent<GriefBarDisplay>().CreateHumanCandle();
-                }
+            //Photon
+            PV = GetComponent<PhotonView>();
+        }
 
+
+
+        if (SceneSettings.Instance.isMultiPlayer == true)
+        {
+            //check if in lobby
+
+            if (this.gameObject.GetComponent<NetworkedPlayerController>().isInLobby == false)
+            {
+                if (PV.IsMine)
+                {
+                    if (isGhostCharacer)
+                    {
+                        griefBar.GetComponent<GriefBarDisplay>().CreateGhostCandle();
+                    }
+                    if (isHumanCharater)
+                    {
+                        griefBar.GetComponent<GriefBarDisplay>().CreateHumanCandle();
+                    }
+
+                }
+            }
+
+        }
+
+        else if (SceneSettings.Instance.isSinglePlayer == true)
+        {
+            SceneSettings.Instance.RemoveMultiplayerScript(this.gameObject);
+
+            if (isGhostCharacer)
+            {
+                griefBar.GetComponent<GriefBarDisplay>().CreateGhostCandle();
+            }
+            if (isHumanCharater)
+            {
+                griefBar.GetComponent<GriefBarDisplay>().CreateHumanCandle();
             }
         }
 
+
+
+      
 
 
     }
