@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GhostPlayerInventory
   m_EditorClassIdentifier: 
   Container: []
+  twoKeysCollected: 0

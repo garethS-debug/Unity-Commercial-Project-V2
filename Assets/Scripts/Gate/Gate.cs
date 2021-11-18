@@ -17,6 +17,8 @@ public class Gate : MonoBehaviour
 
     public bool hasCollectedItems;
 
+   
+
     private void Awake()
     {
         instance = this;
@@ -24,7 +26,7 @@ public class Gate : MonoBehaviour
        // player = GameObject.FindGameObjectWithTag("Player");                //Players dont spawn on load, so this might miss the players. 
         anim = GetComponent<Animator>();
 
-       
+     
     
 
    
@@ -75,6 +77,7 @@ public class Gate : MonoBehaviour
                 else
                 {
                     ChangeColor();
+     
                 }
 
 
