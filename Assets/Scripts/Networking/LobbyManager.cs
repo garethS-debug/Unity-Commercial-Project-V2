@@ -69,6 +69,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     [Header("Bonfires")]
     public GameObject bonfireTrigger;
+   // public GameObject s_bonfireTrigger;
+  //  public GameObject s_bonfirePrefab;
+  //  public GameObject s_bonfirePrefab;
     public GameObject Lobby_PLayer;
     public GameObject[] Bonfire_GameObjects;
     int Bonfire_Index, Bonfire_SpawnIndex;
@@ -140,7 +143,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if (SceneSettings.Instance.isSinglePlayer == true)
         {
             Destroy(bonfireTrigger);
+
+         //   Instantiate(s_bonfirePrefab, s_bonfireTrigger.transform.position, s_bonfireTrigger.transform.rotation);
+
         }
+
+
+
         }
 
     
@@ -621,12 +630,22 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void OnClickLeaveLevelSelect()
     {
-        lobbyPanel.SetActive(false);
-        roomPanel.SetActive(true);
 
-        levelSelectPanel.SetActive(false);
+        if (SceneSettings.Instance.isMultiPlayer == true)
+        {
+            lobbyPanel.SetActive(false);
+            roomPanel.SetActive(true);
 
-    }
+            levelSelectPanel.SetActive(false);
+        }
+
+
+        if (SceneSettings.Instance.isSinglePlayer == true)
+        {
+            levelSelectPanel.SetActive(false);
+        }
+
+        }
 
 
     /*
@@ -696,23 +715,47 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
    public void SpawnLobbyPlayer ()
     {
-     
+
+
+        if (SceneSettings.Instance.isSinglePlayer == true)
+        {
+
+
+
             int randomNumber = UnityEngine.Random.Range(0, Lobby_Room_Player_SpawnPoints.Length);
             Transform spawnPoint = Lobby_Room_Player_SpawnPoints[randomNumber].transform;
-            
+
+            //Access Save File 
+            GameObject playerToSpawn = playerPrefabs[2]; //Choosing Ghost
+
+            spawnedLobbyPlayer = Instantiate(playerToSpawn, spawnPoint.position, spawnPoint.rotation);
+            spawnedLobbyPlayer.gameObject.GetComponent<NetworkedPlayerController>().isInLobby = true;
+
+
+        }
+
+
+        if (SceneSettings.Instance.isMultiPlayer == true)
+        {
+            int randomNumber = UnityEngine.Random.Range(0, Lobby_Room_Player_SpawnPoints.Length);
+            Transform spawnPoint = Lobby_Room_Player_SpawnPoints[randomNumber].transform;
+
             GameObject playerToSpawn = playerPrefabs[(int)playerproperties["playerAvatar"]];
 
 
-        //    Debug.Log("Cretated Player Controller " + playerPrefabs[(int)playerproperties["playerAvatar"]]);
+            //    Debug.Log("Cretated Player Controller " + playerPrefabs[(int)playerproperties["playerAvatar"]]);
 
-        //   Debug.Log("Im located on " + this.gameObject);
-        //  PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerController"), Vector3.zero, Quaternion.identity);
+            //   Debug.Log("Im located on " + this.gameObject);
+            //  PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerController"), Vector3.zero, Quaternion.identity);
 
 
             print("Spawned Player ID = " + (int)playerproperties["playerAvatar"]);
 
-          spawnedLobbyPlayer =  Instantiate(playerToSpawn, spawnPoint.position, spawnPoint.rotation);
+            spawnedLobbyPlayer = Instantiate(playerToSpawn, spawnPoint.position, spawnPoint.rotation);
             spawnedLobbyPlayer.gameObject.GetComponent<NetworkedPlayerController>().isInLobby = true;
+        }
+
+        
     }
 
  public void DebuggingFunction()

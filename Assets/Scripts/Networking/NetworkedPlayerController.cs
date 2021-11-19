@@ -507,43 +507,59 @@ public class NetworkedPlayerController : MonoBehaviour
 					{
 						verticalVelocity = -gravity * Time.deltaTime;
 
-						if (Input.GetKey(JumpInput))
+
+
+						if (Input.GetKey(JumpInput) || Input.GetKeyDown(JumpInput))
 						{
 							verticalVelocity = JumpForce;
 							anim.SetBool("anim_Jumping", true); // Set jumping 
 
-							if (jumpDirForward == 0 && jumpDirLeftRight == 0)
-							{
-								anim.SetFloat(jumpHash, 0);
-							}
 
-							if (jumpDirForward > 0 && jumpDirLeftRight <= 0)
+							if (jumpDirForward > 0 || jumpDirLeftRight <= 0)
 							{
 								//	print("Jump foward " + jumpDirForward );
 								anim.SetFloat(jumpHash, 1);
 							}
 
-							if (jumpDirForward < 0 && jumpDirLeftRight >= 0)
+
+							/*
+							if (Input.GetKey(JumpInput))
 							{
-								//print("Jump Backwards " + jumpDirForward);
-								anim.SetFloat(jumpHash, 1);
-							}
+								verticalVelocity = JumpForce;
+								anim.SetBool("anim_Jumping", true); // Set jumping 
 
-							if (jumpDirLeftRight > 0 && jumpDirForward >= 0)
-							{
-								//print("Jump Side - forward " + jumpDirLeftRight);
-								anim.SetFloat(jumpHash, 1);
-							}
+								if (jumpDirForward == 0 && jumpDirLeftRight == 0)
+								{
+									anim.SetFloat(jumpHash, 0);
+								}
 
-							if (jumpDirLeftRight < 0 && jumpDirForward <= 0)
-							{
-								//print("Jump Side - forward " + jumpDirLeftRight);
-								anim.SetFloat(jumpHash, 1);
-							}
+								if (jumpDirForward > 0 && jumpDirLeftRight <= 0)
+								{
+									//	print("Jump foward " + jumpDirForward );
+									anim.SetFloat(jumpHash, 1);
+								}
+
+								if (jumpDirForward < 0 && jumpDirLeftRight >= 0)
+								{
+									//print("Jump Backwards " + jumpDirForward);
+									anim.SetFloat(jumpHash, 1);
+								}
+
+								if (jumpDirLeftRight > 0 && jumpDirForward >= 0)
+								{
+									//print("Jump Side - forward " + jumpDirLeftRight);
+									anim.SetFloat(jumpHash, 1);
+								}
+
+								if (jumpDirLeftRight < 0 && jumpDirForward <= 0)
+								{
+									//print("Jump Side - forward " + jumpDirLeftRight);
+									anim.SetFloat(jumpHash, 1);
+								}
 
 
-							//	anim.SetFloat(jumpHash, );
-
+								//	anim.SetFloat(jumpHash, );
+							*/
 						}
 
 
@@ -582,12 +598,22 @@ public class NetworkedPlayerController : MonoBehaviour
 				{
 					verticalVelocity = -gravity * Time.deltaTime;
 
-					if (Input.GetKey(JumpInput))
+					if (Input.GetKey(JumpInput) || Input.GetKeyDown(JumpInput))
 					{
 						verticalVelocity = JumpForce;
 						anim.SetBool("anim_Jumping", true); // Set jumping 
 
-						if (jumpDirForward == 0 && jumpDirLeftRight == 0)
+
+					if (jumpDirForward > 0 || jumpDirLeftRight <= 0)
+					{
+						//	print("Jump foward " + jumpDirForward );
+						anim.SetFloat(jumpHash, 1);
+					}
+
+
+
+					/*
+						if (jumpDirForward == 0 && jumpDirLeftRight == 0 )
 						{
 							anim.SetFloat(jumpHash, 0);
 						}
@@ -616,10 +642,10 @@ public class NetworkedPlayerController : MonoBehaviour
 							anim.SetFloat(jumpHash, 1);
 						}
 
+					*/
+					//	anim.SetFloat(jumpHash, );
 
-						//	anim.SetFloat(jumpHash, );
-
-					}
+				}
 				}
 
 				else

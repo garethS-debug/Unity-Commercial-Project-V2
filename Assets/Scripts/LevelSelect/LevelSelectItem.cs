@@ -25,6 +25,9 @@ public class LevelSelectItem : MonoBehaviour
     public int currentScore;
 
 
+
+
+
  //   [SerializeField] private List<LevelInfoSO.SALevelScore> starScoreValue;
 
     /*
@@ -116,9 +119,19 @@ public void DisplayLevel(SceneReference scene)
         if (unlocked) //true bool = locked
         {
 
-          PhotonNetwork.LoadLevel(levelToLoad); //Load the 'Game' scene when master cliet clicks
-            print(levelToLoad.ScenePath);
-        }
+            if (SceneSettings.Instance.isMultiPlayer == true)
+            {
+                PhotonNetwork.LoadLevel(levelToLoad); //Load the 'Game' scene when master cliet clicks
+                print(levelToLoad.ScenePath);
+            }
+
+            if (SceneSettings.Instance.isSinglePlayer == true)
+            {
+
+                SceneManager.LoadScene(levelToLoad);
+
+            }
+            }
         else //if true
         {
         

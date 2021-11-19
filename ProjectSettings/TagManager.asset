@@ -11,6 +11,7 @@ TagManager:
   - PlayerManager
   - GriefBar
   - item
+  - levelSelectUI
   layers:
   - Default
   - TransparentFX
