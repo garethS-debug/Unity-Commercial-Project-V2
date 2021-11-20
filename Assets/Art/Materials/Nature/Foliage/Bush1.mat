@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: m_Leaf
-  m_Shader: {fileID: -6465566751694194690, guid: bd2d02d6c494caf4ba3aa52c1c515ed4,
+  m_Name: Bush1
+  m_Shader: {fileID: -6465566751694194690, guid: 084e760b20ef29d4389bcb0e0c5ec42a,
     type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _DISABLE_SSR_TRANSPARENT
+  m_ShaderKeywords: _ALPHATEST_ON _DISABLE_SSR_TRANSPARENT _DOUBLESIDED_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: 2475
   stringTagMap:
     MotionVector: User
@@ -28,7 +28,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_146525365a5444edafc3d0bc352c2e9d:
-        m_Texture: {fileID: 2800000, guid: 1042c49ade4434c46974a268e0cba5ee, type: 3}
+        m_Texture: {fileID: 2800000, guid: c0f95dda0681e5c47ab33a9312e7fad7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_e5348a08de2e49d7a9349c7f5dee986f:
+        m_Texture: {fileID: 2800000, guid: 53e3da79ac173174492388350fb7a527, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_e5348a08de2e49d7a9349c7f5dee986f_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_e5348a08de2e49d7a9349c7f5dee986f_2:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -44,9 +56,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_13d3c7dfde464de0a7b3d3d57381a694: 0.604
-    - Vector1_73de1b745ef4455cac72bc9498cc85ea: 22.32
-    - Vector1_b17b37f2e1af4547a0526ecacafac70a: 9.7
+    - Vector1_13d3c7dfde464de0a7b3d3d57381a694: 0.01
+    - Vector1_4e8d50b182ff460cb77ea2528a571bcc: 0
+    - Vector1_73de1b745ef4455cac72bc9498cc85ea: 0.51
+    - Vector1_b17b37f2e1af4547a0526ecacafac70a: 0.07
+    - Vector1_b4171f2d85684d87a0cc59922236cd51: 0.4
+    - Vector1_b4171f2d85684d87a0cc59922236cd51_1: 0.4
+    - Vector1_b4171f2d85684d87a0cc59922236cd51_2: 1
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 1
     - _AlphaDstBlend: 0
@@ -54,10 +70,10 @@ Material:
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
     - _BlendMode: 0
-    - _CullMode: 2
-    - _CullModeForward: 2
+    - _CullMode: 0
+    - _CullModeForward: 0
     - _DepthOffsetEnable: 0
-    - _DoubleSidedEnable: 0
+    - _DoubleSidedEnable: 1
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
     - _EnableBlendModePreserveSpecularLighting: 1
@@ -95,14 +111,13 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_1: {r: 0.23137254, g: 1, b: 0.3098733, a: 0}
-    - Color_2: {r: 0.4433962, g: 0.016225478, b: 0, a: 0}
-    - Color_9ef1e1dbbd1f4756b1546dceebd8c0ad: {r: 0.62264144, g: 0.37835157, b: 0.19775707,
-        a: 0}
-    - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
+    - Color_1: {r: 1, g: 1, b: 1, a: 0}
+    - Color_2: {r: 1, g: 1, b: 1, a: 0}
+    - Color_9ef1e1dbbd1f4756b1546dceebd8c0ad: {r: 1, g: 1, b: 1, a: 0}
+    - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &4657017852383645555
+--- !u!114 &3580798136028541724
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
