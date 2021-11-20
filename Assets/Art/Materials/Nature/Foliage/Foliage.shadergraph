@@ -4228,7 +4228,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "5b9da3308ee6468a88f3ccc05eaa9750",
     "m_Id": 0,
-    "m_DisplayName": "TEST",
+    "m_DisplayName": "Exposure",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -5467,10 +5467,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -5475.33349609375,
-            "y": 399.9999694824219,
+            "x": -5430.66650390625,
+            "y": 440.0000305175781,
             "width": 186.0,
-            "height": 250.66664123535157
+            "height": 251.33334350585938
         }
     },
     "m_Slots": [
@@ -7597,7 +7597,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "d48f5b4bd114476caf9fd6951d0e74ff",
     "m_Id": 0,
-    "m_DisplayName": "BottomColour",
+    "m_DisplayName": "BottomGradientColour",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -7688,7 +7688,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "d8c5fe3333264fe99c24aa55e8d46d9f",
     "m_Id": 0,
-    "m_DisplayName": "TopColour",
+    "m_DisplayName": "TopGradiantColor",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
