@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bush1
+  m_Name: GroundCover 1
   m_Shader: {fileID: -6465566751694194690, guid: 084e760b20ef29d4389bcb0e0c5ec42a,
     type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _DISABLE_SSR_TRANSPARENT _DOUBLESIDED_ON
@@ -28,11 +28,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_146525365a5444edafc3d0bc352c2e9d:
-        m_Texture: {fileID: 2800000, guid: c0f95dda0681e5c47ab33a9312e7fad7, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7d771f4df90abe5418ada677358331d3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_e5348a08de2e49d7a9349c7f5dee986f:
-        m_Texture: {fileID: 2800000, guid: 53e3da79ac173174492388350fb7a527, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_e5348a08de2e49d7a9349c7f5dee986f_1:
@@ -56,20 +56,21 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Boolean_9b469f662bd64238adf6a98adf07e12d: 1
-    - Boolean_d6a225570d5244018a3e7cc50e77bc68: 0
+    - Boolean_9b469f662bd64238adf6a98adf07e12d: 0
+    - Boolean_d6a225570d5244018a3e7cc50e77bc68: 1
+    - Boolean_d6a225570d5244018a3e7cc50e77bc68_1: 0
     - Boolean_d6a225570d5244018a3e7cc50e77bc68_2: 0
-    - Vector1_1: 0
-    - Vector1_13d3c7dfde464de0a7b3d3d57381a694: 0.01
-    - Vector1_3: 0
+    - Vector1_1: 1
+    - Vector1_13d3c7dfde464de0a7b3d3d57381a694: 0.007
+    - Vector1_3: 1
     - Vector1_4e8d50b182ff460cb77ea2528a571bcc: 0
-    - Vector1_73de1b745ef4455cac72bc9498cc85ea: 0.51
-    - Vector1_75102d3fd0ea4c36a6e9dc215de0f8eb: 0
-    - Vector1_b17b37f2e1af4547a0526ecacafac70a: 0.07
+    - Vector1_73de1b745ef4455cac72bc9498cc85ea: 33
+    - Vector1_75102d3fd0ea4c36a6e9dc215de0f8eb: 1
+    - Vector1_b17b37f2e1af4547a0526ecacafac70a: 28.9
     - Vector1_b4171f2d85684d87a0cc59922236cd51: 0.4
     - Vector1_b4171f2d85684d87a0cc59922236cd51_1: 0.4
     - Vector1_b4171f2d85684d87a0cc59922236cd51_2: 1
-    - Vector1_bb8b5c803c504edf8273799cf3b3d8dc: 0
+    - Vector1_bb8b5c803c504edf8273799cf3b3d8dc: 2.1
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 1
     - _AlphaDstBlend: 0
@@ -118,11 +119,11 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_1: {r: 1, g: 1, b: 1, a: 0}
-    - Color_2: {r: 1, g: 1, b: 1, a: 0}
-    - Color_3: {r: 1, g: 0.4496855, b: 0.58070326, a: 0}
-    - Color_4: {r: 1, g: 0.4496855, b: 0.58070326, a: 0}
-    - Color_79a7e530902247f2aa75818d5c80a81a: {r: 1, g: 0, b: 0.13752079, a: 0}
+    - Color_1: {r: 1, g: 0.38163927, b: 0, a: 0}
+    - Color_2: {r: 1, g: 0.58689827, b: 0.32704395, a: 0}
+    - Color_3: {r: 1, g: 0.13501385, b: 0, a: 0}
+    - Color_4: {r: 1, g: 0.15172572, b: 0, a: 0}
+    - Color_79a7e530902247f2aa75818d5c80a81a: {r: 1, g: 0.00000011920929, b: 0, a: 0}
     - Color_9ef1e1dbbd1f4756b1546dceebd8c0ad: {r: 1, g: 1, b: 1, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}

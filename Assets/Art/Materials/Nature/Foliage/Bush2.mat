@@ -56,13 +56,20 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_9b469f662bd64238adf6a98adf07e12d: 1
+    - Boolean_d6a225570d5244018a3e7cc50e77bc68: 0
+    - Boolean_d6a225570d5244018a3e7cc50e77bc68_2: 0
+    - Vector1_1: 0
     - Vector1_13d3c7dfde464de0a7b3d3d57381a694: 0.01
+    - Vector1_3: 0
     - Vector1_4e8d50b182ff460cb77ea2528a571bcc: 0
     - Vector1_73de1b745ef4455cac72bc9498cc85ea: 0.51
+    - Vector1_75102d3fd0ea4c36a6e9dc215de0f8eb: 0
     - Vector1_b17b37f2e1af4547a0526ecacafac70a: 0.07
     - Vector1_b4171f2d85684d87a0cc59922236cd51: 0.4
     - Vector1_b4171f2d85684d87a0cc59922236cd51_1: 0.4
     - Vector1_b4171f2d85684d87a0cc59922236cd51_2: 1
+    - Vector1_bb8b5c803c504edf8273799cf3b3d8dc: 0
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 1
     - _AlphaDstBlend: 0
@@ -113,6 +120,10 @@ Material:
     m_Colors:
     - Color_1: {r: 1, g: 1, b: 1, a: 0}
     - Color_2: {r: 1, g: 1, b: 1, a: 0}
+    - Color_3: {r: 1, g: 0.4496855, b: 0.58070326, a: 0}
+    - Color_4: {r: 1, g: 0.4496855, b: 0.58070326, a: 0}
+    - Color_79a7e530902247f2aa75818d5c80a81a: {r: 1, g: 0.4496855, b: 0.58070326,
+        a: 0}
     - Color_9ef1e1dbbd1f4756b1546dceebd8c0ad: {r: 1, g: 1, b: 1, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
