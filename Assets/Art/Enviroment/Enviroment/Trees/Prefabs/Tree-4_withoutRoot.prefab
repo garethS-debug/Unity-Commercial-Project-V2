@@ -5017,6 +5017,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: TreeFoliage
       objectReference: {fileID: 0}
+    - target: {fileID: 2964692125282892186, guid: def2620c3d9222843b8f610755706d36,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 2964692125282892186, guid: def2620c3d9222843b8f610755706d36,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15.03
+      objectReference: {fileID: 0}
     - target: {fileID: 5137227359569188794, guid: def2620c3d9222843b8f610755706d36,
         type: 3}
       propertyPath: m_RootOrder

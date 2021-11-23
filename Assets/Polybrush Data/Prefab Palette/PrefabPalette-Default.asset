@@ -102,13 +102,13 @@ MonoBehaviour:
       type: 3}
     settings:
       m_Strength: 50
-      m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_RotationRangeMin: {x: -90, y: 0, z: 0}
+      m_RotationRangeMax: {x: -90, y: 0, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 1, y: 1}
-      m_UniformBool: 0
-      m_XRotationBool: 0
+      m_UniformScale: {x: 0.25, y: 0.25}
+      m_UniformBool: 1
+      m_XRotationBool: 1
       m_YRotationBool: 0
       m_ZRotationBool: 0
       m_XScaleBool: 0
@@ -356,14 +356,14 @@ MonoBehaviour:
   - gameObject: {fileID: 8037119199851591913, guid: 8a7a3c008ec2ba54fa5df146e7ebf75b,
       type: 3}
     settings:
-      m_Strength: 50
-      m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_Strength: 58.8196
+      m_RotationRangeMin: {x: -90, y: 0, z: 0}
+      m_RotationRangeMax: {x: -90, y: 0, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 1, y: 1}
-      m_UniformBool: 0
-      m_XRotationBool: 0
+      m_UniformScale: {x: 0.15, y: 0.25}
+      m_UniformBool: 1
+      m_XRotationBool: 1
       m_YRotationBool: 0
       m_ZRotationBool: 0
       m_XScaleBool: 0
@@ -373,14 +373,14 @@ MonoBehaviour:
   - gameObject: {fileID: 9147670096949691039, guid: cf5fd88a94161f943a9f388a4535c9e6,
       type: 3}
     settings:
-      m_Strength: 50
-      m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_Strength: 72.048996
+      m_RotationRangeMin: {x: -90, y: 0, z: 0}
+      m_RotationRangeMax: {x: -90, y: 0, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 1, y: 1}
-      m_UniformBool: 0
-      m_XRotationBool: 0
+      m_UniformScale: {x: 0.15, y: 0.25}
+      m_UniformBool: 1
+      m_XRotationBool: 1
       m_YRotationBool: 0
       m_ZRotationBool: 0
       m_XScaleBool: 0
@@ -407,14 +407,14 @@ MonoBehaviour:
   - gameObject: {fileID: 3398417230652422282, guid: 9bc79724441f098438ec75135b98ad26,
       type: 3}
     settings:
-      m_Strength: 50
-      m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_Strength: 82.47104
+      m_RotationRangeMin: {x: -90, y: 0, z: 0}
+      m_RotationRangeMax: {x: -90, y: 0, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 1, y: 1}
-      m_UniformBool: 0
-      m_XRotationBool: 0
+      m_UniformScale: {x: 0.15, y: 0.25}
+      m_UniformBool: 1
+      m_XRotationBool: 1
       m_YRotationBool: 0
       m_ZRotationBool: 0
       m_XScaleBool: 0
@@ -608,3 +608,71 @@ MonoBehaviour:
       m_YScaleBool: 0
       m_ZScaleBool: 0
     name: Bush_1 (1)
+  - gameObject: {fileID: 919132149155446097, guid: fd58cf8adf0937043b18f65089879faf,
+      type: 3}
+    settings:
+      m_Strength: 50
+      m_RotationRangeMin: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_ScaleRangeMin: {x: 1, y: 1, z: 1}
+      m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+      m_UniformScale: {x: 1, y: 1}
+      m_UniformBool: 0
+      m_XRotationBool: 1
+      m_YRotationBool: 0
+      m_ZRotationBool: 0
+      m_XScaleBool: 0
+      m_YScaleBool: 0
+      m_ZScaleBool: 0
+    name: Grass3
+  - gameObject: {fileID: 919132149155446097, guid: 8c6d078628d12d24bb2e498330041dcc,
+      type: 3}
+    settings:
+      m_Strength: 100
+      m_RotationRangeMin: {x: 270, y: 0, z: 0}
+      m_RotationRangeMax: {x: 270, y: 0, z: 0}
+      m_ScaleRangeMin: {x: 1, y: 1, z: 1}
+      m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+      m_UniformScale: {x: 1, y: 1.5}
+      m_UniformBool: 1
+      m_XRotationBool: 1
+      m_YRotationBool: 0
+      m_ZRotationBool: 0
+      m_XScaleBool: 0
+      m_YScaleBool: 0
+      m_ZScaleBool: 0
+    name: Grass4
+  - gameObject: {fileID: 919132149155446097, guid: db4c775aa3da2804ba04df5da7178172,
+      type: 3}
+    settings:
+      m_Strength: 50
+      m_RotationRangeMin: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_ScaleRangeMin: {x: 1, y: 1, z: 1}
+      m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+      m_UniformScale: {x: 1, y: 1}
+      m_UniformBool: 0
+      m_XRotationBool: 1
+      m_YRotationBool: 0
+      m_ZRotationBool: 0
+      m_XScaleBool: 0
+      m_YScaleBool: 0
+      m_ZScaleBool: 0
+    name: Grass5
+  - gameObject: {fileID: 3412390050239141050, guid: 2a123756bff46754a8711aecdae97bd1,
+      type: 3}
+    settings:
+      m_Strength: 50
+      m_RotationRangeMin: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_ScaleRangeMin: {x: 1, y: 1, z: 1}
+      m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+      m_UniformScale: {x: 1, y: 1}
+      m_UniformBool: 0
+      m_XRotationBool: 1
+      m_YRotationBool: 0
+      m_ZRotationBool: 0
+      m_XScaleBool: 0
+      m_YScaleBool: 0
+      m_ZScaleBool: 0
+    name: Grass Polybrush
