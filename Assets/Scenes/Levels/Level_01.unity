@@ -8171,14 +8171,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300186, guid: 1e627bcafe9e32d40ad554880f36b5eb, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8208,6 +8208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e031ca0058a82164fac08e7445f0631b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryPrefab: {fileID: 6440330467291767890, guid: 6b952455859cd474bb8ccfc176ce4f3a,
+    type: 3}
   inventoryHuman: {fileID: 11400000, guid: 5dea348939dc7a84ba7f335378ccea4f, type: 2}
   inventoryGhost: {fileID: 11400000, guid: 70956a508eb072542b381630a9824f78, type: 2}
   xStart: -187

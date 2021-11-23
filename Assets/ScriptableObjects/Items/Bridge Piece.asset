@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e66cb3c572c16d41a4d30347b6d12a0, type: 3}
   m_Name: Bridge Piece
   m_EditorClassIdentifier: 
-  prefab: {fileID: 4321225576311928776, guid: f81afa77fbff862498629e22f5541ed9, type: 3}
+  Id: 2
+  uiDisplay: {fileID: 21300000, guid: e1198bab0e04a8a4eb37ccee7a857b0b, type: 3}
   type: 3
   description: Puzzle Piece for Bridge

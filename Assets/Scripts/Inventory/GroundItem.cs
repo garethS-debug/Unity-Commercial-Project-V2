@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 
 
-public class Item : MonoBehaviour
+public class GroundItem : MonoBehaviour
 {
     public ItemObject item;
 

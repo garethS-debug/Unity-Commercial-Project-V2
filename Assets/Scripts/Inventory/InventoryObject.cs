@@ -8,47 +8,24 @@ using UnityEditor;
 
 [CreateAssetMenu(fileName = "New inventory", menuName = "Inventory System/Inventory")]
 
-public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
+public class InventoryObject : ScriptableObject
 {
     public string savePath;
-    private ItemDatabaseObject database;
-    //public Inventory Container;//
-    public List<InventorySlot> Container = new List<InventorySlot>();
+    public ItemDatabaseObject database;
+    public Inventory Container;
 
     public bool twoKeysCollected = false;
 
-    private void OnEnable()
-    {
-#if UNITY_EDITOR
-        database = (ItemDatabaseObject)AssetDatabase.LoadAssetAtPath("Assets/Resources/InventoryDatabase.asset", typeof(ItemDatabaseObject));
-#else
-        database = Resources.Load<ItemDatabaseObject>("InventoryDatabase");
-#endif
-    }
-
-    public void OnAfterDeserialize()
-    {
-        for (int i = 0; i < Container.Count; i++)
-        {
-            Container[i].item = database.GetItem[Container[i].Id];
-        }
-    }
-
-    public void OnBeforeSerialize()
-    {
-
-    }
-
-    public void AddItem(ItemObject _item, int _amount)
+    public void AddItem(Item _item, int _amount)
     {
         // Check if item is already in inventory
-        for (int i = 0; i < Container.Count; i++)
+        for (int i = 0; i < Container.Items.Count; i++)
         {
-            if (Container[i].item == _item)
+            if (Container.Items[i].item.Id == _item.Id)
             {
-                Container[i].AddAmount(_amount);
+                Container.Items[i].AddAmount(_amount);
 
-                if (_item.name == "GoldenKey")
+                if (_item.Name == "GoldenKey")
                 {
                     twoKeysCollected = true;
                 }
@@ -58,7 +35,7 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
         }
 
         // If item not in inventory, create a new slot
-        Container.Add(new InventorySlot(database.GetId[_item], _item, _amount));
+        Container.Items.Add(new InventorySlot(_item.Id, _item, _amount));
     }
 
     public void SaveInventory()
@@ -83,21 +60,22 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
 
 }
 
-//[Serializable]
-//public class Inventory//
-//{
-//    public InventorySlot[] Items = new InventorySlot[4];//
-//}
+[Serializable]
+public class Inventory
+{
+    public List<InventorySlot> Items = new List<InventorySlot>();
+    //public InventorySlot[] Items = new InventorySlot[4];//
+}
 
 
 [Serializable]
 public class InventorySlot
 {
     public int Id;
-    public ItemObject item;
+    public Item item;
     public int amount;
 
-    public InventorySlot(int _id, ItemObject _item, int _amount)
+    public InventorySlot(int _id, Item _item, int _amount)
     {
         Id = _id;
         item = _item;
