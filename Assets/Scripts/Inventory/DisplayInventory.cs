@@ -14,6 +14,7 @@ public class DisplayInventory : MonoBehaviour
     public int numberOfColumns;
 
     Dictionary<InventorySlot, GameObject> itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
+    //Dictionary<GameObject, InventorySlot> itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
 
     private void Start()
     {
@@ -38,6 +39,17 @@ public class DisplayInventory : MonoBehaviour
             itemsDisplayed.Add(inv.Container[i], obj);
         }
     }
+
+    //public void CreateDisplay(InventoryObject inv)//
+    //{
+    //    for (int i = 0; i < inv.Container.Items.Length; i++)
+    //    {
+    //        var obj = Instantiate(inv.Container.Items[i].item.prefab, Vector3.zero, Quaternion.identity, transform);
+    //        obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
+    //        obj.GetComponentInChildren<TextMeshProUGUI>().text = inv.Container.Items[i].amount.ToString("n0");
+    //        itemsDisplayed.Add(obj, inv.Container.Items[i]);
+    //    }
+    //}
 
     public Vector3 GetPosition(int i)
     {

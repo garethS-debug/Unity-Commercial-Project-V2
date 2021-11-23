@@ -50,12 +50,12 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
         {
             PlayerInventory inventory = other.gameObject.GetComponent<PlayerInventory>();
 
-            for (int i = 0; i < inventory.inventory.Container.Count; i++)
-            {
-               if (inventory.inventory.Container[i].item == missingItem.item)
-                {
+            //for (int i = 0; i < inventory.inventory.Container.Count; i++)
+            //{
+               //if (inventory.inventory.Container[i].item == missingItem.item)
+                //{
 
-                    PV.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                    //PV.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
 
                     //Container[i].AddAmount(_amount);
                     //  hasItem = true;
@@ -64,15 +64,15 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
                     // {
                   
                     // }
-                }
+                //}
 
-               else
-                {
-                    Debug.Log("No Luck");
-                    Debug.Log("----------");
-                    Debug.Log("inventory Item = " + inventory.inventory.Container[i].item);
-                }
-            }
+               //else
+               // {
+               //     Debug.Log("No Luck");
+               //     Debug.Log("----------");
+               //     //Debug.Log("inventory Item = " + inventory.inventory.Container[i].item);
+               // }
+            //}
 
 
 
@@ -98,9 +98,9 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
     }
 
 
-    [PunRPC]
-    void RPC_PropChangeModel()
-    {
+    //[PunRPC]
+    //void RPC_PropChangeModel()
+    //{
         //if (!PV.IsMine)
         //   return;
 
@@ -109,10 +109,10 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
         // if (targetPV.gameObject == null)
         //     return;
 
-        brokenBridge.GetComponent<MeshFilter>().mesh = fixedBridgeMesh;
-        Debug.Log("2 golden keys");
-        missingPieceBoxCollder.SetActive(true);
-    }
+        //brokenBridge.GetComponent<MeshFilter>().mesh = fixedBridgeMesh;
+        //Debug.Log("2 golden keys");
+        //missingPieceBoxCollder.SetActive(true);
+    //}
 
 
 }

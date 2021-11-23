@@ -12,6 +12,19 @@ public class PlayerInventory : MonoBehaviour
     [Header("Photon Settings")]
     PhotonView PV;                                              //Setting up photon view 
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            inventory.SaveInventory();
+        }
+
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            inventory.LoadInventory();
+        }
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "item")
@@ -60,6 +73,7 @@ public class PlayerInventory : MonoBehaviour
     {
         // Clear the player's inventory when they quit
         inventory.Container.Clear();
+        //inventory.Container.Items = new InventorySlot[4];
     }
 
 
