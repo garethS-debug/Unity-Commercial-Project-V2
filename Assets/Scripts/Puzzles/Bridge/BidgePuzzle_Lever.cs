@@ -38,6 +38,8 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
     [Header("Photon Settings")]
     PhotonView PV;
+    public GameObject[] puzzlePiecesForSpawn;
+    public GameObject[] puzzlePieceSpawnPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +50,16 @@ public class BidgePuzzle_Lever : MonoBehaviour
         PuzzleGuideShowing = false;
         RandomizePuzzlePiece();
 
+        
+        if (SceneSettings.Instance.isSinglePlayer == true)
+        {
+
+        }
+
+        if (SceneSettings.Instance.isMultiPlayer == true)
+        {
+
+        }
   
 
     }

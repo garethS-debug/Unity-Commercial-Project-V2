@@ -14,9 +14,16 @@ public class PuzzleInfo : MonoBehaviour
     bool correctPlayerinTriggerZone;
 
 
-    [Header("Photon Settings")]
-    PhotonView PV;
-    private GameObject player;
+  //  [Header("Photon Settings")]
+  ////  PhotonView PV;
+  //  private GameObject[] players;
+   public GameObject myPlayer;
+
+
+    public void Start()
+    {
+        
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -25,7 +32,7 @@ public class PuzzleInfo : MonoBehaviour
        
             if (SceneSettings.Instance.isSinglePlayer == true)
             {
-                player = other.gameObject;
+                myPlayer = other.gameObject;
                 //Invert of Lever Choice
                 if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 && leverInfo.HumanPlayer == true)
                 {
@@ -45,12 +52,11 @@ public class PuzzleInfo : MonoBehaviour
 
             if (SceneSettings.Instance.isMultiPlayer == true)
             {
-                PV = other.gameObject.GetComponent<PhotonView>();
-                if (PV.IsMine)
-                {
-                    player = other.gameObject;
-                    //Invert of Lever Choice
-                    if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 && leverInfo.HumanPlayer == true)
+
+                myPlayer = other.gameObject;
+                // myPlayer = SceneSettings.Instance.myPlayer.gameObject;
+                //Invert of Lever Choice
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 && leverInfo.HumanPlayer == true)
                     {
                         correctPlayerinTriggerZone = true;
                     }
@@ -64,7 +70,7 @@ public class PuzzleInfo : MonoBehaviour
                     {
                         correctPlayerinTriggerZone = true;
                     }
-                }
+                
             }
   
 
@@ -83,11 +89,11 @@ public class PuzzleInfo : MonoBehaviour
 
             if (SceneSettings.Instance.isMultiPlayer == true)
             {
-                if (PV.IsMine)
-                {
+         
+                    print("isMIne");
                     //Invert of Lever Choice
                     correctPlayerinTriggerZone = false;
-                }
+                
 
             }
 
@@ -119,29 +125,24 @@ public class PuzzleInfo : MonoBehaviour
 
             if (SceneSettings.Instance.isMultiPlayer == true)
             {
-                if (PV.IsMine)                                          //Only run this script on the owning player who triggered the event
-                {
-                    if (player.gameObject.GetComponent<PhotonView>() != null)
-                {
-                    PV = player.gameObject.GetComponent<PhotonView>();        //Get the photonview on the player
-                }
-
-        
+              
                     if (item)
                     {
-                       player.gameObject.GetComponent< PlayerInventory>().inventory.AddItem(item.item, 1);                    //Photon 
+                       myPlayer.gameObject.GetComponent< PlayerInventory>().inventory.AddItem(item.item, 1);                    //Photon 
 
-                        PV.RPC("RPC_DeleteModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                        PhotonView photonView = PhotonView.Get(this);
+
+                        photonView.RPC("RPC_DeleteModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
                         //item.DestroyItem();
                     }
-                }
+                
             }
 
             else if (SceneSettings.Instance.isSinglePlayer == true)
             {
                 if (item)
                 {
-                    player.gameObject.GetComponent<PlayerInventory>().inventory.AddItem(item.item, 1);                    //singlePlayer
+                    myPlayer.gameObject.GetComponent<PlayerInventory>().inventory.AddItem(item.item, 1);                    //singlePlayer
 
 
                  //   item.DestroyItem();
@@ -179,9 +180,5 @@ public class PuzzleInfo : MonoBehaviour
     }
 
 
-    private void OnApplicationQuit()
-    {
-        // Clear the player's inventory when they quit
-        player.gameObject.GetComponent<PlayerInventory>().inventory.Container.Clear();
-    }
+
 }

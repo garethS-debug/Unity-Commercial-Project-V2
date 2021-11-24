@@ -363,7 +363,6 @@ MonoBehaviour:
   isHostVersion: 0
   remainingPlayerID: 0
   playerCurrentlyInRoom: 0
-  DebugMode: 1
 --- !u!65 &4902874812327242995
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6372,6 +6371,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6515900873604205013}
     m_Modifications:
+    - target: {fileID: 1680464258, guid: 0f8032ecd2cd99f4885ecaea49bc4fc6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1648103272126973518, guid: 0f8032ecd2cd99f4885ecaea49bc4fc6,
         type: 3}
       propertyPath: m_Name
