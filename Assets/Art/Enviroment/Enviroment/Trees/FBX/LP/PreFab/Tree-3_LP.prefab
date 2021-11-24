@@ -279,6 +279,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground Cover_6 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1784007399790068036, guid: 393b8fcfab4029041beba912009d48ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 393b8fcfab4029041beba912009d48ca, type: 3}
 --- !u!4 &6479857709708015711 stripped
@@ -368,6 +373,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ground Cover_6 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784007399790068036, guid: 393b8fcfab4029041beba912009d48ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 393b8fcfab4029041beba912009d48ca, type: 3}
