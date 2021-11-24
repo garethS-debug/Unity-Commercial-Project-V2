@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Player_Data", menuName = "player_Data/Player_Data_SO", order = 1)]
 public class PlayerSO : ScriptableObject
 {
-
+    [Tooltip("2 = ghost 1= human")]
     public int PlayerCharacterChoise;
 
     public string PlayerName;

@@ -594,6 +594,7 @@ MonoBehaviour:
   CharaceterName: Human Player
   isGhostCharacer: 0
   isHumanCharater: 1
+  isSinglePlayer: 0
   playerSOData: {fileID: 11400000, guid: f6bbc180c160720489c9048e80112be2, type: 2}
 --- !u!1 &1729794143952959833
 GameObject:

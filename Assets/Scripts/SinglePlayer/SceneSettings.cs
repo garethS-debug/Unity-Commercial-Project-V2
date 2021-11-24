@@ -18,6 +18,9 @@ public class SceneSettings : MonoBehaviour
 
     public bool isMultiPlayer;
 
+
+    public bool DebugMode;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)

@@ -39,7 +39,7 @@ public class RoomItem : MonoBehaviour
     [Header("RequiredPlayer")]
     public int remainingPlayerID;
     public int playerCurrentlyInRoom;
-    public bool DebugMode;
+  //  public bool DebugMode;
 
 
     private void Start()
@@ -110,7 +110,7 @@ public class RoomItem : MonoBehaviour
         LobbyManager lobbymanager = GameObject.FindGameObjectWithTag("LobbyManager").GetComponent<LobbyManager>();
         print("Your ID is : " + lobbymanager.spawnedLobbyPlayer.GetComponent<CharacterID>().playerSOData.PlayerCharacterChoise + "Remaining ID is " + remainingPlayerID);
 
-        if (DebugMode == false && lobbymanager.spawnedLobbyPlayer.GetComponent<CharacterID>().playerSOData.PlayerCharacterChoise == remainingPlayerID)
+        if (SceneSettings.Instance.DebugMode == false && lobbymanager.spawnedLobbyPlayer.GetComponent<CharacterID>().playerSOData.PlayerCharacterChoise == remainingPlayerID)
         {
 
         
@@ -146,7 +146,7 @@ public class RoomItem : MonoBehaviour
             }
         }
 
-        if (DebugMode == true) 
+        if (SceneSettings.Instance.DebugMode == true) 
         
         
         {

@@ -137,6 +137,11 @@ public class NetworkedPlayerController : MonoBehaviour
 	[Header("Perform Action")]
 	public KeyCode PerformAction = KeyCode.F;
 	public bool PermormingAction;
+	public delegate void MyEventDelegate();
+	public static event MyEventDelegate myEvent;
+
+
+
 
 	private void Awake()
 	{
@@ -850,15 +855,24 @@ public class NetworkedPlayerController : MonoBehaviour
 
 	private void PerformActionCheck()
 	{
-	 if (Input.GetKey(PerformAction))
+	 if (Input.GetKeyDown(PerformAction))
         {
 			PermormingAction = true;
 			print("player controller performing action");
-        }
-	 else
-        {
+
+			if (myEvent != null)
+			{
+				myEvent();
+			}
+
+
+		}
+		if (Input.GetKeyUp(PerformAction))
+		{
+			print("player controller not performing action");
 			PermormingAction = false;
-        }
+		}
+	
 	}
 
 }
