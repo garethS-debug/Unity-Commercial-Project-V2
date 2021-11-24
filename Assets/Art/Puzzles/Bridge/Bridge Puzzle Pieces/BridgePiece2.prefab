@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 965209380541692116}
   - component: {fileID: 5452509778719878509}
   - component: {fileID: -3410900911349751669}
+  - component: {fileID: 919132148313608668}
   m_Layer: 0
   m_Name: BridgePiece2
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 118348136048674178}
   m_LocalRotation: {x: -0.6678216, y: -0.23240983, z: 0.23240983, w: 0.6678216}
   m_LocalPosition: {x: 89, y: 13, z: 36}
-  m_LocalScale: {x: 100, y: 58.27371, z: 438.35114}
+  m_LocalScale: {x: 1.5113668, y: 1.4959445, z: 1.2310858}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -43,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 118348136048674178}
-  m_Mesh: {fileID: 1799131749446294383, guid: dcbb06574953d2e4f8a2d9c189c91ee9, type: 3}
+  m_Mesh: {fileID: 4378663012894292959, guid: dcbb06574953d2e4f8a2d9c189c91ee9, type: 3}
 --- !u!23 &1919810457572303959
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 125642e6bb6256a479b4975889464412, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,8 +97,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.08991436, y: 0.020000022, z: 0.02}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.13355641, y: 0.020000022, z: 0.13707499}
+  m_Center: {x: 0.0007440919, y: 0.0000009896962, z: 0.0009926226}
 --- !u!65 &965209380541692116
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -109,8 +110,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.10193717, y: 0.067465216, z: 0.02}
-  m_Center: {x: 0.0060114185, y: 0.0032023138, z: 4.0552128e-11}
+  m_Size: {x: 0.15202375, y: 0.067465216, z: 0.1440671}
+  m_Center: {x: 0.00087575096, y: 0.0034686544, z: 0.0077905226}
 --- !u!114 &5452509778719878509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,8 +125,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzleInfo: {fileID: 11400000, guid: 50811d97674d7504e88aea79231adc95, type: 2}
-  inventoryItem: {fileID: 0}
+  inventoryItem: {fileID: 11400000, guid: 0f5055a9070d62648ba5f66842cb28a5, type: 2}
   leverInfo: {fileID: 0}
+  myPlayer: {fileID: 0}
 --- !u!114 &-3410900911349751669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,3 +150,16 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &919132148313608668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118348136048674178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2324cf73536d5854c908f3e8bed001d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 0f5055a9070d62648ba5f66842cb28a5, type: 2}
