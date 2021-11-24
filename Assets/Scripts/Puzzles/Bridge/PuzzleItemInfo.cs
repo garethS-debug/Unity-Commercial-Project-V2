@@ -10,6 +10,7 @@ public  class PuzzleItemInfo : ScriptableObject
     public GameObject prefab;
     public Sprite uiImage;
     public Item inventoryItem;
+    public string runeDesccription;
     //public PuzzleType type;
 
 

@@ -299,6 +299,31 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
             if (SceneSettings.Instance.isSinglePlayer == true)
             {
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1 && HumanPlayer == true && PuzzleGuideShowing == false)
+                {
+                    print("Performing human Action");
+                    PuzzleGuide.gameObject.SetActive(true);
+                    PuzzleGuideShowing = true;
+                    // performingLeverAction = false;
+                    return;
+                }
+
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 && GhostPLayer == true && PuzzleGuideShowing == false)
+                {
+                    print("Performing ghost Action");
+                    PuzzleGuide.gameObject.SetActive(true);
+                    PuzzleGuideShowing = true;
+                    //  performingLeverAction = false;
+                    return;
+                }
+
+                if (PuzzleGuideShowing == true)
+                {
+                    PuzzleGuide.gameObject.SetActive(false);
+                    PuzzleGuideShowing = false;
+                    //  performingLeverAction = false;
+                    return;
+                }
             }
 
         }

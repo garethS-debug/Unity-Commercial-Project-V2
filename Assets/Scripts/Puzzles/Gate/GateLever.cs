@@ -16,6 +16,8 @@ public class GateLever : MonoBehaviour
     public GameObject InteractionUI;
     public GameObject PuzzleGuide;
     public Image clueImageContainer;
+    public Image Objective;
+    public Sprite GateObjectivePictureDescription;
     bool PuzzleGuideShowing, withinLeverZone;
 
 
@@ -31,8 +33,12 @@ public class GateLever : MonoBehaviour
     public PuzzleState state;
 
     [Header("Activation")]
-    [HideInInspector] public PuzzleInfo activationSwitch;
-    public BridgePuzzle_CheckForPiece bridgePuzzleChecker;
+    public PuzzleItemInfo activationSwitch;
+    public GatePuzzleObjectTrigger gatePuzzleChecker;
+    [HideInInspector] public bool correctPieceSelected;
+
+    [Header("Rune")]
+    public string runeDescription;
 
     [Header("Photon Settings")]
     PhotonView PV;
@@ -60,28 +66,20 @@ public class GateLever : MonoBehaviour
 
 
 
-        if (SceneSettings.Instance.isSinglePlayer == true)
-        {
-
-        }
-
-        if (SceneSettings.Instance.isMultiPlayer == true)
-        {
-
-        }
-
         if (SceneSettings.Instance.DebugMode == true)
         {
+            print("Debug Mode");
             brokenGatePiece.gameObject.GetComponent<BoxCollider>().isTrigger = true;
         }
 
-
+        state = PuzzleState.Inactive;
     }
 
     public void Update()
     {
         if (state == PuzzleState.Active)
         {
+            print("Checking for trigger");
             checkForCorrectTrigger();
         }
 
@@ -124,9 +122,11 @@ public class GateLever : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+          
             //Open UI
             if (SceneSettings.Instance.isSinglePlayer == true)
             {
+            
                 withinLeverZone = true;
             }
 
@@ -142,17 +142,20 @@ public class GateLever : MonoBehaviour
 
             if (controller != null)
             {
+
+
                 if (SceneSettings.Instance.isSinglePlayer == true)
                 {
                     if (controller.PermormingAction == true)
                     {
-                      
+                 
+
                         if (state == PuzzleState.Inactive)
                         {
                             //SEND CALL FOR ACTION - suvscription 
                             //Spawn Bridge Piece
                             state = PuzzleState.Active;
-                            print("State is now : " + state);
+                            Objective.sprite = GateObjectivePictureDescription;
 
                         }
                     }
@@ -170,6 +173,7 @@ public class GateLever : MonoBehaviour
                                 //SEND CALL FOR ACTION - suvscription 
                                 //Spawn Bridge Piece
                                 state = PuzzleState.Active;
+                                Objective.sprite = GateObjectivePictureDescription;
                                 print("State is now : " + state);
 
 
@@ -216,7 +220,15 @@ public class GateLever : MonoBehaviour
 
 
 
-
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            InteractionUI.gameObject.SetActive(false);  //Close UI
+            PuzzleGuide.gameObject.SetActive(false); // close puzzle UI
+            withinLeverZone = false;
+        }
+    }
 
 
 
@@ -246,12 +258,19 @@ public class GateLever : MonoBehaviour
                 if (trigger.objectInfo == activationSwitch)
                 {
                     print("Correct Piece Active");
+                    state = PuzzleState.Inactive;
+                    correctPieceSelected = true;
+                    //WIN METHOD
+
+                    return;
+
+
                 }
 
                 if (trigger.objectInfo != activationSwitch)
                 {
                     print("Incorrect Piece Active");
-                    IncorrectSelection();
+                    IncorrectSelection(); //Loose Method
                     state = PuzzleState.Inactive;
                     return;
                 }
@@ -264,20 +283,138 @@ public class GateLever : MonoBehaviour
 
     public void RandomizePuzzlePiece()
     {
+        //Randomize
 
+   
         int index;
         index = Random.Range(0, puzzleTriggers.Length);
-        activationSwitch = puzzleTriggers[index].GetComponent<PuzzleInfo>(); ;
+        activationSwitch = puzzleTriggers[index].GetComponent<GatePuzzleObjectTrigger>().objectInfo; ;
+        print("randomized piece = " + activationSwitch.objectName);
 
-        bridgePuzzleChecker.missingItem = activationSwitch;
+        gatePuzzleChecker.objectInfo = activationSwitch;
+        clueImageContainer.sprite = activationSwitch.uiImage;
 
-        clueImageContainer.sprite = activationSwitch.puzzleInfo.uiImage;
+     
+      //  rune.gameObject.GetComponent<MeshFilter>().sharedMesh = activationSwitch.rune.gameObject.GetComponent<MeshFilter>().sharedMesh;
     }
 
 
     public void IncorrectSelection()
     {
-        RandomizePuzzlePiece();
+        RandomizePuzzlePiece(); // Choose a new puzzle piece
+        //set state to inactive
+        for (int i = 0; i < puzzleTriggers.Length; i++)
+        {
+            GatePuzzleObjectTrigger trigger = puzzleTriggers[i].gameObject.GetComponent<GatePuzzleObjectTrigger>();
+            trigger.state = GatePuzzleObjectTrigger.PuzzleObjectState.Inactive;
+        }
+
+
     }
 
+
+    void OnEnable()
+    {
+        NetworkedPlayerController.myEvent += PrintStuff;
+    }
+
+    void OnDisable()
+    {
+        NetworkedPlayerController.myEvent -= PrintStuff;
+    }
+
+
+    void PrintStuff()
+    {
+        if (withinLeverZone == true)
+        {
+            Debug.Log("myEvent received!");
+            print("Check for UI");
+
+
+
+            //event ending here
+
+
+            if (SceneSettings.Instance.DebugMode == true)
+            {
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1)
+                {
+                    print("SettingBoolBasedon Debug human");
+                    HumanPlayer = true;
+                }
+
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2)
+                {
+                    print("SettingBoolBasedon Debug ghost");
+                    GhostPLayer = true;
+                }
+            }
+
+
+
+            if (SceneSettings.Instance.isMultiPlayer == true)
+            {
+
+                if (PV.IsMine)
+                {
+                    if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1 && HumanPlayer == true && PuzzleGuideShowing == false)
+                    {
+                        print("Performing human Action");
+                        PuzzleGuide.gameObject.SetActive(true);
+                        PuzzleGuideShowing = true;
+                        // performingLeverAction = false;
+                        return;
+                    }
+
+                    if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 && GhostPLayer == true && PuzzleGuideShowing == false)
+                    {
+                        print("Performing ghost Action");
+                        PuzzleGuide.gameObject.SetActive(true);
+                        PuzzleGuideShowing = true;
+                        //  performingLeverAction = false;
+                        return;
+                    }
+
+                    if (PuzzleGuideShowing == true)
+                    {
+                        PuzzleGuide.gameObject.SetActive(false);
+                        PuzzleGuideShowing = false;
+                        //  performingLeverAction = false;
+                        return;
+                    }
+                }
+            }
+
+            if (SceneSettings.Instance.isSinglePlayer == true)
+            {
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1 && HumanPlayer == true && PuzzleGuideShowing == false)
+                {
+                    print("Performing human Action");
+                    PuzzleGuide.gameObject.SetActive(true);
+                    PuzzleGuideShowing = true;
+                    // performingLeverAction = false;
+                    return;
+                }
+
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 && GhostPLayer == true && PuzzleGuideShowing == false)
+                {
+                    print("Performing ghost Action");
+                    PuzzleGuide.gameObject.SetActive(true);
+                    PuzzleGuideShowing = true;
+                    //  performingLeverAction = false;
+                    return;
+                }
+
+                if (PuzzleGuideShowing == true)
+                {
+                    PuzzleGuide.gameObject.SetActive(false);
+                    PuzzleGuideShowing = false;
+                    //  performingLeverAction = false;
+                    return;
+                }
+            }
+
+        }
+    }
 }

@@ -5,23 +5,14 @@ using Photon.Pun;
 using Photon.Realtime;
 
 
-public class GatePuzzleCheckForPiece : MonoBehaviour
+public class GatePuzzleCheck : MonoBehaviour
 {
 
     // Start is called before the first frame update
     [Header("Missing Item")]
     [HideInInspector] public PuzzleInfo activationPiece;
 
-    // [Header("Lever")]
-    //public BidgePuzzle_Lever lever;
-
-    [Header("new Mesh")]
-    public Mesh openMesh;
-    public GameObject newBoxCollider;
-
-    [Header("Broken Bridge")]
-    public GameObject blockedMesh;
-    //public GameObject brokenBridgeMesh;
+ 
 
 
     [Header("Photon Settings")]
@@ -84,7 +75,7 @@ public class GatePuzzleCheckForPiece : MonoBehaviour
         // if (targetPV.gameObject == null)
         //     return;
 
-        blockedMesh.GetComponent<MeshFilter>().mesh = openMesh;
+      //  blockedMesh.GetComponent<MeshFilter>().mesh = openMesh;
         Debug.Log("Correct Rune Selected");
        // missingPieceBoxCollder.SetActive(true);
     }
@@ -92,7 +83,7 @@ public class GatePuzzleCheckForPiece : MonoBehaviour
 
     public void FixBridge()
     {
-        blockedMesh.GetComponent<MeshFilter>().mesh = openMesh;
+    //    blockedMesh.GetComponent<MeshFilter>().mesh = openMesh;
         Debug.Log("Correct Rune Selected");
         // missingPieceBoxCollder.SetActive(true);
     }
