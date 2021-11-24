@@ -16,15 +16,16 @@ public class PuzzleInfo : MonoBehaviour
 
     [Header("Photon Settings")]
     PhotonView PV;
-
+    private GameObject player;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-
+       
             if (SceneSettings.Instance.isSinglePlayer == true)
             {
+                player = other.gameObject;
                 //Invert of Lever Choice
                 if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 && leverInfo.HumanPlayer == true)
                 {
@@ -47,6 +48,7 @@ public class PuzzleInfo : MonoBehaviour
                 PV = other.gameObject.GetComponent<PhotonView>();
                 if (PV.IsMine)
                 {
+                    player = other.gameObject;
                     //Invert of Lever Choice
                     if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 && leverInfo.HumanPlayer == true)
                     {
@@ -108,22 +110,62 @@ public class PuzzleInfo : MonoBehaviour
         if (correctPlayerinTriggerZone == true)
         {
             print("Item has been Picked up");
-            this.gameObject.tag = "item";
+           // this.gameObject.tag = "item";
 
             //Force add to inventory
 
+            //PLayer Checking the item
+            var item = this.gameObject.GetComponent<Item>();
 
-
-            //Delete 
-            if (SceneSettings.Instance.isSinglePlayer == true)
-            {
-                Destroy(this.gameObject);
-            } 
-          
             if (SceneSettings.Instance.isMultiPlayer == true)
             {
-                PV.RPC("RPC_DeleteModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                if (PV.IsMine)                                          //Only run this script on the owning player who triggered the event
+                {
+                    if (player.gameObject.GetComponent<PhotonView>() != null)
+                {
+                    PV = player.gameObject.GetComponent<PhotonView>();        //Get the photonview on the player
+                }
+
+        
+                    if (item)
+                    {
+                       player.gameObject.GetComponent< PlayerInventory>().inventory.AddItem(item.item, 1);                    //Photon 
+
+                        PV.RPC("RPC_DeleteModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                        //item.DestroyItem();
+                    }
+                }
             }
+
+            else if (SceneSettings.Instance.isSinglePlayer == true)
+            {
+                if (item)
+                {
+                    player.gameObject.GetComponent<PlayerInventory>().inventory.AddItem(item.item, 1);                    //singlePlayer
+
+
+                 //   item.DestroyItem();
+                    this.gameObject.SetActive(false);
+                }
+            }
+        
+   
+
+
+
+
+
+
+            ////Delete 
+            //if (SceneSettings.Instance.isSinglePlayer == true)
+            //{
+            //    this.gameObject.SetActive(false);
+            //} 
+          
+            //if (SceneSettings.Instance.isMultiPlayer == true)
+            //{
+            //    PV.RPC("RPC_DeleteModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+            //}
         }
 
     }
@@ -132,6 +174,14 @@ public class PuzzleInfo : MonoBehaviour
     void RPC_DeleteModel()
     {
         print("Destroying " + this.gameObject.name);
-        Destroy(this.gameObject);
+        //   Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
+    }
+
+
+    private void OnApplicationQuit()
+    {
+        // Clear the player's inventory when they quit
+        player.gameObject.GetComponent<PlayerInventory>().inventory.Container.Clear();
     }
 }
