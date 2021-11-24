@@ -16,6 +16,8 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
     public GameObject UI;
 
+    NetworkedPlayerController controller;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +47,11 @@ public class BidgePuzzle_Lever : MonoBehaviour
             UI.gameObject.SetActive(true);
             //Open UI
 
-            NetworkedPlayerController controller = other.gameObject.GetComponent<NetworkedPlayerController>();
+            if (SceneSettings.Instance.isMultiPlayer == true)
+            {
+                controller = other.gameObject.GetComponent<NetworkedPlayerController>();
+            }
+
 
             if (controller.PermormingAction == true && SpawnedPiece == false)
             {
