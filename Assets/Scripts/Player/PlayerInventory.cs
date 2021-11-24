@@ -14,12 +14,12 @@ public class PlayerInventory : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.K))
         {
             inventory.SaveInventory();
         }
 
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             inventory.LoadInventory();
         }

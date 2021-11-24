@@ -9,7 +9,7 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
 {
     // Start is called before the first frame update
     [Header("Missing Item")]
-    public Item missingItem;
+    public GroundItem missingItem;
 
     [Header("Fixed Bridge")]
     public Mesh fixedBridgeMesh;
@@ -27,7 +27,6 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
 
     public void Start()
     {
-
         DebugOutSideOfNetwork = false;
         missingPieceBoxCollder.SetActive(false);
         PV = this.gameObject.GetComponent<PhotonView>();        //Get the photonview on the player
@@ -50,34 +49,34 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
         {
             PlayerInventory inventory = other.gameObject.GetComponent<PlayerInventory>();
 
-            //for (int i = 0; i < inventory.inventory.Container.Count; i++)
-            //{
-               //if (inventory.inventory.Container[i].item == missingItem.item)
-                //{
+            for (int i = 0; i < inventory.inventory.Container.Items.Count; i++)
+            {
+                if (inventory.inventory.Container.Items[i].item == missingItem.item)
+                {
 
-                    //PV.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                    PV.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
 
                     //Container[i].AddAmount(_amount);
                     //  hasItem = true;
 
                     // if (_item.name == "GoldenKey")
                     // {
-                  
+
                     // }
-                //}
+                }
 
-               //else
-               // {
-               //     Debug.Log("No Luck");
-               //     Debug.Log("----------");
-               //     //Debug.Log("inventory Item = " + inventory.inventory.Container[i].item);
-               // }
-            //}
+                else
+                {
+                    Debug.Log("No Luck");
+                    Debug.Log("----------");
+                    //Debug.Log("inventory Item = " + inventory.inventory.Container[i].item);
+                }
+            }
 
 
 
-        //    inventory.inventory
-            
+            //    inventory.inventory
+
         }
 
 
@@ -98,9 +97,9 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
     }
 
 
-    //[PunRPC]
-    //void RPC_PropChangeModel()
-    //{
+    [PunRPC]
+    void RPC_PropChangeModel()
+    {
         //if (!PV.IsMine)
         //   return;
 
@@ -109,10 +108,11 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
         // if (targetPV.gameObject == null)
         //     return;
 
-        //brokenBridge.GetComponent<MeshFilter>().mesh = fixedBridgeMesh;
-        //Debug.Log("2 golden keys");
-        //missingPieceBoxCollder.SetActive(true);
-    //}
+        brokenBridge.GetComponent<MeshFilter>().mesh = fixedBridgeMesh;
+        Debug.Log("2 golden keys");
+        missingPieceBoxCollder.SetActive(true);
+        //}
 
 
+    }
 }
