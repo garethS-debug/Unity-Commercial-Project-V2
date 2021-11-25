@@ -29,7 +29,13 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
     {
         DebugOutSideOfNetwork = false;
         missingPieceBoxCollder.SetActive(false);
-        PV = this.gameObject.GetComponent<PhotonView>();        //Get the photonview on the player
+
+      //  missingItem = lever.missingItem;
+
+        if (SceneSettings.Instance.isMultiPlayer == true)
+        {
+            PV = this.gameObject.GetComponent<PhotonView>();        //Get the photonview on the player
+        }
     }
 
     private void Update()
@@ -52,10 +58,18 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
             for (int i = 0; i < inventory.inventory.Container.Items.Count; i++)
             {
                 if (inventory.inventory.Container.Items[i].item == missingItem.item)
+
                 {
 
-                    PV.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                    if (SceneSettings.Instance.isMultiPlayer == true)
+                    {
+                        PV.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                    }
 
+                    if (SceneSettings.Instance.isSinglePlayer == true)
+                    {
+                        FixBridge();
+                    }
                     //Container[i].AddAmount(_amount);
                     //  hasItem = true;
 
@@ -113,6 +127,40 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
         missingPieceBoxCollder.SetActive(true);
         //}
 
-
     }
 }
+
+
+
+//PlayerInventory inventory = other.gameObject.GetComponent<PlayerInventory>();
+
+//for (int i = 0; i < inventory.inventory.Container.Count; i++)
+//{
+//    if (inventory.inventory.Container[i].item == missingItem.puzzleInfo)
+//    {
+
+//        if (SceneSettings.Instance.isMultiPlayer == true)
+//        {
+//            PV.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+//        }
+
+//        if (SceneSettings.Instance.isSinglePlayer == true)
+//        {
+//            FixBridge();
+//        }
+//        //Container[i].AddAmount(_amount);
+//        //  hasItem = true;
+
+//        // if (_item.name == "GoldenKey")
+//        // {
+
+//        // }
+//    }
+
+//    else
+//    {
+//        Debug.Log("No Luck");
+//        Debug.Log("----------");
+//        Debug.Log("inventory Item = " + inventory.inventory.Container[i].item);
+//    }
+//}

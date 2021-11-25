@@ -10,13 +10,21 @@ public class SceneSettings : MonoBehaviour
 
     public static SceneSettings Instance { get { return _instance; } }
 
-
+    [Header("PlayerData")]
     public PlayerSO playerSOData;
 
-
+    [Header("Game Mode ")]
     public bool isSinglePlayer;
 
     public bool isMultiPlayer;
+
+
+    [Header("my player ")]
+    //  PhotonView PV;
+  //  private GameObject[] players;
+   // public GameObject myPlayer;
+
+    public bool DebugMode;
 
     private void Awake()
     {
@@ -54,6 +62,32 @@ public class SceneSettings : MonoBehaviour
     }
 
 
+    //public void Start()
+    //{
+    //    if (isMultiPlayer == true)
+    //    {
+    //        players = GameObject.FindGameObjectsWithTag("Player");
+
+    //        for (int i = 0; i < players.Length; i++)
+    //        {
+    //            // Clear the player's inventory when they quit
+    //            if (players[i].gameObject.GetComponent<PhotonView>().IsMine)
+    //            {
+    //                myPlayer = players[i];
+    //                print("My Player is " + myPlayer.name);
+    //            }
+
+    //            else
+    //            {
+    //                Debug.Log("Player found but not mine " + players[i].gameObject.name);
+    //            }
+
+    //        }
+    //    }
+     
+    //}
+
+
     public void RemoveMultiplayerScript(GameObject subject)
     {
         if (subject.gameObject.GetComponent<PhotonTransformView>() == true)
@@ -65,6 +99,19 @@ public class SceneSettings : MonoBehaviour
         {
             Destroy(subject.gameObject.GetComponent<PhotonView>());
         }
+    }
+
+
+    private void OnApplicationQuit()
+    {
+
+        //for (int i = 0; i < players.Length; i++)
+        //{
+        //    // Clear the player's inventory when they quit
+        //    players[i].gameObject.GetComponent<PlayerInventory>().inventory.Container.Clear();
+        //}
+
+
     }
 
 }

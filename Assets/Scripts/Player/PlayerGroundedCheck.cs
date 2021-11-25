@@ -16,6 +16,7 @@ public 	NetworkedPlayerController playerController;
 
 	void OnTriggerEnter(Collider other)
 	{
+		playerController = other.gameObject.GetComponent<NetworkedPlayerController>();
 		if (other.gameObject == playerController.gameObject)
 			return;
 	//	Debug.Log("Hit !!");
@@ -36,6 +37,7 @@ public 	NetworkedPlayerController playerController;
 
 	void OnTriggerStay(Collider other)
 	{
+		playerController = other.gameObject.GetComponent<NetworkedPlayerController>();
 		if (other.gameObject == playerController.gameObject)
 			return;
 

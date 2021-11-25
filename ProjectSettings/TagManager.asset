@@ -20,11 +20,11 @@ TagManager:
   - Water
   - UI
   - Terrain
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PostProcess
+  - GhostPlayer
+  - HumanPlayer
+  - GhostCollisionIgnore
+  - HumanCollisionIgnore
   - 
   - 
   - 

@@ -48,6 +48,10 @@ MonoBehaviour:
   - PauseAnimation
   - pauseAnimationEvent
   - m_DestroyObject
+  - RPC_DeleteModel
+  - RPC_ActivatePuzzleStatus
+  - RPC_IncorrectPuzzlePiece
+  - RPC_SelectPuzzlePiece
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
