@@ -31,7 +31,11 @@ public class EndOfLevel : MonoBehaviourPunCallbacks
 
     public void OnTriggerEnter(Collider other)
     {
-        StartCoroutine("CutSceneCoRoutine");
+        if (other.gameObject.tag == "Player")
+        {
+            StartCoroutine("CutSceneCoRoutine");
+        }
+       
     }
 
 
