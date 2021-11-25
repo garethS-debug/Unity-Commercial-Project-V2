@@ -838,7 +838,7 @@ public class NetworkedPlayerController : MonoBehaviour
 
 				//Player Controls
 				return test3;
-				print("Incorrect intelligence level.");
+				//print("Incorrect intelligence level.");
 				break;
 		}
 

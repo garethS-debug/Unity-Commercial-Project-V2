@@ -24,6 +24,7 @@ public class Level01Cutscene : MonoBehaviour
     [Header("Intro")]
     public GameObject intro;
     public TMP_Text txt;
+    public GameObject textObj;
     [TextArea]
     public string story;
 
@@ -72,8 +73,8 @@ public class Level01Cutscene : MonoBehaviour
 
     IEnumerator CutSceneCoRoutine()
     {
-        
 
+        StartCoroutine("PlayText");
         intro.gameObject.SetActive(true);
 
 
@@ -96,8 +97,9 @@ public class Level01Cutscene : MonoBehaviour
 
         //After we have waited 5 seconds print the time again.
         yield return new WaitForSeconds(cutSceneDelay);
+        textObj.SetActive(false);
 
-      
+
         fogAnim.SetBool("moveFog", true);
 
 
@@ -130,7 +132,18 @@ public class Level01Cutscene : MonoBehaviour
 
     }
 
-  
+    IEnumerator PlayText()
+    {
+        foreach (char c in story)
+        {
+            txt.text += c;
+            yield return new WaitForSeconds(0.075f);
+
+    
+        }
+    }
+
+
 
 
 }
