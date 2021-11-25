@@ -136,7 +136,11 @@ public class GatePuzzleObjectTrigger : MonoBehaviour
                         state = PuzzleObjectState.Active;
 
                         MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
-                        GetComponent<MeshRenderer>().material = activeRune;
+                       if (GetComponent<MeshRenderer>()!= null)
+                        {
+                            GetComponent<MeshRenderer>().material = activeRune;
+                        }
+                    
 
                         print("Performing human Action");
                         return;

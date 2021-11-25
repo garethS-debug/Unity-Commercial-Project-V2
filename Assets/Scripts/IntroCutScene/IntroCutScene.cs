@@ -104,7 +104,7 @@ public class IntroCutScene : MonoBehaviour
         //After we have waited 5 seconds print the time again.
         Debug.Log("Spawn Player after Cutscene Coroutine at timestamp : ".Bold().Color("yellow") + Time.time);
 
-
+        skipButton.gameObject.SetActive(false);
         lobbyManager.OnTriggerSpawnPlayers();
 
 

@@ -46,7 +46,7 @@ public class GateLever : MonoBehaviour
 
     [Header("Photon Settings")]
     PhotonView PV;
-
+    GatePuzzleObjectTrigger trigger;
 
     /// <summary>
     /// 
@@ -62,11 +62,20 @@ public class GateLever : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if (SceneSettings.Instance.isMultiPlayer == true)
+        {
+            //Photon
+            PV = GetComponent<PhotonView>();
+        }
         InteractionUI.gameObject.SetActive(false);
         PuzzleGuide.gameObject.SetActive(false);
         PuzzleGuideShowing = false;
-        RandomizePuzzlePiece();
+
+        if (SceneSettings.Instance.isSinglePlayer)
+        {
+            RandomizePuzzlePiece();
+        }
+
 
 
 
@@ -153,6 +162,9 @@ public class GateLever : MonoBehaviour
                 if (PV.IsMine)
                 {
                     withinLeverZone = true;
+            
+           
+              
                 }
 
             }
@@ -185,17 +197,9 @@ public class GateLever : MonoBehaviour
                     {
                         if (controller.PermormingAction == true)
                         {
-        
-                            if (state == PuzzleState.Inactive)
-                            {
-                                //SEND CALL FOR ACTION - suvscription 
-                                //Spawn Bridge Piece
-                                state = PuzzleState.Active;
-                                Objective.sprite = GateObjectivePictureDescription;
-                                print("State is now : " + state);
-
-
-                            }
+                            PhotonView photonView = PhotonView.Get(this);
+                            photonView.RPC("RPC_ActivatePuzzleStatus", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                   
                         }
                     }
 
@@ -268,27 +272,29 @@ public class GateLever : MonoBehaviour
     {
         for (int i = 0; i < puzzleTriggers.Length; i++)
         {
-            GatePuzzleObjectTrigger trigger = puzzleTriggers[i].gameObject.GetComponent<GatePuzzleObjectTrigger>();
+             trigger = puzzleTriggers[i].gameObject.GetComponent<GatePuzzleObjectTrigger>();
 
             if (trigger.state == GatePuzzleObjectTrigger.PuzzleObjectState.Active)
             {
                 print("Puzzle Piece Active");
                 if (trigger.objectInfo == activationSwitch)
                 {
-                    print("Correct Piece Active");
-                    trigger.CorrectRune();
-                    state = PuzzleState.Inactive;
-                    correctPieceSelected = true;
                     //WIN METHOD
-
 
                     if (SceneSettings.Instance.isMultiPlayer == true)
                     {
-                        PV.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+
+                        PhotonView photonView = PhotonView.Get(this);
+                        photonView.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
                     }
 
                     if (SceneSettings.Instance.isSinglePlayer == true)
                     {
+                        print("Correct Piece Active");
+                        trigger.CorrectRune();
+                        state = PuzzleState.Inactive;
+                        correctPieceSelected = true;
+                       
                         FixBridge();
                     }
                     return;
@@ -299,10 +305,30 @@ public class GateLever : MonoBehaviour
                 if (trigger.objectInfo != activationSwitch)
                 {
                     //LOOSE METHOD
-                    print("Incorrect Piece Active");
-                    trigger.incorrectRune();
-                    IncorrectSelection(); //Loose Method
-                    state = PuzzleState.Inactive;
+              
+
+
+                    if (SceneSettings.Instance.isMultiPlayer == true)
+                    {
+                        PhotonView photonView = PhotonView.Get(this);
+                        photonView.RPC("RPC_IncorrectPuzzlePiece", RpcTarget.All ); // reset puzzle
+                        int index;
+                        index = Random.Range(0, puzzleTriggers.Length);
+
+                        photonView.RPC("RPC_SelectPuzzlePiece", RpcTarget.All, index); // choose new piece
+                    }
+
+
+                    if (SceneSettings.Instance.isSinglePlayer == true)
+                    {
+                        print("Incorrect Piece Active");
+                        trigger.incorrectRune();
+                        IncorrectSelection(); //Loose Method
+                        state = PuzzleState.Inactive;
+                    }
+
+
+         
                     return;
                 }
             }
@@ -311,17 +337,12 @@ public class GateLever : MonoBehaviour
     }
 
 
-    [PunRPC]
-    void RPC_PropChangeModel()
-    {
+    
 
 
-           brokenGatePiece.GetComponent<MeshFilter>().sharedMesh = fixedGatePiece.GetComponent<MeshFilter>().sharedMesh;
-        //  Debug.Log("2 golden keys");
-        //  missingPieceBoxCollder.SetActive(true);
-        humanBarrier.gameObject.SetActive(false);
-        ghostBarrier.gameObject.SetActive(false);
-    }
+
+
+
 
 
     public void FixBridge()
@@ -336,19 +357,30 @@ public class GateLever : MonoBehaviour
 
     public void RandomizePuzzlePiece()
     {
-        //Randomize
 
-   
-        int index;
-        index = Random.Range(0, puzzleTriggers.Length);
-        activationSwitch = puzzleTriggers[index].GetComponent<GatePuzzleObjectTrigger>().objectInfo; ;
-        print("randomized piece = " + activationSwitch.objectName);
+        //if (SceneSettings.Instance.isMultiPlayer == true)
+        //{
+        //    PhotonView photonView = PhotonView.Get(this);
+        //    photonView.RPC("RPC_SelectPuzzlePiece", RpcTarget.All );
+        //}
 
-        gatePuzzleChecker.objectInfo = activationSwitch;
-        clueImageContainer.sprite = activationSwitch.uiImage;
+        //Randomize _SP
+        if (SceneSettings.Instance.isSinglePlayer == true)
+        {
+            int index;
+            index = Random.Range(0, puzzleTriggers.Length);
+            activationSwitch = puzzleTriggers[index].GetComponent<GatePuzzleObjectTrigger>().objectInfo; ;
+            print("randomized piece = " + activationSwitch.objectName);
+
+            gatePuzzleChecker.objectInfo = activationSwitch;
+            clueImageContainer.sprite = activationSwitch.uiImage;
+            //  rune.gameObject.GetComponent<MeshFilter>().sharedMesh = activationSwitch.rune.gameObject.GetComponent<MeshFilter>().sharedMesh;
+        }
 
      
-      //  rune.gameObject.GetComponent<MeshFilter>().sharedMesh = activationSwitch.rune.gameObject.GetComponent<MeshFilter>().sharedMesh;
+
+
+
     }
 
 
@@ -418,6 +450,19 @@ public class GateLever : MonoBehaviour
                         PuzzleGuide.gameObject.SetActive(true);
                         PuzzleGuideShowing = true;
                         // performingLeverAction = false;
+                        PhotonView photonView = PhotonView.Get(this);
+
+                        int index;
+                        index = Random.Range(0, puzzleTriggers.Length);
+
+                        
+                        ///?FUUUUUUUUUUUUUU
+                        photonView.RPC("ChatMessage", RpcTarget.All, index);
+
+
+
+
+                        photonView.RPC("RPC_SelectPuzzlePiece", RpcTarget.All, index);
                         return;
                     }
 
@@ -426,6 +471,21 @@ public class GateLever : MonoBehaviour
                         print("Performing ghost Action");
                         PuzzleGuide.gameObject.SetActive(true);
                         PuzzleGuideShowing = true;
+
+                        int index;
+                        index = Random.Range(0, puzzleTriggers.Length);
+
+
+                        PhotonView photonView = PhotonView.Get(this);
+                        //   string intTest = int.Parse(index);
+
+                        ///?FUUUUUUUUUUUUUU
+                        photonView.RPC("ChatMessage", RpcTarget.All, index);
+
+
+
+
+                        photonView.RPC("RPC_SelectPuzzlePiece", RpcTarget.All, index);
                         //  performingLeverAction = false;
                         return;
                     }
@@ -470,5 +530,81 @@ public class GateLever : MonoBehaviour
             }
 
         }
+    }
+
+
+
+    [PunRPC]
+    void RPC_PropChangeModel()
+    {
+        print("Correct Piece Active");
+        trigger.CorrectRune();
+        state = PuzzleState.Inactive;
+        correctPieceSelected = true;
+
+        brokenGatePiece.GetComponent<MeshFilter>().sharedMesh = fixedGatePiece.GetComponent<MeshFilter>().sharedMesh;
+        //  Debug.Log("2 golden keys");
+        //  missingPieceBoxCollder.SetActive(true);
+        humanBarrier.gameObject.SetActive(false);
+        ghostBarrier.gameObject.SetActive(false);
+    }
+
+
+    [PunRPC]
+    void ChatMessage(int a)
+    {
+        int index = a;
+        print("FUUUUUUUUUUU " + a);
+
+       // Debug.Log(string.Format("ChatMessage {0} {1}", a, b));
+    }
+
+
+
+
+
+
+    [PunRPC]
+    void RPC_SelectPuzzlePiece(int randomNO)
+    {
+
+      
+        activationSwitch = puzzleTriggers[randomNO].GetComponent<GatePuzzleObjectTrigger>().objectInfo; ;
+        print("randomized piece = " + activationSwitch.objectName);
+
+        gatePuzzleChecker.objectInfo = activationSwitch;
+        clueImageContainer.sprite = activationSwitch.uiImage;
+    }
+
+
+    [PunRPC]
+    void RPC_ActivatePuzzleStatus()
+    {
+        if (state == PuzzleState.Inactive)
+        {
+            //SEND CALL FOR ACTION - suvscription 
+            //Spawn Bridge Piece
+            state = PuzzleState.Active;
+            Objective.sprite = GateObjectivePictureDescription;
+            print("State is now : " + state);
+
+
+        }
+
+
+    }
+
+
+    [PunRPC]
+    void RPC_IncorrectPuzzlePiece()
+    {
+
+        //LOOSE METHOD
+        print("Incorrect Piece Active");
+        trigger.incorrectRune();
+        IncorrectSelection(); //Loose Method
+        state = PuzzleState.Inactive;
+        return;
+
     }
 }
