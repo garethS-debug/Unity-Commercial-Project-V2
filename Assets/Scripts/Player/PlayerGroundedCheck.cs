@@ -11,7 +11,8 @@ public 	NetworkedPlayerController playerController;
 
 	void Awake()
 	{
-	//	playerController = GetComponentInParent<NetworkedPlayerController>();
+		playerController = GetComponentInParent<NetworkedPlayerController>();
+		print("Getting Controller from parent");
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -19,19 +20,24 @@ public 	NetworkedPlayerController playerController;
 		if (other.gameObject.tag == "Player")
 		{
 			playerController = other.gameObject.GetComponent<NetworkedPlayerController>();
-
+			print("Getting Controller from enter" + playerController);
 		}
 		//if (other.gameObject == playerController.gameObject)
 		//	return;
 		//	Debug.Log("Hit !!");
 
-		if (playerController != null)
-        {
-			if (other.gameObject != playerController.gameObject)
+		if (playerController == null)
+		{
+			playerController = other.gameObject.GetComponent<NetworkedPlayerController>();
+			print("Getting Controller from the parent again");
+		}
+
+
+		if (other.gameObject != playerController.gameObject)
 			{
 				playerController.SetGroundedState(true);
 			}
-		}
+		
 	
 
 
@@ -51,20 +57,22 @@ public 	NetworkedPlayerController playerController;
 
 	void OnTriggerStay(Collider other)
 	{
-		if (other.gameObject.tag == "Player")
-        {
-			playerController = other.gameObject.GetComponent<NetworkedPlayerController>();
+		//if (other.gameObject.tag == "Player")
+  //      {
+		//	playerController = other.gameObject.GetComponent<NetworkedPlayerController>();
 
-		}
+		//}
 
-		if (playerController != null)
-		{
-			if (other.gameObject != playerController.gameObject)
-			{
+
 				playerController.SetGroundedState(true);
 				Debug.Log("Hit Continue  !!" + other.gameObject.name);
-			}
+		
 
+
+		if (playerController == null)
+        {
+			playerController = other.gameObject.GetComponent<NetworkedPlayerController>();
+			print("Getting Controller from the parent again" );
 		}
 
 	}
