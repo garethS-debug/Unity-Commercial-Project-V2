@@ -55,9 +55,9 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
         {
             PlayerInventory inventory = other.gameObject.GetComponent<PlayerInventory>();
 
-            for (int i = 0; i < inventory.inventory.Container.Items.Count; i++)
+            for (int i = 0; i < inventory.inventory.database.Items.Length; i++)
             {
-                if (inventory.inventory.Container.Items[i].item == missingItem.item)
+                if (inventory.inventory.database.Items[i] == missingItem.item)
 
                 {
 
@@ -127,6 +127,12 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
         missingPieceBoxCollder.SetActive(true);
         //}
 
+    }
+
+    public void FixBridge()
+    {
+        brokenBridge.GetComponent<MeshFilter>().mesh = fixedBridgeMesh;
+        missingPieceBoxCollder.SetActive(true);
     }
 }
 

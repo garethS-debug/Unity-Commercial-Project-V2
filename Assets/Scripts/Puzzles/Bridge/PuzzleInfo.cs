@@ -121,36 +121,36 @@ public class PuzzleInfo : MonoBehaviour
             //Force add to inventory
 
             //PLayer Checking the item
-            var item = this.gameObject.GetComponent<Item>();
+            var item = this.gameObject.GetComponent<GroundItem>();
 
             if (SceneSettings.Instance.isMultiPlayer == true)
             {
-              
-                    if (item)
-                    {
-                       myPlayer.gameObject.GetComponent< PlayerInventory>().inventory.AddItem(item.item, 1);                    //Photon 
 
-                        PhotonView photonView = PhotonView.Get(this);
+                if (item)
+                {
+                  //  myPlayer.gameObject.GetComponent<PlayerInventory>().inventory.AddItem(item.item, 1);                    //Photon 
 
-                        photonView.RPC("RPC_DeleteModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
-                        //item.DestroyItem();
-                    }
-                
+                    PhotonView photonView = PhotonView.Get(this);
+                    print("Removing Model");
+                    photonView.RPC("RPC_DeleteModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                    //item.DestroyItem();
+                }
+
             }
 
             else if (SceneSettings.Instance.isSinglePlayer == true)
             {
                 if (item)
                 {
-                    myPlayer.gameObject.GetComponent<PlayerInventory>().inventory.AddItem(item.item, 1);                    //singlePlayer
+                 //   myPlayer.gameObject.GetComponent<PlayerInventory>().inventory.AddItem(item.item, 1);                    //singlePlayer
 
 
-                 //   item.DestroyItem();
+                    //   item.DestroyItem();
                     this.gameObject.SetActive(false);
                 }
             }
-        
-   
+
+
 
 
 
@@ -162,7 +162,7 @@ public class PuzzleInfo : MonoBehaviour
             //{
             //    this.gameObject.SetActive(false);
             //} 
-          
+
             //if (SceneSettings.Instance.isMultiPlayer == true)
             //{
             //    PV.RPC("RPC_DeleteModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );

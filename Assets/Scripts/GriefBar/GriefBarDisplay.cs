@@ -33,6 +33,7 @@ public class GriefBarDisplay : MonoBehaviour
         var obj = Instantiate(griefBarHuman.griefBarPrefab, Vector3.zero, Quaternion.identity, transform);
         obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
         slider.fillRect = obj.GetComponent<RectTransform>();
+        slider.direction = Slider.Direction.BottomToTop;                                            //G - I have added this line to ensure the slide goes up and down and not left to right
     }
 
     public void CreateGhostCandle()
@@ -40,6 +41,7 @@ public class GriefBarDisplay : MonoBehaviour
         var obj = Instantiate(griefBarGhost.griefBarPrefab, Vector3.zero, Quaternion.identity, transform);
         obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
         slider.fillRect = obj.GetComponent<RectTransform>();
+        slider.direction = Slider.Direction.BottomToTop;                                            //G - I have added this line to ensure the slide goes up and down and not left to right
     }
 
     private void SetMaxGrief(int grief)

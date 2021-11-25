@@ -29,11 +29,11 @@ public class BidgePuzzle_Lever : MonoBehaviour
     public bool HumanPlayer;
 
     [Header("Puzzle Hints")]
-    public PuzzleInfo[] puzzleClues;
+    public GroundItem[] puzzleClues;
     NetworkedPlayerController controller;
 
     [Header("Missing Item")]
-    [HideInInspector] public PuzzleInfo missingItem;
+    [HideInInspector] public GroundItem missingItem;
     public BridgePuzzle_CheckForPiece bridgePuzzleChecker;
 
     [Header("Photon Settings")]
@@ -48,12 +48,12 @@ public class BidgePuzzle_Lever : MonoBehaviour
         InteractionUI.gameObject.SetActive(false);
         PuzzleGuide.gameObject.SetActive(false);
         PuzzleGuideShowing = false;
-        RandomizePuzzlePiece();
+      
 
         
         if (SceneSettings.Instance.isSinglePlayer == true)
         {
-
+            RandomizePuzzlePiece();
         }
 
         if (SceneSettings.Instance.isMultiPlayer == true)
@@ -166,14 +166,15 @@ public class BidgePuzzle_Lever : MonoBehaviour
                             print("Controller perfmorning action");
                             if (SpawnedPiece == false)
                             {
+                                int index;
+                                index = Random.Range(0, puzzleClues.Length);
+                                PhotonView photonView = PhotonView.Get(this);
+                                photonView.RPC("RandomizePuzzlePieces", RpcTarget.All, index);
+
                                 //SEND CALL FOR ACTION - suvscription 
                                 //Spawn Bridge Piece
                                 SpawnedPiece = true;
-                                if (SceneSettings.Instance.isMultiPlayer == true)
-                                {
-                                    //Removed as puzzle pieces are already available. 
-                                    // PhotonNetwork.Instantiate(missingBridePiece.name, SpawnPoint.transform.position, SpawnPoint.transform.rotation);
-                                }
+                            
                             }
                         }
                     }
@@ -329,6 +330,10 @@ public class BidgePuzzle_Lever : MonoBehaviour
         }
     }
 
+
+
+
+
     public void RandomizePuzzlePiece()
     {
 
@@ -338,8 +343,18 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
         bridgePuzzleChecker.missingItem = missingItem;
 
-        clueImageContainer.sprite = missingItem.puzzleInfo.uiImage;
+        clueImageContainer.sprite = missingItem.item.uiDisplay;
     }
 
+
+    [PunRPC]
+    void RandomizePuzzlePieces(int randomNum)
+    {
+        missingItem = puzzleClues[randomNum];
+
+         bridgePuzzleChecker.missingItem = missingItem;
+
+        clueImageContainer.sprite = missingItem.item.uiDisplay;
+    }
 
 }
