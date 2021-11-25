@@ -23,9 +23,24 @@ public class GatePuzzleObjectTrigger : MonoBehaviour
     PhotonView PV;
     NetworkedPlayerController controller;
 
+    [Header("Material Settings")]
+    public Material activeRune;
+    public Material correctRune;
+    public Material wrongRune;
+    public Material originalMaterial;
+    //public GameObject rune;
+
+
+
+
+
+
     public void Start()
     {
         state = PuzzleObjectState.Inactive;
+
+    
+        //  rune.gameObject.GetComponent<MeshRenderer>().sharedMaterial.SetFloat("Intensity", 1);
     }
 
 
@@ -119,6 +134,10 @@ public class GatePuzzleObjectTrigger : MonoBehaviour
                     if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1)
                     {
                         state = PuzzleObjectState.Active;
+
+                        MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
+                        GetComponent<MeshRenderer>().material = activeRune;
+
                         print("Performing human Action");
                         return;
                     }
@@ -126,6 +145,8 @@ public class GatePuzzleObjectTrigger : MonoBehaviour
                     if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 )
                     {
                         state = PuzzleObjectState.Active;
+                        MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
+                        GetComponent<MeshRenderer>().material = activeRune;
                         print("Performing ghost Action");
                         return;
                     }
@@ -138,6 +159,8 @@ public class GatePuzzleObjectTrigger : MonoBehaviour
                 if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1)
                 {
                     state = PuzzleObjectState.Active;
+                    MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
+                    GetComponent<MeshRenderer>().material = activeRune;
                     print("Performing human Action");
                     return;
                 }
@@ -145,12 +168,44 @@ public class GatePuzzleObjectTrigger : MonoBehaviour
                 if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 )
                 {
                     state = PuzzleObjectState.Active;
+                    MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
+                    GetComponent<MeshRenderer>().material = activeRune;
                     print("Performing ghost Action");
                     return;
                 }
             }
 
         }
+    }
+
+
+ 
+
+
+
+    IEnumerator RevertToExistingMat()
+    {
+      
+        yield return new WaitForSeconds(3f);
+        // MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        GetComponent<MeshRenderer>().material = originalMaterial;
+        print("I hate coroutines");
+
+    }
+
+
+    public void incorrectRune()
+    {
+        GetComponent<MeshRenderer>().material = wrongRune;
+        StartCoroutine("RevertToExistingMat");
+    }
+
+
+
+    public void CorrectRune()
+    {
+        GetComponent<MeshRenderer>().material = correctRune;
+        StartCoroutine("RevertToExistingMat");
     }
 
 

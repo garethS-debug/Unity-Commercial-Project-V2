@@ -25,6 +25,10 @@ public class GateLever : MonoBehaviour
     public bool GhostPLayer;
     public bool HumanPlayer;
 
+    [Header("Puzzle Barrier")]
+    public GameObject humanBarrier;
+    public GameObject ghostBarrier;
+
     [Header("Puzzle Hints")]
     public GameObject[] puzzleTriggers;
     NetworkedPlayerController controller;
@@ -73,6 +77,19 @@ public class GateLever : MonoBehaviour
         }
 
         state = PuzzleState.Inactive;
+
+
+        if (GhostPLayer)
+        {
+            humanBarrier.gameObject.SetActive(true);
+            ghostBarrier.gameObject.SetActive(false);
+        }
+
+        if (HumanPlayer)
+        {
+            humanBarrier.gameObject.SetActive(false);
+            ghostBarrier.gameObject.SetActive(true);
+        }
     }
 
     public void Update()
@@ -82,6 +99,7 @@ public class GateLever : MonoBehaviour
             print("Checking for trigger");
             checkForCorrectTrigger();
         }
+
 
     }
 
@@ -258,10 +276,21 @@ public class GateLever : MonoBehaviour
                 if (trigger.objectInfo == activationSwitch)
                 {
                     print("Correct Piece Active");
+                    trigger.CorrectRune();
                     state = PuzzleState.Inactive;
                     correctPieceSelected = true;
                     //WIN METHOD
 
+
+                    if (SceneSettings.Instance.isMultiPlayer == true)
+                    {
+                        PV.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                    }
+
+                    if (SceneSettings.Instance.isSinglePlayer == true)
+                    {
+                        FixBridge();
+                    }
                     return;
 
 
@@ -269,7 +298,9 @@ public class GateLever : MonoBehaviour
 
                 if (trigger.objectInfo != activationSwitch)
                 {
+                    //LOOSE METHOD
                     print("Incorrect Piece Active");
+                    trigger.incorrectRune();
                     IncorrectSelection(); //Loose Method
                     state = PuzzleState.Inactive;
                     return;
@@ -277,6 +308,28 @@ public class GateLever : MonoBehaviour
             }
 
         }
+    }
+
+
+    [PunRPC]
+    void RPC_PropChangeModel()
+    {
+
+
+           brokenGatePiece.GetComponent<MeshFilter>().sharedMesh = fixedGatePiece.GetComponent<MeshFilter>().sharedMesh;
+        //  Debug.Log("2 golden keys");
+        //  missingPieceBoxCollder.SetActive(true);
+        humanBarrier.gameObject.SetActive(false);
+        ghostBarrier.gameObject.SetActive(false);
+    }
+
+
+    public void FixBridge()
+    {
+        brokenGatePiece.GetComponent<MeshFilter>().sharedMesh = fixedGatePiece.GetComponent<MeshFilter>().sharedMesh;
+        humanBarrier.gameObject.SetActive(false);
+        ghostBarrier.gameObject.SetActive(false);
+        //  missingPieceBoxCollder.SetActive(true);
     }
 
 
@@ -307,6 +360,7 @@ public class GateLever : MonoBehaviour
         {
             GatePuzzleObjectTrigger trigger = puzzleTriggers[i].gameObject.GetComponent<GatePuzzleObjectTrigger>();
             trigger.state = GatePuzzleObjectTrigger.PuzzleObjectState.Inactive;
+            trigger.incorrectRune();
         }
 
 

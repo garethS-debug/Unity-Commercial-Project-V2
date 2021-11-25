@@ -21,10 +21,10 @@ TagManager:
   - UI
   - Terrain
   - PostProcess
-  - 
-  - 
-  - 
-  - 
+  - GhostPlayer
+  - HumanPlayer
+  - GhostCollisionIgnore
+  - HumanCollisionIgnore
   - 
   - 
   - 
