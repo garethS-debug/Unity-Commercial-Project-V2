@@ -16,11 +16,16 @@ public class RespawnTrigger : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
-           int index = Random.Range(0, RespawnPOints.Length);
-            cuurentSpawnPoint = RespawnPOints[index];
+            if (RespawnPOints.Length > 0)
+            {
+                int index = Random.Range(0, RespawnPOints.Length);
+                cuurentSpawnPoint = RespawnPOints[index];
+                other.gameObject.transform.position = cuurentSpawnPoint.transform.position;
+            }
+           
 
 
-            other.gameObject.transform.position = cuurentSpawnPoint.transform.position;
+           
         }
 
     }
@@ -32,10 +37,13 @@ public class RespawnTrigger : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
-            int index = Random.Range(0, RespawnPOints.Length);
-            cuurentSpawnPoint = RespawnPOints[index];
+            if (RespawnPOints.Length > 0)
+            {
+                int index = Random.Range(0, RespawnPOints.Length);
+                cuurentSpawnPoint = RespawnPOints[index];
 
-            other.gameObject.transform.position = cuurentSpawnPoint.transform.position;
+                other.gameObject.transform.position = cuurentSpawnPoint.transform.position;
+            }
         }
 
 

@@ -44,7 +44,14 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
         {
             PV = this.gameObject.GetComponent<PhotonView>();        //Get the photonview on the player
         }
+
+
+        if (SceneSettings.Instance.DebugMode == true)
+        {
+            missingPieceBoxCollder.SetActive(true);
+        }
     }
+
 
     private void Update()
     {
@@ -63,17 +70,24 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
         {
             PlayerInventory inventory = other.gameObject.GetComponent<PlayerInventory>();
 
+            if (inventory != null )
+            {
+
+            if (missingItem != null)
+                {
+
+                
 
             if (inventory.inventory.database.Items.Length > 0)
             {
-                for (int i = 0; i < inventory.inventory.database.Items.Length; i++)
+                for (int i = 0; i < inventory.inventory.database.Items.Length ; i++)
                 {
                     Debug.Log("-------------------");
                     Debug.Log("Looping through inv");
 
                     //  Debug.Log("inventory.inventory.database.Items[i] = " + inventory.inventory.database.Items[i]);       //Key Object
                     //   Debug.Log("missingItem.item =  " + missingItem.item);       //Key Object
-
+                    
                     if (inventory.inventory.Container.Items[i].Id == missingItem.item.Id)
 
                     {
@@ -92,31 +106,21 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
                             FixBridge();
                             s_ShowKey();
                         }
-                        //Container[i].AddAmount(_amount);
-                        //  hasItem = true;
-
-                        // if (_item.name == "GoldenKey")
-                        // {
-
-                        // }
+             
                     }
 
-                    else
-                    {
-                        Debug.Log("No Luck");
-                        Debug.Log("----------");
-                        //Debug.Log("inventory Item = " + inventory.inventory.Container[i].item);
-                    }
+                   
+                        
                 }
             }
 
-
+            }
 
 
             //    inventory.inventory
 
         }
-
+        }
 
     }
 

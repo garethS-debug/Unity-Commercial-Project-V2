@@ -86,26 +86,32 @@ public class GateLever : MonoBehaviour
 
 
 
-        if (SceneSettings.Instance.DebugMode == true)
-        {
-            print("Debug Mode");
-            brokenGatePiece.gameObject.GetComponent<BoxCollider>().isTrigger = true;
-        }
-
+   
         state = PuzzleState.Inactive;
 
 
-        if (GhostPLayer)
+        if (GhostPLayer & SceneSettings.Instance.DebugMode == false)
         {
             humanBarrier.gameObject.SetActive(true);
             ghostBarrier.gameObject.SetActive(false);
         }
 
-        if (HumanPlayer)
+        if (HumanPlayer && SceneSettings.Instance.DebugMode == false)
         {
             humanBarrier.gameObject.SetActive(false);
             ghostBarrier.gameObject.SetActive(true);
         }
+
+        if (SceneSettings.Instance.DebugMode == true)
+        {
+            print("Debug Mode");
+            brokenGatePiece.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+            humanBarrier.gameObject.SetActive(false);
+            ghostBarrier.gameObject.SetActive(false);
+        }
+
+
+
     }
 
     public void Update()
