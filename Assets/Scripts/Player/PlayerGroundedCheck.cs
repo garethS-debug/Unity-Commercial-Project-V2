@@ -63,11 +63,13 @@ public 	NetworkedPlayerController playerController;
 
 		//}
 
-
+		
+			if (other.gameObject != playerController.gameObject)
+			{
 				playerController.SetGroundedState(true);
 				Debug.Log("Hit Continue  !!" + other.gameObject.name);
-		
-
+			}
+	
 
 		if (playerController == null)
         {
