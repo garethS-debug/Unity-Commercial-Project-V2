@@ -16,12 +16,26 @@ public 	NetworkedPlayerController playerController;
 
 	void OnTriggerEnter(Collider other)
 	{
-		playerController = other.gameObject.GetComponent<NetworkedPlayerController>();
-		if (other.gameObject == playerController.gameObject)
-			return;
-	//	Debug.Log("Hit !!");
+		if (other.gameObject.tag == "Player")
+		{
+			playerController = other.gameObject.GetComponent<NetworkedPlayerController>();
 
-		playerController.SetGroundedState(true);
+		}
+		//if (other.gameObject == playerController.gameObject)
+		//	return;
+		//	Debug.Log("Hit !!");
+
+		if (playerController != null)
+        {
+			if (other.gameObject != playerController.gameObject)
+			{
+				playerController.SetGroundedState(true);
+			}
+		}
+	
+
+
+
 	}
 
 
@@ -37,12 +51,21 @@ public 	NetworkedPlayerController playerController;
 
 	void OnTriggerStay(Collider other)
 	{
-		playerController = other.gameObject.GetComponent<NetworkedPlayerController>();
-		if (other.gameObject == playerController.gameObject)
-			return;
+		if (other.gameObject.tag == "Player")
+        {
+			playerController = other.gameObject.GetComponent<NetworkedPlayerController>();
 
-		//Debug.Log("Hit Continue  !!");
+		}
 
-		playerController.SetGroundedState(true);
+		if (playerController != null)
+		{
+			if (other.gameObject != playerController.gameObject)
+			{
+				playerController.SetGroundedState(true);
+				Debug.Log("Hit Continue  !!" + other.gameObject.name);
+			}
+
+		}
+
 	}
 }

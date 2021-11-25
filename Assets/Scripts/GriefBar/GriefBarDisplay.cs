@@ -88,7 +88,7 @@ public class GriefBarDisplay : MonoBehaviour
     public void GriefBasedOnDistance ()
     {
         currentGrief = SceneSettings.Instance.playerdistance;
-        print(currentGrief);
+      //  print(currentGrief);
         SetGrief(currentGrief);
     }
 }
