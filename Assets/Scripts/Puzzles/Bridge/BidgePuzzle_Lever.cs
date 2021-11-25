@@ -41,6 +41,7 @@ public class BidgePuzzle_Lever : MonoBehaviour
     public GameObject[] puzzlePiecesForSpawn;
     public GameObject[] puzzlePieceSpawnPoint;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,8 +49,8 @@ public class BidgePuzzle_Lever : MonoBehaviour
         InteractionUI.gameObject.SetActive(false);
         PuzzleGuide.gameObject.SetActive(false);
         PuzzleGuideShowing = false;
-      
 
+    
         
         if (SceneSettings.Instance.isSinglePlayer == true)
         {
@@ -143,17 +144,16 @@ public class BidgePuzzle_Lever : MonoBehaviour
                 if (controller.PermormingAction == true)
                 {
                     print("Controller perfmorning action");
-                    if (SpawnedPiece == false)
-                    {
+           
                         //SEND CALL FOR ACTION - suvscription 
                         //Spawn Bridge Piece
-                        SpawnedPiece = true;
+            
                         if (SceneSettings.Instance.isMultiPlayer == true)
                         {
                             //Removed as puzzle pieces are already available. 
                             // PhotonNetwork.Instantiate(missingBridePiece.name, SpawnPoint.transform.position, SpawnPoint.transform.rotation);
                         }
-                    }
+                    
                 }
                 }
 
@@ -164,18 +164,18 @@ public class BidgePuzzle_Lever : MonoBehaviour
                         if (controller.PermormingAction == true)
                         {
                             print("Controller perfmorning action");
-                            if (SpawnedPiece == false)
-                            {
+                           
                                 int index;
                                 index = Random.Range(0, puzzleClues.Length);
+                                
                                 PhotonView photonView = PhotonView.Get(this);
                                 photonView.RPC("RandomizePuzzlePieces", RpcTarget.All, index);
 
                                 //SEND CALL FOR ACTION - suvscription 
                                 //Spawn Bridge Piece
-                                SpawnedPiece = true;
+                           
                             
-                            }
+                            
                         }
                     }
 
@@ -356,5 +356,11 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
         clueImageContainer.sprite = missingItem.item.uiDisplay;
     }
+
+
+    
+
+
+
 
 }

@@ -19,10 +19,15 @@ public class SceneSettings : MonoBehaviour
     public bool isMultiPlayer;
 
 
-    [Header("my player ")]
+    [Header(" players ")]
+
+
+    public GameObject humanPlayer;
+    public GameObject ghostPlayer;
+    public float playerdistance;
     //  PhotonView PV;
-  //  private GameObject[] players;
-   // public GameObject myPlayer;
+    //  private GameObject[] players;
+    // public GameObject myPlayer;
 
     public bool DebugMode;
 
@@ -41,14 +46,14 @@ public class SceneSettings : MonoBehaviour
             {
                 // 1 = multiplayer
                 //2 = single player
-             isMultiPlayer = true;
+                isMultiPlayer = true;
                 isSinglePlayer = false;
 
             }
 
             else if (playerSOData.SingleOrMultiPlayer == 2)
             {
-              isSinglePlayer = true;
+                isSinglePlayer = true;
                 isMultiPlayer = false;
             }
 
@@ -59,6 +64,7 @@ public class SceneSettings : MonoBehaviour
                 Debug.LogError("SceneSettings : Set bool to either single or multiplayer");
             }
         }
+
     }
 
 
@@ -84,8 +90,17 @@ public class SceneSettings : MonoBehaviour
 
     //        }
     //    }
-     
+
     //}
+
+    public void Update()
+    {
+        if (humanPlayer != null && ghostPlayer != null )
+        {
+            LogDistance();
+        }
+
+    }
 
 
     public void RemoveMultiplayerScript(GameObject subject)
@@ -101,7 +116,15 @@ public class SceneSettings : MonoBehaviour
         }
     }
 
+    public void LogDistance()
+    {
 
+
+        float dist = Vector3.Distance(humanPlayer.transform.position, ghostPlayer.transform.position);
+        //print("Player Dist " + dist);
+        playerdistance = 100-dist;
+
+    }
     private void OnApplicationQuit()
     {
 

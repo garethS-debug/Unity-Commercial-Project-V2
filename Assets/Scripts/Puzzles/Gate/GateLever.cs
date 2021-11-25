@@ -59,9 +59,16 @@ public class GateLever : MonoBehaviour
 
 
 
+    [Header("Key")]
+    public GameObject KeyInScene;
+
+
     // Start is called before the first frame update
     void Start()
     {
+
+        KeyInScene.gameObject.SetActive(false);
+
         if (SceneSettings.Instance.isMultiPlayer == true)
         {
             //Photon
@@ -286,6 +293,7 @@ public class GateLever : MonoBehaviour
 
                         PhotonView photonView = PhotonView.Get(this);
                         photonView.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                        photonView.RPC("RPC_ShowKey", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
                     }
 
                     if (SceneSettings.Instance.isSinglePlayer == true)
@@ -294,7 +302,7 @@ public class GateLever : MonoBehaviour
                         trigger.CorrectRune();
                         state = PuzzleState.Inactive;
                         correctPieceSelected = true;
-                       
+                        s_ShowKey();
                         FixBridge();
                     }
                     return;
@@ -606,5 +614,16 @@ public class GateLever : MonoBehaviour
         state = PuzzleState.Inactive;
         return;
 
+    }
+
+
+    public void s_ShowKey()
+    {
+        KeyInScene.gameObject.SetActive(true);
+    }
+    [PunRPC]
+    void RPC_ShowKey()
+    {
+        KeyInScene.gameObject.SetActive(true);
     }
 }

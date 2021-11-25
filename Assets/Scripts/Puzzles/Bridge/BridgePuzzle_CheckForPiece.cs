@@ -20,6 +20,12 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
     //public GameObject brokenBridgeMesh;
 
 
+
+    [Header("Key")]
+    public GameObject KeyInScene;
+
+
+
     [Header("Photon Settings")]
     PhotonView PV;                                              //Setting up photon view 
 
@@ -27,6 +33,8 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
 
     public void Start()
     {
+        KeyInScene.gameObject.SetActive(false);
+
         DebugOutSideOfNetwork = false;
         missingPieceBoxCollder.SetActive(false);
 
@@ -55,37 +63,53 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
         {
             PlayerInventory inventory = other.gameObject.GetComponent<PlayerInventory>();
 
-            for (int i = 0; i < inventory.inventory.database.Items.Length; i++)
+
+            if (inventory.inventory.database.Items.Length > 0)
             {
-                if (inventory.inventory.database.Items[i] == missingItem.item)
-
+                for (int i = 0; i < inventory.inventory.database.Items.Length; i++)
                 {
+                    Debug.Log("-------------------");
+                    Debug.Log("Looping through inv");
 
-                    if (SceneSettings.Instance.isMultiPlayer == true)
+                    //  Debug.Log("inventory.inventory.database.Items[i] = " + inventory.inventory.database.Items[i]);       //Key Object
+                    //   Debug.Log("missingItem.item =  " + missingItem.item);       //Key Object
+
+                    if (inventory.inventory.Container.Items[i].Id == missingItem.item.Id)
+
                     {
-                        PV.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                        Debug.Log("-------------------");
+                        Debug.Log("found our boy");
+
+                        if (SceneSettings.Instance.isMultiPlayer == true)
+                        {
+                            PhotonView photonView = PhotonView.Get(this);
+                            photonView.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                            photonView.RPC("RPC_ShowKey", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                        }
+
+                        if (SceneSettings.Instance.isSinglePlayer == true)
+                        {
+                            FixBridge();
+                            s_ShowKey();
+                        }
+                        //Container[i].AddAmount(_amount);
+                        //  hasItem = true;
+
+                        // if (_item.name == "GoldenKey")
+                        // {
+
+                        // }
                     }
 
-                    if (SceneSettings.Instance.isSinglePlayer == true)
+                    else
                     {
-                        FixBridge();
+                        Debug.Log("No Luck");
+                        Debug.Log("----------");
+                        //Debug.Log("inventory Item = " + inventory.inventory.Container[i].item);
                     }
-                    //Container[i].AddAmount(_amount);
-                    //  hasItem = true;
-
-                    // if (_item.name == "GoldenKey")
-                    // {
-
-                    // }
-                }
-
-                else
-                {
-                    Debug.Log("No Luck");
-                    Debug.Log("----------");
-                    //Debug.Log("inventory Item = " + inventory.inventory.Container[i].item);
                 }
             }
+
 
 
 
@@ -133,6 +157,17 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
     {
         brokenBridge.GetComponent<MeshFilter>().mesh = fixedBridgeMesh;
         missingPieceBoxCollder.SetActive(true);
+    }
+
+
+    public void s_ShowKey()
+    {
+        KeyInScene.gameObject.SetActive(true);
+    }
+    [PunRPC]
+    void RPC_ShowKey()
+    {
+        KeyInScene.gameObject.SetActive(true);
     }
 }
 

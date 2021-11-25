@@ -53,6 +53,7 @@ MonoBehaviour:
   - RPC_IncorrectPuzzlePiece
   - RPC_SelectPuzzlePiece
   - RandomizePuzzlePieces
+  - RPC_ShowKey
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -175,6 +175,8 @@ public class NetworkedPlayerController : MonoBehaviour
 		//	controller
 		controller = this.gameObject.GetComponent<CharacterController>();
 
+
+
 	}
 
 	// Start is called before the first frame update
