@@ -14,15 +14,10 @@ public class GriefBarDisplay : MonoBehaviour
     public RoomManager room;
 
 
-
     public void Start()
     {
-       
         currentGrief = maxGrief;
         SetMaxGrief(maxGrief);
-        //CreateDisplay();
-
-  
     }
 
     private void Update()
@@ -33,57 +28,20 @@ public class GriefBarDisplay : MonoBehaviour
         }
     }
 
-    public void CreateDisplay()
-    {
-        
-
-
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        print("I FOUND " + player.name);
-
-        // else
-        //  {
-        //  print("is null");
-        //  }
-
-
-        
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterID>().isHumanCharater)
-        {
-     
-        }
-
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterID>().isGhostCharacer)
-        {
-
-        }
-        
-
-    
-
-
-
-
-}
-
     public void CreateHumanCandle()
     {
-        print("isHuman");
-
         var obj = Instantiate(griefBarHuman.griefBarPrefab, Vector3.zero, Quaternion.identity, transform);
         obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
         slider.fillRect = obj.GetComponent<RectTransform>();
     }
 
-
     public void CreateGhostCandle()
     {
-        print("isGhost");
         var obj = Instantiate(griefBarGhost.griefBarPrefab, Vector3.zero, Quaternion.identity, transform);
         obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
         slider.fillRect = obj.GetComponent<RectTransform>();
     }
+
     private void SetMaxGrief(int grief)
     {
         slider.maxValue = grief;

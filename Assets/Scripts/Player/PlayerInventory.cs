@@ -12,13 +12,26 @@ public class PlayerInventory : MonoBehaviour
     [Header("Photon Settings")]
     PhotonView PV;                                              //Setting up photon view 
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            inventory.SaveInventory();
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            inventory.LoadInventory();
+        }
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "item")
         {
 
     
-        var item = other.GetComponent<Item>();
+        var item = other.GetComponent<GroundItem>();
 
         if (SceneSettings.Instance.isMultiPlayer == true)
         {
@@ -35,7 +48,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 if (item)
                 {
-                    inventory.AddItem(item.item, 1);                    //Photon 
+                    inventory.AddItem(new Item(item.item), 1);                    //Photon 
 
 
                     item.DestroyItem();
@@ -47,7 +60,7 @@ public class PlayerInventory : MonoBehaviour
         {
             if (item)
             {
-                inventory.AddItem(item.item, 1);                    //singlePlayer
+                inventory.AddItem(new Item(item.item), 1);                    //singlePlayer
 
 
                 item.DestroyItem();
@@ -59,7 +72,8 @@ public class PlayerInventory : MonoBehaviour
     private void OnApplicationQuit()
     {
         // Clear the player's inventory when they quit
-        inventory.Container.Clear();
+        inventory.Container.Items.Clear();
+        //inventory.Container.Items = new InventorySlot[4];
     }
 
 

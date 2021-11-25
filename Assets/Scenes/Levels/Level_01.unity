@@ -275,13 +275,13 @@ Transform:
   m_Children:
   - {fileID: 954518855}
   - {fileID: 1170010212}
-  - {fileID: 661437978}
+  - {fileID: 1521130257}
   - {fileID: 974893596}
   - {fileID: 687048643}
   - {fileID: 790417140}
+  - {fileID: 147378552}
   - {fileID: 949639166}
   - {fileID: 1365509010}
-  - {fileID: 147378552}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -572,7 +572,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 53298884}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &147555356
 PrefabInstance:
@@ -731,7 +731,7 @@ MonoBehaviour:
   griefBarHuman: {fileID: 11400000, guid: 34f4cba6e441e40479487040eb5bbd64, type: 2}
   griefBarGhost: {fileID: 11400000, guid: 675e156c2923aa548baf67fd7b0a17ba, type: 2}
   maxGrief: 100
-  currentGrief: 0
+  currentGrief: 100
   room: {fileID: 482707163}
 --- !u!114 &209183686
 MonoBehaviour:
@@ -776,11 +776,11 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 0}
   m_HandleRect: {fileID: 0}
-  m_Direction: 0
+  m_Direction: 2
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2791,37 +2791,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.000001, y: 2.0000005, z: 2.0000005}
   m_Center: {x: 0.0000076293945, y: 0.0000076293945, z: 0.0000076293945}
---- !u!1 &661437977
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 661437978}
-  m_Layer: 0
-  m_Name: GateParent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &661437978
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 661437977}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.440674, y: -183.6991, z: -341.9722}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1521130257}
-  m_Father: {fileID: 53298884}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &685253163
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4771,7 +4740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &831108743
 Transform:
   m_ObjectHideFlags: 0
@@ -5027,7 +4996,7 @@ PrefabInstance:
     - target: {fileID: 6687839687677279363, guid: 96af37403788b25418cc2bd8f15b1089,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6687839687677279363, guid: 96af37403788b25418cc2bd8f15b1089,
         type: 3}
@@ -6227,7 +6196,7 @@ PrefabInstance:
     - target: {fileID: 5491276357341050185, guid: 163d1c6a5010434429cf7e1a52e1e084,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5491276357341050185, guid: 163d1c6a5010434429cf7e1a52e1e084,
         type: 3}
@@ -9182,7 +9151,7 @@ GameObject:
   - component: {fileID: 2020604493}
   m_Layer: 5
   m_Name: InventoryScreen
-  m_TagString: Untagged
+  m_TagString: InventoryScreen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9219,14 +9188,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300186, guid: 1e627bcafe9e32d40ad554880f36b5eb, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9256,7 +9225,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e031ca0058a82164fac08e7445f0631b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 11400000, guid: 5dea348939dc7a84ba7f335378ccea4f, type: 2}
+  inventoryPrefab: {fileID: 6440330467291767890, guid: 6b952455859cd474bb8ccfc176ce4f3a,
+    type: 3}
+  inventoryHuman: {fileID: 11400000, guid: 5dea348939dc7a84ba7f335378ccea4f, type: 2}
+  inventoryGhost: {fileID: 11400000, guid: 70956a508eb072542b381630a9824f78, type: 2}
   xStart: -187
   xSpaceBetweenItems: 350
   yStart: 80
@@ -9958,11 +9930,16 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 661437978}
+    m_TransformParent: {fileID: 53298884}
     m_Modifications:
     - target: {fileID: 1372071156, guid: e3db3222b3467604a97161847ac3d09e, type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1199342806636502531, guid: e3db3222b3467604a97161847ac3d09e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2627382279409479892, guid: e3db3222b3467604a97161847ac3d09e,
         type: 3}
@@ -9972,22 +9949,22 @@ PrefabInstance:
     - target: {fileID: 7325134344758725573, guid: e3db3222b3467604a97161847ac3d09e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7325134344758725573, guid: e3db3222b3467604a97161847ac3d09e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.7741699
+      value: 15.214844
       objectReference: {fileID: 0}
     - target: {fileID: 7325134344758725573, guid: e3db3222b3467604a97161847ac3d09e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -183.6991
       objectReference: {fileID: 0}
     - target: {fileID: 7325134344758725573, guid: e3db3222b3467604a97161847ac3d09e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -341.9722
       objectReference: {fileID: 0}
     - target: {fileID: 7325134344758725573, guid: e3db3222b3467604a97161847ac3d09e,
         type: 3}
@@ -10034,6 +10011,11 @@ PrefabInstance:
       propertyPath: gateRend2
       value: 
       objectReference: {fileID: 1521130255}
+    - target: {fileID: 7325134344758725574, guid: e3db3222b3467604a97161847ac3d09e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7325134344758725574, guid: e3db3222b3467604a97161847ac3d09e,
         type: 3}
       propertyPath: roomManager

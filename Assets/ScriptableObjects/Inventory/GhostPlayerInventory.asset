@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dac54696e5bb43409a745283f41bea9, type: 3}
   m_Name: GhostPlayerInventory
   m_EditorClassIdentifier: 
-  Container: []
+  savePath: /Inventory.save
+  database: {fileID: 11400000, guid: 00369018cad9015428978510816441f3, type: 2}
+  Container:
+    Items: []
   twoKeysCollected: 0

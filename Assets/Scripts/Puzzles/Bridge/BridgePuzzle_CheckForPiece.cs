@@ -9,10 +9,7 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
 {
     // Start is called before the first frame update
     [Header("Missing Item")]
-    [HideInInspector] public PuzzleInfo missingItem;
-
-   // [Header("Lever")]
-    //public BidgePuzzle_Lever lever;
+    public GroundItem missingItem;
 
     [Header("Fixed Bridge")]
     public Mesh fixedBridgeMesh;
@@ -30,7 +27,6 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
 
     public void Start()
     {
-
         DebugOutSideOfNetwork = false;
         missingPieceBoxCollder.SetActive(false);
 
@@ -59,9 +55,10 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
         {
             PlayerInventory inventory = other.gameObject.GetComponent<PlayerInventory>();
 
-            for (int i = 0; i < inventory.inventory.Container.Count; i++)
+            for (int i = 0; i < inventory.inventory.Container.Items.Count; i++)
             {
-               if (inventory.inventory.Container[i].item == missingItem.inventoryItem)
+                if (inventory.inventory.Container.Items[i].item == missingItem.item)
+
                 {
 
                     if (SceneSettings.Instance.isMultiPlayer == true)
@@ -82,19 +79,18 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
                     // }
                 }
 
-               else
+                else
                 {
                     Debug.Log("No Luck");
                     Debug.Log("----------");
-                    Debug.Log("inventory Item = " + inventory.inventory.Container[i].item);
-                    Debug.Log("missingItem.puzzleInfo = " + missingItem.inventoryItem);
+                    //Debug.Log("inventory Item = " + inventory.inventory.Container[i].item);
                 }
             }
 
 
 
-        //    inventory.inventory
-            
+            //    inventory.inventory
+
         }
 
 
@@ -129,16 +125,9 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
         brokenBridge.GetComponent<MeshFilter>().mesh = fixedBridgeMesh;
         Debug.Log("2 golden keys");
         missingPieceBoxCollder.SetActive(true);
+        //}
+
     }
-
-
-    public void FixBridge()
-    {
-        brokenBridge.GetComponent<MeshFilter>().mesh = fixedBridgeMesh;
-        Debug.Log("2 golden keys");
-        missingPieceBoxCollder.SetActive(true);
-    }
-
 }
 
 
