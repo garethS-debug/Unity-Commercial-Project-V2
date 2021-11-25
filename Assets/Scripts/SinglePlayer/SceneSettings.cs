@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Pun;
+using Photon.Realtime;
+using ExitGames.Client.Photon;
+using UnityEngine.SceneManagement;
 
 
-public class SceneSettings : MonoBehaviour
+
+public class SceneSettings : MonoBehaviourPunCallbacks
 {
     private static SceneSettings _instance;
 
@@ -25,6 +30,11 @@ public class SceneSettings : MonoBehaviour
     public GameObject humanPlayer;
     public GameObject ghostPlayer;
     public float playerdistance;
+
+
+
+    [Header(" Scenes ")]
+    public SceneReference restartSCene;
     //  PhotonView PV;
     //  private GameObject[] players;
     // public GameObject myPlayer;
@@ -135,6 +145,51 @@ public class SceneSettings : MonoBehaviour
         //}
 
 
+    }
+
+
+
+    public void RestartGame()
+    {
+
+        if (SceneSettings.Instance.isSinglePlayer)
+        {
+            SceneManager.LoadScene(restartSCene);
+        }
+
+        if (SceneSettings.Instance.isMultiPlayer)
+        {
+            // PhotonNetwork.LeaveRoom();
+
+            SwitchLevel(restartSCene);
+
+        }
+
+
+
+    }
+
+
+    //public override void OnLeftRoom()
+    //{
+    //    base.OnLeftRoom();
+    //    //StartCoroutine(DisconnectAndLoad());
+    //    SceneManager.LoadScene(levelToLoad);
+    //}
+
+
+
+    public void SwitchLevel(SceneReference level)
+    {
+        StartCoroutine(DoSwitchLevel(level));
+    }
+
+    IEnumerator DoSwitchLevel(string level)
+    {
+        PhotonNetwork.Disconnect();
+        while (PhotonNetwork.IsConnected)
+            yield return null;
+        SceneManager.LoadScene(restartSCene);
     }
 
 }
