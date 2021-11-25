@@ -22,7 +22,7 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
 
     [Header("PlayerData")]
-   // public PlayerSO playerData;
+    // public PlayerSO playerData;
 
     [Header("Player Required for Puzzle Hint")]
     public bool GhostPLayer;
@@ -50,7 +50,7 @@ public class BidgePuzzle_Lever : MonoBehaviour
         PuzzleGuideShowing = false;
         RandomizePuzzlePiece();
 
-        
+
         if (SceneSettings.Instance.isSinglePlayer == true)
         {
 
@@ -60,15 +60,15 @@ public class BidgePuzzle_Lever : MonoBehaviour
         {
 
         }
-  
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-      
-      
+
+
 
     }
 
@@ -104,7 +104,7 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
 
 
-            }
+        }
 
 
 
@@ -128,11 +128,11 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
             if (SceneSettings.Instance.isMultiPlayer == true)
             {
-                if(PV.IsMine)
+                if (PV.IsMine)
                 {
                     withinLeverZone = true;
                 }
-           
+
             }
 
 
@@ -140,21 +140,21 @@ public class BidgePuzzle_Lever : MonoBehaviour
             {
                 if (SceneSettings.Instance.isSinglePlayer == true)
                 {
-                if (controller.PermormingAction == true)
-                {
-                    print("Controller perfmorning action");
-                    if (SpawnedPiece == false)
+                    if (controller.PermormingAction == true)
                     {
-                        //SEND CALL FOR ACTION - suvscription 
-                        //Spawn Bridge Piece
-                        SpawnedPiece = true;
-                        if (SceneSettings.Instance.isMultiPlayer == true)
+                        print("Controller perfmorning action");
+                        if (SpawnedPiece == false)
                         {
-                            //Removed as puzzle pieces are already available. 
-                            // PhotonNetwork.Instantiate(missingBridePiece.name, SpawnPoint.transform.position, SpawnPoint.transform.rotation);
+                            //SEND CALL FOR ACTION - suvscription 
+                            //Spawn Bridge Piece
+                            SpawnedPiece = true;
+                            if (SceneSettings.Instance.isMultiPlayer == true)
+                            {
+                                //Removed as puzzle pieces are already available. 
+                                // PhotonNetwork.Instantiate(missingBridePiece.name, SpawnPoint.transform.position, SpawnPoint.transform.rotation);
+                            }
                         }
                     }
-                }
                 }
 
                 if (SceneSettings.Instance.isMultiPlayer == true)
@@ -181,7 +181,7 @@ public class BidgePuzzle_Lever : MonoBehaviour
                 }
 
 
-            
+
             }
 
             if (controller == null)
@@ -336,7 +336,7 @@ public class BidgePuzzle_Lever : MonoBehaviour
         index = Random.Range(0, puzzleClues.Length);
         missingItem = puzzleClues[index];
 
-        bridgePuzzleChecker.missingItem = missingItem;
+        //bridgePuzzleChecker.missingItem = missingItem;
 
         clueImageContainer.sprite = missingItem.puzzleInfo.uiImage;
     }

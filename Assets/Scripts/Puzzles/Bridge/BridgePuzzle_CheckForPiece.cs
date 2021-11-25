@@ -30,7 +30,7 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
         DebugOutSideOfNetwork = false;
         missingPieceBoxCollder.SetActive(false);
 
-      //  missingItem = lever.missingItem;
+        //  missingItem = lever.missingItem;
 
         if (SceneSettings.Instance.isMultiPlayer == true)
         {
@@ -57,7 +57,7 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
 
             for (int i = 0; i < inventory.inventory.Container.Items.Count; i++)
             {
-                if (inventory.inventory.Container.Items[i].item == missingItem.item)
+                if (inventory.inventory.Container.Items[i].item.Id == missingItem.item.Id)
 
                 {
 
@@ -68,7 +68,7 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
 
                     if (SceneSettings.Instance.isSinglePlayer == true)
                     {
-                        FixBridge();
+                        //FixBridge();
                     }
                     //Container[i].AddAmount(_amount);
                     //  hasItem = true;
