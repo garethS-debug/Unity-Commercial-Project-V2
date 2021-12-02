@@ -55,7 +55,7 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
         {
             PlayerInventory inventory = other.gameObject.GetComponent<PlayerInventory>();
 
-            for (int i = 0; i < inventory.inventory.Container.Items.Count; i++)
+            for (int i = 0; i < inventory.inventory.Container.Items.Length; i++)
             {
                 if (inventory.inventory.Container.Items[i].item.Id == missingItem.item.Id)
 

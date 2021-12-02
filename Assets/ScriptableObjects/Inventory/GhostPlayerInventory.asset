@@ -15,5 +15,25 @@ MonoBehaviour:
   savePath: /Inventory.save
   database: {fileID: 11400000, guid: 00369018cad9015428978510816441f3, type: 2}
   Container:
-    Items: []
-  twoKeysCollected: 0
+    Items:
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+      amount: 0
+  twoKeysCollected: 1

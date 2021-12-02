@@ -50,7 +50,6 @@ public class PlayerInventory : MonoBehaviour
                 {
                     inventory.AddItem(new Item(item.item), 1);                    //Photon 
 
-
                     item.DestroyItem();
                 }
             }
@@ -62,7 +61,6 @@ public class PlayerInventory : MonoBehaviour
             {
                 inventory.AddItem(new Item(item.item), 1);                    //singlePlayer
 
-
                 item.DestroyItem();
             }
         }
@@ -72,8 +70,7 @@ public class PlayerInventory : MonoBehaviour
     private void OnApplicationQuit()
     {
         // Clear the player's inventory when they quit
-        inventory.Container.Items.Clear();
-        //inventory.Container.Items = new InventorySlot[4];
+        inventory.Container.Items = new InventorySlot[4];//
     }
 
 
