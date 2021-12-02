@@ -14,5 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   savePath: /Inventory.save
   database: {fileID: 11400000, guid: 00369018cad9015428978510816441f3, type: 2}
-  Container: []
+  playerSO: {fileID: 11400000, guid: f6bbc180c160720489c9048e80112be2, type: 2}
+  Container:
+    Items:
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+      amount: 0
   twoKeysCollected: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using UnityEditor;
+using Photon.Pun;
 
 [CreateAssetMenu(fileName = "New inventory", menuName = "Inventory System/Inventory")]
 
@@ -12,7 +12,9 @@ public class InventoryObject : ScriptableObject
 {
     public string savePath;
     public ItemDatabaseObject database;
+    public PlayerSO playerSO;
     public Inventory Container;
+
 
     public bool twoKeysCollected = false;
 
@@ -64,20 +66,46 @@ public class InventoryObject : ScriptableObject
         {
             if (Container.Items[i].item == _item)
             {
+                //If one item in inventory, remove it completely
                 if (Container.Items[i].amount == 1)
                 {
                     Container.Items[i].UpdateSlot(-1, null, 0);
                 }
 
+                //If more than one item in inventory, remove one of them
                 if (Container.Items[i].amount >= 2)
                 {
                     int newAmount = Container.Items[i].amount - 1;
                     Container.Items[i].UpdateSlot(Container.Items[i].ID, Container.Items[i].item, newAmount);
                 }
 
+                Vector3 positionPrefab = new Vector3();
+                Vector3 offsetPrefab = new Vector3(0, 2f, -5f);
+
+                if (playerSO.PlayerCharacterChoise == 1)
+                {
+                    positionPrefab = GameObject.Find("HumanPlayerCharacter(Clone)").transform.position + offsetPrefab;
+                }
+
+                if (playerSO.PlayerCharacterChoise == 2)
+                {
+                    positionPrefab = GameObject.Find("GhostCharacter(Clone)").transform.position + offsetPrefab;
+                }
+
+                //Instantiate an item on the ground
+                GameObject prefab = database.GetItem[_item.Id].prefabItem;
+                Instantiate(prefab, positionPrefab, Quaternion.identity);
+
+                //Need to work on multiplayer spawn
+                //PhotonNetwork.Instantiate(prefab.name, positionPrefab, Quaternion.identity);
 
             }
         }
+    }
+
+    public void PlayerPosition()
+    {
+
     }
 
     public void SaveInventory()

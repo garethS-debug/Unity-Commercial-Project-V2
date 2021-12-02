@@ -16,3 +16,5 @@ MonoBehaviour:
   uiDisplay: {fileID: 21300000, guid: 823d3a932b7bdce4b950d2dce15d50e4, type: 3}
   type: 0
   description: 
+  prefabItem: {fileID: 8822471509508786010, guid: 163d1c6a5010434429cf7e1a52e1e084,
+    type: 3}
