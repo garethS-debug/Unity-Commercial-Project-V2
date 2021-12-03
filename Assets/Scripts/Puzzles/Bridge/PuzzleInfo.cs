@@ -142,13 +142,7 @@ public class PuzzleInfo : MonoBehaviour
             {
                 if (item)
                 {
-<<<<<<< HEAD
                  //   myPlayer.gameObject.GetComponent<PlayerInventory>().inventory.AddItem(item.item, 1);                    //singlePlayer
-=======
-                    myPlayer.gameObject.GetComponent<PlayerInventory>().inventory.AddItem(new Item(item.item), 1);                    //singlePlayer
->>>>>>> Claire's_Branch
-
-
                     //   item.DestroyItem();
                     this.gameObject.SetActive(false);
                 }
