@@ -8,96 +8,98 @@ public class GriefBarDisplay : MonoBehaviour
     public Slider slider;
     public GriefBarObject griefBarHuman;
     public GriefBarObject griefBarGhost;
-    public int maxGrief = 100;
-    public int currentGrief;
+    public float maxGrief = 100f;
+    public float currentGrief;
+    public float decreasePerSecond = 1f;
 
     public RoomManager room;
+
+    /// <summary>
+    /// 
+    /// 
+    /// 
+    /// PLEASE BE AWARE I HAVE CHANGED THE BELOW:
+    /// 
+    /// ADDED A NEW METHOD FOR CALLING THE PLAYER DISTANCE FROM SCENE SETTINGS
+    /// 
+    /// CHANGED THE INTERGER TO FLOAT SO THAT THE CANDLE HEIGHT IS SMOOTHER
+    /// 
+    /// 
+    /// 
+    /// 
+    /// </summary>
 
 
 
     public void Start()
     {
-       
         currentGrief = maxGrief;
         SetMaxGrief(maxGrief);
-        //CreateDisplay();
-
-  
     }
 
     private void Update()
     {
+<<<<<<< HEAD
         if (Input.GetKeyDown(KeyCode.G))
         {
             ReduceGriefBar(20);
         }
+
+        GriefBasedOnDistance();
+
+=======
+        ReduceGriefBar();
+>>>>>>> Claire's_Branch
     }
-
-    public void CreateDisplay()
-    {
-        
-
-
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        print("I FOUND " + player.name);
-
-        // else
-        //  {
-        //  print("is null");
-        //  }
-
-
-        
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterID>().isHumanCharater)
-        {
-     
-        }
-
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterID>().isGhostCharacer)
-        {
-
-        }
-        
-
-    
-
-
-
-
-}
 
     public void CreateHumanCandle()
     {
-        print("isHuman");
-
         var obj = Instantiate(griefBarHuman.griefBarPrefab, Vector3.zero, Quaternion.identity, transform);
         obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
         slider.fillRect = obj.GetComponent<RectTransform>();
+        slider.direction = Slider.Direction.BottomToTop;                                            //G - I have added this line to ensure the slide goes up and down and not left to right
     }
-
 
     public void CreateGhostCandle()
     {
-        print("isGhost");
         var obj = Instantiate(griefBarGhost.griefBarPrefab, Vector3.zero, Quaternion.identity, transform);
         obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
         slider.fillRect = obj.GetComponent<RectTransform>();
+        slider.direction = Slider.Direction.BottomToTop;                                            //G - I have added this line to ensure the slide goes up and down and not left to right
     }
-    private void SetMaxGrief(int grief)
+
+    private void SetMaxGrief(float grief)
     {
         slider.maxValue = grief;
         slider.value = grief;
     }
 
-    private void SetGrief(int grief)
+    private void SetGrief(float grief)
     {
         slider.value = grief;
     }
 
-    private void ReduceGriefBar(int reduction)
+<<<<<<< HEAD
+    private void ReduceGriefBar(float reduction)
     {
+
+
         currentGrief -= reduction;
+=======
+    private void ReduceGriefBar()
+    {
+        currentGrief -= Time.deltaTime * decreasePerSecond;
+>>>>>>> Claire's_Branch
+        SetGrief(currentGrief);
+    }
+
+
+    // I have added the below method that links in with 'scenesettings'. The 'sceneSettings' script judges the distance of the players, this is used to determine the length of the candle. 
+
+    public void GriefBasedOnDistance ()
+    {
+        currentGrief = SceneSettings.Instance.playerdistance;
+      //  print(currentGrief);
         SetGrief(currentGrief);
     }
 }

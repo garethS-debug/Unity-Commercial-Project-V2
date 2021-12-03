@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Player_Data
   m_EditorClassIdentifier: 
   PlayerCharacterChoise: 2
-  PlayerName: Ghost
+  PlayerName: ghost
   AutoConnect: 1
-  SingleOrMultiPlayer: 2
+  SingleOrMultiPlayer: 1

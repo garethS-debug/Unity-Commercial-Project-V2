@@ -23,6 +23,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [Header("Grief Bar")]
     public GriefBarDisplay griefBar;
 
+    [Header("Intro")]
+
+    public GameObject LevelIntro;
+
 
 
     private void Awake()
@@ -78,27 +82,35 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode LoadSceneMode)
     {
-        // if (scene.buildIndex == 1) // if we are in the game scene
-        // {
+  
+        //start evtry scene 
 
-           if (SceneSettings.Instance.isMultiPlayer == true)
+        //then spawn in players
+
+        LevelIntro.gameObject.GetComponent<Level01Cutscene>().StartCoroutine("CutSceneCoRoutine");
+
+    }
+
+    public void spawnPlayers()
+    {
+
+
+        if (SceneSettings.Instance.isMultiPlayer == true)
         {
             networkedPlayerManager = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
             Debug.Log("Game Is Multiplayer : ".Bold().Color("green"));
         }
 
-           else
+        else
         {
             Debug.Log("Game Is Single Player : ".Bold().Color("white"));
             s_CreatePlayer();
         }
 
-        
+
+        LevelIntro.gameObject.SetActive(false);
 
 
-      
-     //   networkedPlayer.gameObject.GetComponent<NetworkedPlayerController>().isInLobby = false;
-      //  }
     }
 
 

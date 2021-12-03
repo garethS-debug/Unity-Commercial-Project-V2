@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45cfd2dfce46f343a7ffc9eb73c5f21, type: 3}
   m_Name: Heart
   m_EditorClassIdentifier: 
-  prefab: {fileID: 4321225576311928776, guid: d85c18b973eb67a478fda25fb1267320, type: 3}
-  type: 2
+  Id: 1
+  uiDisplay: {fileID: 21300002, guid: 1e627bcafe9e32d40ad554880f36b5eb, type: 3}
+  type: 3
   description: 
+  prefabItem: {fileID: 6687839687677370531, guid: 96af37403788b25418cc2bd8f15b1089,
+    type: 3}
