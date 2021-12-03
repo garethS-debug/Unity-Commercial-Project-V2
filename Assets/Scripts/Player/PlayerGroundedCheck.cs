@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerGroundedCheck : MonoBehaviour
 {
-	public NetworkedPlayerController playerController;
+public 	NetworkedPlayerController playerController;
 
 
 
@@ -34,11 +34,11 @@ public class PlayerGroundedCheck : MonoBehaviour
 
 
 		if (other.gameObject != playerController.gameObject)
-		{
-			playerController.SetGroundedState(true);
-		}
-
-
+			{
+				playerController.SetGroundedState(true);
+			}
+		
+	
 
 
 
@@ -50,7 +50,7 @@ public class PlayerGroundedCheck : MonoBehaviour
 		if (other.gameObject == playerController.gameObject)
 			return;
 
-		//	Debug.Log("Exit ground !!");
+	//	Debug.Log("Exit ground !!");
 
 		playerController.SetGroundedState(false);
 	}
@@ -58,23 +58,23 @@ public class PlayerGroundedCheck : MonoBehaviour
 	void OnTriggerStay(Collider other)
 	{
 		//if (other.gameObject.tag == "Player")
-		//      {
+  //      {
 		//	playerController = other.gameObject.GetComponent<NetworkedPlayerController>();
 
 		//}
 
-
-		if (other.gameObject != playerController.gameObject)
-		{
-			playerController.SetGroundedState(true);
-			Debug.Log("Hit Continue  !!" + other.gameObject.name);
-		}
-
+		
+			if (other.gameObject != playerController.gameObject)
+			{
+				playerController.SetGroundedState(true);
+				Debug.Log("Hit Continue  !!" + other.gameObject.name);
+			}
+	
 
 		if (playerController == null)
-		{
+        {
 			playerController = other.gameObject.GetComponent<NetworkedPlayerController>();
-			print("Getting Controller from the parent again");
+			print("Getting Controller from the parent again" );
 		}
 
 	}
