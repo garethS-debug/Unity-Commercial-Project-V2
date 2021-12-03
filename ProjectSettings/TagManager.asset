@@ -7,6 +7,11 @@ TagManager:
   - spawnPoint
   - LobbyCharacter
   - Bullet
+  - LobbyManager
+  - PlayerManager
+  - GriefBar
+  - item
+  - InventoryScreen
   layers:
   - Default
   - TransparentFX
@@ -15,11 +20,11 @@ TagManager:
   - Water
   - UI
   - Terrain
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PostProcess
+  - GhostPlayer
+  - HumanPlayer
+  - GhostCollisionIgnore
+  - HumanCollisionIgnore
   - 
   - 
   - 

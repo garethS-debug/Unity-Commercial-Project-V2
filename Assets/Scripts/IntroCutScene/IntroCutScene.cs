@@ -26,6 +26,16 @@ public class IntroCutScene : MonoBehaviour
     [TextArea]
     public string story;
 
+    [Header("Debug")]
+   public  bool DebugSkipCutScene;
+
+    [Header("UI")]
+    public GameObject skipButton;
+
+    [Header("Co-Courtines")]
+    Coroutine theCutSceneCoRoutine;
+
+
     /*
      * 
      *   
@@ -48,7 +58,18 @@ public class IntroCutScene : MonoBehaviour
     {
      //   trainAnimator.SetBool("StartEntry", false);
         //Start the coroutine we define below named ExampleCoroutine.
-        StartCoroutine(CutSceneCoRoutine());
+        if (DebugSkipCutScene == false)
+        {
+            theCutSceneCoRoutine = StartCoroutine(CutSceneCoRoutine());
+       }
+
+        if (DebugSkipCutScene == true)
+        {
+            lobbyManager.OnTriggerSpawnPlayers();
+        }
+
+        skipButton.gameObject.SetActive(true);
+
 
     }
 
@@ -60,28 +81,30 @@ public class IntroCutScene : MonoBehaviour
 
     IEnumerator CutSceneCoRoutine()
     {
+        StartCoroutine("PlayText");
+
         intro.gameObject.SetActive(true);
         //Print the time of when the function is first called.
-        Debug.Log("Started IntroSplash Coroutine at timestamp : ".Bold().Color("yellow") + Time.time);
+       // Debug.Log("Started IntroSplash Coroutine at timestamp : ".Bold().Color("yellow") + Time.time);
 
         //yield on a new YieldInstruction that waits for 5 seconds.
         yield return new WaitForSeconds(cutSceneDelayAtStart);
         intro.gameObject.SetActive(false);
         //Print the time of when the function is first called.
-        Debug.Log("Started Cutscene Coroutine at timestamp : ".Bold().Color("yellow") + Time.time);
+      //  Debug.Log("Started Cutscene Coroutine at timestamp : ".Bold().Color("yellow") + Time.time);
 
         trainAnimator.SetBool("StartEntry", true);
 
 
         //After we have waited 5 seconds print the time again.
-        Debug.Log("Finished Cutscene Coroutine at timestamp : ".Bold().Color("yellow") + Time.time);
+    //    Debug.Log("Finished Cutscene Coroutine at timestamp : ".Bold().Color("yellow") + Time.time);
 
         yield return new WaitForSeconds(cutSceneDelay);
 
         //After we have waited 5 seconds print the time again.
         Debug.Log("Spawn Player after Cutscene Coroutine at timestamp : ".Bold().Color("yellow") + Time.time);
 
-
+        skipButton.gameObject.SetActive(false);
         lobbyManager.OnTriggerSpawnPlayers();
 
 
@@ -96,7 +119,7 @@ public class IntroCutScene : MonoBehaviour
         txt.text = "";
 
         // TODO: add optional delay when to start
-        StartCoroutine("PlayText");
+   
     }
 
     IEnumerator PlayText()
@@ -109,8 +132,36 @@ public class IntroCutScene : MonoBehaviour
             if (c >= story.Length)
             {
                 print("End Of Story");
+
             }
         }
     }
+
+
+
+        public void SkipTheCutScene()
+    {
+        intro.gameObject.SetActive(false);
+        trainAnimator.SetBool("StartEntry", true);
+
+        StopCoroutine(theCutSceneCoRoutine);
+
+        StartCoroutine(SkipCutscene());
+
+
+        
+
+        cutSceneDelayAtStart = 0;
+        cutSceneDelay = 0;
+        skipButton.gameObject.SetActive(false);
+    }
+
+    IEnumerator SkipCutscene()
+    {
+        yield return new WaitForSeconds(3);
+
+        lobbyManager.OnTriggerSpawnPlayers();
+    }
+
 
 }

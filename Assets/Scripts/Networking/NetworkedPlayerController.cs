@@ -53,7 +53,7 @@ public class NetworkedPlayerController : MonoBehaviour
 	int jumpHash;
 	float jumpDirForward; //-1 is Backwards, +1 is Forwards
 	float jumpDirLeftRight; //-1 is Backwards, +1 is Forwards
-
+	bool rayHitGround;
 	//[Header("Sneak Settings")]
 	//[HideInInspector] public int sneakHash;
 	//[HideInInspector] public int againstWallHash;
@@ -137,6 +137,11 @@ public class NetworkedPlayerController : MonoBehaviour
 	[Header("Perform Action")]
 	public KeyCode PerformAction = KeyCode.F;
 	public bool PermormingAction;
+	public delegate void MyEventDelegate();
+	public static event MyEventDelegate myEvent;
+
+
+
 
 	private void Awake()
 	{
@@ -158,19 +163,35 @@ public class NetworkedPlayerController : MonoBehaviour
 
 		//sneak
 		//sneakHash = Animator.StringToHash("anim_sneak");                                      //Hash number for turning    
-	//	againstWallHash = Animator.StringToHash("anim_isAgainstWall");                                      //Hash number for turning   
+		//	againstWallHash = Animator.StringToHash("anim_isAgainstWall");                                      //Hash number for turning   
 
-		//Photon
-		PV = GetComponent<PhotonView>();
+		if (SceneSettings.Instance.isMultiPlayer == true)
+		{
+			//Photon
+			PV = GetComponent<PhotonView>();
+		}
+
 
 		//	controller
 		controller = this.gameObject.GetComponent<CharacterController>();
+
+
 
 	}
 
 	// Start is called before the first frame update
 	void Start()
 	{
+
+
+
+		if (SceneSettings.Instance.isSinglePlayer == true)
+		{
+			SceneSettings.Instance.RemoveMultiplayerScript(this.gameObject);
+		}
+
+
+
 		if (isInLobby)
         {
 			CameraPrefab = Instantiate(camPrefab, this.transform.position, camPrefab.transform.rotation);
@@ -183,8 +204,12 @@ public class NetworkedPlayerController : MonoBehaviour
 			controller = this.gameObject.GetComponent<CharacterController>();
 		}
 
+
 		if (isInLobby == false)
         {
+			if (SceneSettings.Instance.isMultiPlayer == true)
+			{
+			
 
 			//If multiplayer and not my game object
 			if (!PV.IsMine)
@@ -206,6 +231,27 @@ public class NetworkedPlayerController : MonoBehaviour
 				cam = CameraPrefab.gameObject.transform;
 				controller = this.gameObject.GetComponent<CharacterController>();
 			}
+
+			}
+
+			else if (SceneSettings.Instance.isSinglePlayer == true)
+			{
+					if (GetComponentInChildren<Camera>() != null)
+					{
+						Destroy(GetComponentInChildren<Camera>().gameObject);
+					}
+
+					CameraPrefab = Instantiate(camPrefab, this.transform.position, camPrefab.transform.rotation);
+					//Camera
+					_camControll = CameraPrefab.GetComponent<PlayerCameraController>();
+					_camControll.parent = this.gameObject;
+
+					cam = CameraPrefab.gameObject.transform;
+					controller = this.gameObject.GetComponent<CharacterController>();
+			}
+
+
+
 		}
 	
 
@@ -220,32 +266,22 @@ public class NetworkedPlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-
 		//Move();
-	
+
 
 		//this wont allow for backwards movement
 		//Rotate(toRot);
-
-
-	}
-
-	private void LateUpdate()
-	{
-
-	}
-
-
-	void FixedUpdate()
-	{
 		if (isInLobby == false)
-        {
-			if (!PV.IsMine)
+		{
+			if (SceneSettings.Instance.isMultiPlayer == true)
 			{
-				return;
+				if (!PV.IsMine)
+				{
+					return;
+				}
 			}
 		}
-		
+
 
 		//Existing Movement Script
 		//m_Rigidbody.MovePosition(m_Rigidbody.position + transform.TransformDirection(movementWithInversion) * Time.fixedDeltaTime);
@@ -254,12 +290,25 @@ public class NetworkedPlayerController : MonoBehaviour
 		Move5();
 		Jump();
 		PerformActionCheck();
+
+	}
+
+	private void LateUpdate()
+	{
+		
+	}
+
+
+	void FixedUpdate()
+	{
 	
+
+
 	}
 
 
 
-    public void Move5()
+	public void Move5()
     {
 		float horizontalInput = Input.GetAxisRaw("Horizontal"); //-1 and +1 (-1 for left , + 1 for right)
 		float verticalInput = Input.GetAxisRaw("Vertical"); // -1 and +1  (+ 1 up, - 1 down) 
@@ -386,80 +435,9 @@ public class NetworkedPlayerController : MonoBehaviour
 	void Jump()
 	{
 
-
-		if (isInLobby == true)
+		if (SceneSettings.Instance.isMultiPlayer == true)
 		{
-			if (controller.isGrounded)
-			{
-				verticalVelocity = -gravity * Time.deltaTime;
-
-				if (Input.GetKey(JumpInput))
-				{
-					verticalVelocity = JumpForce;
-					anim.SetBool("anim_Jumping", true); // Set jumping 
-					
-					if (jumpDirForward == 0 && jumpDirLeftRight == 0)
-                    {
-						anim.SetFloat(jumpHash, 0);
-					}
-
-					if (jumpDirForward > 0 && jumpDirLeftRight <= 0)
-                    {
-						//	print("Jump foward " + jumpDirForward );
-						anim.SetFloat(jumpHash, 1);
-					}
-
-					if ( jumpDirForward < 0 && jumpDirLeftRight >= 0)
-                    {
-						//print("Jump Backwards " + jumpDirForward);
-						anim.SetFloat(jumpHash, 1);
-					}
-
-					if (jumpDirLeftRight > 0 && jumpDirForward >= 0)
-					{
-						//print("Jump Side - forward " + jumpDirLeftRight);
-						anim.SetFloat(jumpHash, 1);
-					}
-
-					if (jumpDirLeftRight < 0 && jumpDirForward <= 0)
-					{
-						//print("Jump Side - forward " + jumpDirLeftRight);
-						anim.SetFloat(jumpHash, 1);
-					}
-
-
-					//	anim.SetFloat(jumpHash, );
-
-				}
-			}
-
-			else
-			{
-				verticalVelocity -= gravity * Time.deltaTime;
-				anim.SetBool("anim_Jumping", false); // Set jumping 
-			}
-
-			Vector3 jumpvector = new Vector3(0, verticalVelocity, 0);
-			controller.Move(jumpvector * Time.deltaTime);
-			/*
-					if (Input.GetKeyDown(JumpInput) && grounded)
-					{
-					//	m_Rigidbody.AddForce(transform.up * jumpForce);
-					}
-
-					*/
-		}
-
-		if (isInLobby == false)
-		{
-
-			//If multiplayer and not my game object
-			if (!PV.IsMine)
-			{
-				return;
-			}
-
-			if (PV.IsMine)
+			if (isInLobby == true)
 			{
 				if (controller.isGrounded)
 				{
@@ -467,6 +445,7 @@ public class NetworkedPlayerController : MonoBehaviour
 
 					if (Input.GetKey(JumpInput))
 					{
+						print("Jumping");
 						verticalVelocity = JumpForce;
 						anim.SetBool("anim_Jumping", true); // Set jumping 
 
@@ -521,9 +500,170 @@ public class NetworkedPlayerController : MonoBehaviour
 
 						*/
 			}
+
+			if (isInLobby == false)
+			{
+
+				if (!PV.IsMine)
+				{
+					return; //If multiplayer and not my game object
+					print("PV is not mine Jumping");
+				}
+
+				if (PV.IsMine)
+				{
+					print("Controller grounded status " + controller.isGrounded);
+
+
+					
+						// Bit shift the index of the layer (8) to get a bit mask
+						int layerMask = 1 << 8;
+
+						// This would cast rays only against colliders in layer 8.
+						// But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask.
+						layerMask = ~layerMask;
+
+						RaycastHit hit;
+						// Does the ray intersect any objects excluding the player layer
+						if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, JumpForce-6, layerMask))
+						{
+							Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
+							Debug.Log("Did Hit");
+
+						rayHitGround = true;
+					}
+						else
+						{
+							Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000, Color.white);
+							Debug.Log("Did not Hit");
+						rayHitGround = false;
+						}
+
+
+
+
+
+
+
+						if (rayHitGround == true)
+					{
+
+						if (Input.GetKey(JumpInput) || Input.GetKeyDown(JumpInput))
+						{
+							verticalVelocity = JumpForce;
+							anim.SetBool("anim_Jumping", true); // Set jumping 
+
+
+							if (jumpDirForward > 0 || jumpDirLeftRight <= 0)
+							{
+								//	print("Jump foward " + jumpDirForward );
+								anim.SetFloat(jumpHash, 1);
+							}
+
+
+						}
+					}
+
+					else
+					{
+						verticalVelocity -= gravity * Time.deltaTime;
+						anim.SetBool("anim_Jumping", false); // Set jumping 
+					}
+
+					Vector3 jumpvector = new Vector3(0, verticalVelocity, 0);
+					controller.Move(jumpvector * Time.deltaTime);
+				}
+
+
+				
+
+
+			}
+
 		}
+		//------------------------------------------------------->
 
 
+		if (SceneSettings.Instance.isSinglePlayer == true)
+		{
+			
+				if (controller.isGrounded)
+				{
+					verticalVelocity = -gravity * Time.deltaTime;
+
+					if (Input.GetKey(JumpInput) || Input.GetKeyDown(JumpInput))
+					{
+						verticalVelocity = JumpForce;
+						anim.SetBool("anim_Jumping", true); // Set jumping 
+
+
+					if (jumpDirForward > 0 || jumpDirLeftRight <= 0)
+					{
+						//	print("Jump foward " + jumpDirForward );
+						anim.SetFloat(jumpHash, 1);
+					}
+
+
+
+					/*
+						if (jumpDirForward == 0 && jumpDirLeftRight == 0 )
+						{
+							anim.SetFloat(jumpHash, 0);
+						}
+
+						if (jumpDirForward > 0 && jumpDirLeftRight <= 0)
+						{
+							//	print("Jump foward " + jumpDirForward );
+							anim.SetFloat(jumpHash, 1);
+						}
+
+						if (jumpDirForward < 0 && jumpDirLeftRight >= 0)
+						{
+							//print("Jump Backwards " + jumpDirForward);
+							anim.SetFloat(jumpHash, 1);
+						}
+
+						if (jumpDirLeftRight > 0 && jumpDirForward >= 0)
+						{
+							//print("Jump Side - forward " + jumpDirLeftRight);
+							anim.SetFloat(jumpHash, 1);
+						}
+
+						if (jumpDirLeftRight < 0 && jumpDirForward <= 0)
+						{
+							//print("Jump Side - forward " + jumpDirLeftRight);
+							anim.SetFloat(jumpHash, 1);
+						}
+
+					*/
+					//	anim.SetFloat(jumpHash, );
+
+				}
+				}
+
+				else
+				{
+					verticalVelocity -= gravity * Time.deltaTime;
+					anim.SetBool("anim_Jumping", false); // Set jumping 
+				}
+
+				Vector3 jumpvector = new Vector3(0, verticalVelocity, 0);
+				controller.Move(jumpvector * Time.deltaTime);
+				/*
+						if (Input.GetKeyDown(JumpInput) && grounded)
+						{
+						//	m_Rigidbody.AddForce(transform.up * jumpForce);
+						}
+
+						*/
+			}
+
+			
+
+
+
+
+	
 	}
 
 
@@ -684,7 +824,7 @@ public class NetworkedPlayerController : MonoBehaviour
 
 				//Player Controls
 				return test3;
-				print("Incorrect intelligence level.");
+				//print("Incorrect intelligence level.");
 				break;
 		}
 
@@ -703,15 +843,24 @@ public class NetworkedPlayerController : MonoBehaviour
 
 	private void PerformActionCheck()
 	{
-	 if (Input.GetKey(PerformAction))
+	 if (Input.GetKeyDown(PerformAction))
         {
 			PermormingAction = true;
 			print("player controller performing action");
-        }
-	 else
-        {
+
+			if (myEvent != null)
+			{
+				myEvent();
+			}
+
+
+		}
+		if (Input.GetKeyUp(PerformAction))
+		{
+			print("player controller not performing action");
 			PermormingAction = false;
-        }
+		}
+	
 	}
 
 }

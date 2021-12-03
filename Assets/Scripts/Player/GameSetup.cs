@@ -118,7 +118,8 @@ public class GameSetup : MonoBehaviour
 	public void SELECT_CHILDCHARACTER()
     {
 
-		PlayerCharacter = 1;
+		PlayerCharacter = 1;                                            //Human = 1
+		playerSOData.PlayerCharacterChoise = PlayerCharacter;
 		//Debug.Log("Saving....");
 		playerName = ChildNameInput.text;
 		SaveGameManager.Save();
@@ -128,7 +129,8 @@ public class GameSetup : MonoBehaviour
 
 	public void SELECT_GHOSTCHARACTER()
 	{
-		PlayerCharacter = 2;
+		PlayerCharacter = 2;										//Ghost = 2
+		playerSOData.PlayerCharacterChoise = PlayerCharacter;
 		//Debug.Log("Saving....");
 		playerName = GhostNameInput.text;
 		SaveGameManager.Save();
@@ -136,7 +138,7 @@ public class GameSetup : MonoBehaviour
 	}
 
 
-	public void START_GAME()
+	public void m_START_GAME()
     {
 	 bool isSave =	SaveGameManager.CheckforSaveGame();
 
@@ -144,7 +146,9 @@ public class GameSetup : MonoBehaviour
         {
 		//	Debug.Log("Continue to game with your character...");
 			SaveGameManager.Load();
-			UpdatePlayerSaveSO();
+
+			UpdatePlayerSaveSO(1);						//1 = multiplayer
+
 			SceneManager.LoadScene(levelToLoad);
 		}
 	else
@@ -154,27 +158,40 @@ public class GameSetup : MonoBehaviour
 			StartUI.SetActive(false);
 
 		}
-				/*
-if (BooleanExpression)
-{
-    expression1;
-}
-else
-{
-    expression2;
-}*/
 
+	}
+
+
+	public void s_START_GAME()
+	{
+		bool isSave = SaveGameManager.CheckforSaveGame();
+
+		if (isSave)
+		{
+			//	Debug.Log("Continue to game with your character...");
+			SaveGameManager.Load();
+			UpdatePlayerSaveSO(2);                  //2 = Single Player
+			SceneManager.LoadScene(levelToLoad);
+		}
+		else
+		{
+			//	Debug.Log("Choose A Character");
+			selectCharacterUI.SetActive(true);
+			StartUI.SetActive(false);
+
+		}
 
 	}
 
 
 
-	public  static void UpdatePlayerSaveSO()
+	public  static void UpdatePlayerSaveSO(int SingleorMulti)
     {
 		
 		//Insert other variable information -- e.g. level progression
 		staticPlayerData.PlayerCharacterChoise = playerSaveFile.slectedCharacter;
 		staticPlayerData.PlayerName = playerSaveFile.playerName;
+		staticPlayerData.SingleOrMultiPlayer = SingleorMulti;
 
 		Debug.Log("Updating SO......." + playerSaveFile.slectedCharacter);
 

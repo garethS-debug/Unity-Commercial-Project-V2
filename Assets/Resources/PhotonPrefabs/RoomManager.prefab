@@ -44,6 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d99a6d2c7b66545b79825f43a32450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkedPlayerManager: {fileID: 0}
+  S_PlayerInstance: {fileID: 0}
+  s_PlayerManager: {fileID: 3324084925119894777, guid: 66579498e834f7f428e789a9101afeaa,
+    type: 3}
+  griefBar: {fileID: 0}
 --- !u!114 &1043889007808830186
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -42,6 +42,18 @@ MonoBehaviour:
   - TakeDamage
   - ChatMessage
   - DestroyObject
+  - RPC_PropChangeModel
+  - ChangeTheColor
+  - OpenDoor
+  - PauseAnimation
+  - pauseAnimationEvent
+  - m_DestroyObject
+  - RPC_DeleteModel
+  - RPC_ActivatePuzzleStatus
+  - RPC_IncorrectPuzzlePiece
+  - RPC_SelectPuzzlePiece
+  - RandomizePuzzlePieces
+  - RPC_ShowKey
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -33,7 +33,14 @@ public class RoomItem : MonoBehaviour
     public GameObject LobbySpawnPoint;
     public GameObject BonfireGO;
     public GameObject bonfireGhost;
+    public GameObject bonfireHuman;
     public bool isHostVersion;
+
+    [Header("RequiredPlayer")]
+    public int remainingPlayerID;
+    public int playerCurrentlyInRoom;
+  //  public bool DebugMode;
+
 
     private void Start()
     {
@@ -59,6 +66,22 @@ public class RoomItem : MonoBehaviour
 
         roomButton.SetActive(false);
         PasswordBox.gameObject.SetActive(false);
+
+
+        //Room ID required (opposite to joining player)
+        //----HUman = 1
+        //----Ghost = 2
+        if (remainingPlayerID == 2)
+        {
+            bonfireHuman.SetActive(true);
+            bonfireGhost.SetActive(false);
+        }
+
+        if (remainingPlayerID == 1)
+        {
+            bonfireHuman.SetActive(false);
+            bonfireGhost.SetActive(true);
+        }
     }
 
 
@@ -79,10 +102,18 @@ public class RoomItem : MonoBehaviour
   
     public void OnClickItem()
     {
-        roomButton.SetActive(false);
+    
 
-        PasswordBox.gameObject.SetActive(false);
 
+        //Check for remaining player ID
+        //get your instance of lobby manager
+        LobbyManager lobbymanager = GameObject.FindGameObjectWithTag("LobbyManager").GetComponent<LobbyManager>();
+        print("Your ID is : " + lobbymanager.spawnedLobbyPlayer.GetComponent<CharacterID>().playerSOData.PlayerCharacterChoise + "Remaining ID is " + remainingPlayerID);
+
+        if (SceneSettings.Instance.DebugMode == false && lobbymanager.spawnedLobbyPlayer.GetComponent<CharacterID>().playerSOData.PlayerCharacterChoise == remainingPlayerID)
+        {
+
+        
 
         if (passwordRequired)
         {
@@ -92,8 +123,11 @@ public class RoomItem : MonoBehaviour
             {
                 Debug.Log("WELL DONE PASSWORD CORRECT");
                 manager.JoinRoom(roomName.text);
-        
-            }
+                    roomButton.SetActive(false);
+
+                    PasswordBox.gameObject.SetActive(false);
+
+                }
 
             else
             {
@@ -105,11 +139,51 @@ public class RoomItem : MonoBehaviour
         if (!passwordRequired)
         {
             manager.JoinRoom(roomName.text);
+                roomButton.SetActive(false);
+
+                PasswordBox.gameObject.SetActive(false);
+
+            }
+        }
+
+        if (SceneSettings.Instance.DebugMode == true) 
+        
+        
+        {
+            if (passwordRequired)
+            {
+                passwordtext = password.text;
+
+                if (passwordtext == thePasswordDummy)
+                {
+                    Debug.Log("WELL DONE PASSWORD CORRECT");
+                    manager.JoinRoom(roomName.text);
+                    roomButton.SetActive(false);
+
+                    PasswordBox.gameObject.SetActive(false);
+
+                }
+
+                else
+                {
+                    Debug.Log("PASSWORD INCORRECT");
+                    Debug.Log("You Entered " + passwordtext);
+                }
+
+            }
+            if (!passwordRequired)
+            {
+                manager.JoinRoom(roomName.text);
+                roomButton.SetActive(false);
+
+                PasswordBox.gameObject.SetActive(false);
+
+            }
+
 
         }
 
-
-        }
+    }
 
     public void onClickLeaveRoom()
     {
