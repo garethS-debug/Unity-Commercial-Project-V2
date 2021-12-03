@@ -88,7 +88,7 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
                     //  Debug.Log("inventory.inventory.database.Items[i] = " + inventory.inventory.database.Items[i]);       //Key Object
                     //   Debug.Log("missingItem.item =  " + missingItem.item);       //Key Object
                     
-                    if (inventory.inventory.Container.Items[i].item.Id == missingItem.item.Id)
+                    if (inventory.inventory.Container.Items[i].ID == missingItem.item.Id)
 
                     {
                         Debug.Log("-------------------");

@@ -128,10 +128,10 @@ public class PuzzleInfo : MonoBehaviour
 
                 if (item)
                 {
-                    myPlayer.gameObject.GetComponent<PlayerInventory>().inventory.AddItem(new Item(item.item), 1);                    //Photon 
+                  //  myPlayer.gameObject.GetComponent<PlayerInventory>().inventory.AddItem(item.item, 1);                    //Photon 
 
                     PhotonView photonView = PhotonView.Get(this);
-
+                    print("Removing Model");
                     photonView.RPC("RPC_DeleteModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
                     //item.DestroyItem();
                 }
@@ -142,9 +142,7 @@ public class PuzzleInfo : MonoBehaviour
             {
                 if (item)
                 {
-                    myPlayer.gameObject.GetComponent<PlayerInventory>().inventory.AddItem(new Item(item.item), 1);                    //singlePlayer
-
-
+                 //   myPlayer.gameObject.GetComponent<PlayerInventory>().inventory.AddItem(item.item, 1);                    //singlePlayer
                     //   item.DestroyItem();
                     this.gameObject.SetActive(false);
                 }
