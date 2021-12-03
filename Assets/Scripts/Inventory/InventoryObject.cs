@@ -94,10 +94,7 @@ public class InventoryObject : ScriptableObject
 
                 //Instantiate an item on the ground
                 GameObject prefab = database.GetItem[_item.Id].prefabItem;
-                Instantiate(prefab, positionPrefab, Quaternion.identity);
-
-                //Need to work on multiplayer spawn
-                //PhotonNetwork.Instantiate(prefab.name, positionPrefab, Quaternion.identity);
+                PhotonNetwork.Instantiate(prefab.name, positionPrefab, Quaternion.identity);
 
             }
         }
