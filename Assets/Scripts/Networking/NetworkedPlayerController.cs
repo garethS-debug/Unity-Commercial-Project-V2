@@ -83,7 +83,24 @@ public class NetworkedPlayerController : MonoBehaviour
 	[Header("Camera")]
 	public Camera camPrefab;
 	Camera CameraPrefab;
+
 	[HideInInspector] public PlayerCameraController _camControll;
+	public bool SpawnTestCam;
+
+	[Header("Test Camera")]
+	Camera testCameraPrefab;
+	public Camera testCamPrefab;
+	public GameObject camFollowObject;
+	public Vector2 _move;
+	public Vector2 _look;
+	public float rotationPower = 3f;
+	public float rotationLerp = 0.5f;
+	public Quaternion nextRotation;
+	public Vector3 nextPosition;
+	public float aimValue;
+	public float speed = 1f;
+
+
 	//Vector3 newPOS;
 	//public float CamXOffset = 0.0f;
 	//public float CamYOffset = 10.0f;
@@ -95,7 +112,7 @@ public class NetworkedPlayerController : MonoBehaviour
 	//public GameObject cameraTargetOnSpawn;
 
 	[Header("LobbySettings")]
-	[HideInInspector] public bool isInLobby = false;
+	public bool isInLobby = false;
 
 
 
@@ -165,11 +182,7 @@ public class NetworkedPlayerController : MonoBehaviour
 		//sneakHash = Animator.StringToHash("anim_sneak");                                      //Hash number for turning    
 		//	againstWallHash = Animator.StringToHash("anim_isAgainstWall");                                      //Hash number for turning   
 
-		if (SceneSettings.Instance.isMultiPlayer == true)
-		{
-			//Photon
-			PV = GetComponent<PhotonView>();
-		}
+		
 
 
 		//	controller
@@ -183,7 +196,12 @@ public class NetworkedPlayerController : MonoBehaviour
 	void Start()
 	{
 
-
+		if (SceneSettings.Instance.isMultiPlayer == true)
+		{
+			Debug.Log("Is Multiplayer??");
+			//Photon
+			PV = GetComponent<PhotonView>();
+		}
 
 		if (SceneSettings.Instance.isSinglePlayer == true)
 		{
@@ -192,7 +210,7 @@ public class NetworkedPlayerController : MonoBehaviour
 
 
 
-		if (isInLobby)
+		if (isInLobby && SpawnTestCam == false)
         {
 			CameraPrefab = Instantiate(camPrefab, this.transform.position, camPrefab.transform.rotation);
 			//Camera
@@ -204,8 +222,24 @@ public class NetworkedPlayerController : MonoBehaviour
 			controller = this.gameObject.GetComponent<CharacterController>();
 		}
 
+		/*
 
-		if (isInLobby == false)
+		if (SpawnTestCam)
+        {
+			testCameraPrefab = Instantiate(testCameraPrefab, this.transform.position, testCameraPrefab.transform.rotation);
+			//Camera
+			_camControll = CameraPrefab.GetComponent<PlayerCameraController>();
+			_camControll.parent = this.gameObject;
+			cam = CameraPrefab.gameObject.transform;
+			//Display the parent's name in the console.
+			//	Debug.Log("Player's Parent: " + CameraPrefab.gameObject.transform.parent.name);
+			controller = this.gameObject.GetComponent<CharacterController>();
+		}
+
+		*/
+
+
+		if (isInLobby == false && SpawnTestCam == false)
         {
 			if (SceneSettings.Instance.isMultiPlayer == true)
 			{
@@ -234,13 +268,15 @@ public class NetworkedPlayerController : MonoBehaviour
 
 			}
 
-			else if (SceneSettings.Instance.isSinglePlayer == true)
+			 if (SceneSettings.Instance.isSinglePlayer == true)
 			{
 					if (GetComponentInChildren<Camera>() != null)
 					{
 						Destroy(GetComponentInChildren<Camera>().gameObject);
 					}
 
+
+				
 					CameraPrefab = Instantiate(camPrefab, this.transform.position, camPrefab.transform.rotation);
 					//Camera
 					_camControll = CameraPrefab.GetComponent<PlayerCameraController>();
@@ -248,6 +284,8 @@ public class NetworkedPlayerController : MonoBehaviour
 
 					cam = CameraPrefab.gameObject.transform;
 					controller = this.gameObject.GetComponent<CharacterController>();
+
+
 			}
 
 
@@ -288,6 +326,7 @@ public class NetworkedPlayerController : MonoBehaviour
 
 		//Move 3 is the current edition 
 		Move5();
+
 		Jump();
 		PerformActionCheck();
 
@@ -358,67 +397,78 @@ public class NetworkedPlayerController : MonoBehaviour
 	}
 
 
-
-
-	/// <summary>
-	/// DEPRECEATED 
-	/// </summary>
-	/// 
-
-	/*
-	public void Move3()
+	public void Move6()
 	{
-		float horizontalInput = Input.GetAxis("Horizontal");
-		float verticalInput = Input.GetAxis("Vertical");
+		#region Player Based Rotation
+		//Move the player based on the X input on the controller
+		//transform.rotation *= Quaternion.AngleAxis(_look.x * rotationPower, Vector3.up);
+		#endregion
 
-		Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
+		#region Follow Transform Rotation
 
-		movementDirection.Normalize();
+		//Rotate the Follow Target transform based on the input
+		testCamPrefab.transform.rotation *= Quaternion.AngleAxis(_look.x * rotationPower, Vector3.up);
 
-		float normalDirection = movementDirection.magnitude;
+		#endregion
 
-		//Movement speed of Character
+		#region Vertical Rotation
+		testCamPrefab.transform.rotation *= Quaternion.AngleAxis(_look.y * rotationPower, Vector3.right);
 
-		movementSpeed = Mathf.Lerp(movementSpeed, (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed), smoothTime);
+		var angles = testCamPrefab.transform.localEulerAngles;
+		angles.z = 0;
 
-	
+		var angle = testCamPrefab.transform.localEulerAngles.x;
 
-
-		//Rotation of Character
-		if (movementDirection != Vector3.zero)
+		//Clamp the Up/Down rotation
+		if (angle > 180 && angle < 340)
 		{
-			Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-
-			transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+			angles.x = 340;
+		}
+		else if (angle < 180 && angle > 40)
+		{
+			angles.x = 40;
 		}
 
 
-		if (verticalInput == 0 && horizontalInput ==0 )
-        {
-			m_ForwardAmount = 0;
+		testCamPrefab.transform.localEulerAngles = angles;
+		#endregion
 
+
+		nextRotation = Quaternion.Lerp(testCamPrefab.transform.rotation, nextRotation, Time.deltaTime * rotationLerp);
+
+		if (_move.x == 0 && _move.y == 0)
+		{
+			nextPosition = transform.position;
+
+			if (aimValue == 1)
+			{
+				//Set the player rotation based on the look transform
+				transform.rotation = Quaternion.Euler(0, testCamPrefab.transform.rotation.eulerAngles.y, 0);
+				//reset the y rotation of the look transform
+				testCamPrefab.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
+			}
+
+			return;
 		}
-
-		//transform the input direction from the player's local space to world space,
-		//Vector3 worldInputMovement = transform.TransformDirection(movementDirection.normalized);
-
-
-		//Move the character
-		transform.Translate(movementDirection * movementSpeed * Time.deltaTime, Space.World);
-
-		//m_TurnAmount = Mathf.Atan2(movementDirection.x, movementDirection.z);                                                                     //Return value is the angle between the x-axis and a 2D vector starting at zero and terminating at (x,y).
-
-		m_ForwardAmount = Mathf.Lerp(m_ForwardAmount, normalDirection * movementSpeed * anim_walkSpeed * Time.deltaTime, lerpSpeed * Time.deltaTime * 10);
+		float moveSpeed = speed / 100f;
+		Vector3 position = (transform.forward * _move.y * moveSpeed) + (transform.right * _move.x * moveSpeed);
+		nextPosition = transform.position + position;
 
 
-	//	print(m_ForwardAmount);
+		//Set the player rotation based on the look transform
+		transform.rotation = Quaternion.Euler(0, testCamPrefab.transform.rotation.eulerAngles.y, 0);
+		//reset the y rotation of the look transform
+		testCamPrefab.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
 
-		UpdateAnimator();                                                                               //Update the aniumation 
 
-		UpdateCamPosition(_camControll.myDirection);
-	}
-	*/
-	void UpdateAnimator()
+
+}
+
+
+
+
+
+void UpdateAnimator()
 	{
 		anim.SetFloat(velocityHash, m_ForwardAmount);                                                               // update the velocity animator parameters
 		anim.SetFloat(turningHash, m_TurnAmount);                                                                   // update the turning animator parameters
