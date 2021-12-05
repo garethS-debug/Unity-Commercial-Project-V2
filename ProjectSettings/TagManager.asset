@@ -12,6 +12,8 @@ TagManager:
   - GriefBar
   - item
   - InventoryScreen
+  - TargetTrigger
+  - Box
   layers:
   - Default
   - TransparentFX
