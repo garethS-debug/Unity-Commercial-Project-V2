@@ -14,22 +14,22 @@ public class PuzzleInfo : MonoBehaviour
     bool correctPlayerinTriggerZone;
 
 
-  //  [Header("Photon Settings")]
-  ////  PhotonView PV;
-  //  private GameObject[] players;
-   public GameObject myPlayer;
+    //  [Header("Photon Settings")]
+    ////  PhotonView PV;
+    //  private GameObject[] players;
+    public GameObject myPlayer;
 
 
     public void Start()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-       
+
             if (SceneSettings.Instance.isSinglePlayer == true)
             {
                 myPlayer = other.gameObject;
@@ -57,22 +57,22 @@ public class PuzzleInfo : MonoBehaviour
                 // myPlayer = SceneSettings.Instance.myPlayer.gameObject;
                 //Invert of Lever Choice
                 if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 && leverInfo.HumanPlayer == true)
-                    {
-                        correctPlayerinTriggerZone = true;
-                    }
+                {
+                    correctPlayerinTriggerZone = true;
+                }
 
-                    if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1 && leverInfo.GhostPLayer == true)
-                    {
-                        correctPlayerinTriggerZone = true;
-                    }
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1 && leverInfo.GhostPLayer == true)
+                {
+                    correctPlayerinTriggerZone = true;
+                }
 
-                    if (SceneSettings.Instance.DebugMode == true)
-                    {
-                        correctPlayerinTriggerZone = true;
-                    }
-                
+                if (SceneSettings.Instance.DebugMode == true)
+                {
+                    correctPlayerinTriggerZone = true;
+                }
+
             }
-  
+
 
         }
     }
@@ -89,11 +89,11 @@ public class PuzzleInfo : MonoBehaviour
 
             if (SceneSettings.Instance.isMultiPlayer == true)
             {
-         
-                    print("isMIne");
-                    //Invert of Lever Choice
-                    correctPlayerinTriggerZone = false;
-                
+
+                print("isMIne");
+                //Invert of Lever Choice
+                correctPlayerinTriggerZone = false;
+
 
             }
 
@@ -116,7 +116,7 @@ public class PuzzleInfo : MonoBehaviour
         if (correctPlayerinTriggerZone == true)
         {
             print("Item has been Picked up");
-           // this.gameObject.tag = "item";
+            // this.gameObject.tag = "item";
 
             //Force add to inventory
 
@@ -143,8 +143,6 @@ public class PuzzleInfo : MonoBehaviour
                 if (item)
                 {
                  //   myPlayer.gameObject.GetComponent<PlayerInventory>().inventory.AddItem(item.item, 1);                    //singlePlayer
-
-
                     //   item.DestroyItem();
                     this.gameObject.SetActive(false);
                 }
