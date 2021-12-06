@@ -435,6 +435,7 @@ Transform:
   - {fileID: 1680464259}
   - {fileID: 6682451347460764235}
   - {fileID: 8896666158869682778}
+  - {fileID: 1233417915769051120}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
@@ -523,12 +524,15 @@ MonoBehaviour:
   SprintInput: 304
   cam: {fileID: 0}
   turnSmoothTime: 0.112
+  turningDamp: 0
   anim_walkSpeed: 4.12
   sprintSpeed: 19
   walkspeed: 7.37
   smoothTime: 0.15
   PerformAction: 102
   PermormingAction: 0
+  rotSpeed: 5
+  speed: 5
 --- !u!114 &1531644324875848136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,6 +839,36 @@ Transform:
   m_Father: {fileID: 4236313957727197893}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2615555755972973838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1233417915769051120}
+  m_Layer: 9
+  m_Name: CameraFollowTarget (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1233417915769051120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2615555755972973838}
+  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
+  m_LocalPosition: {x: 0, y: 1.526, z: 1.439}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2131589783073971444}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!1 &2629844714500534995
 GameObject:
   m_ObjectHideFlags: 0

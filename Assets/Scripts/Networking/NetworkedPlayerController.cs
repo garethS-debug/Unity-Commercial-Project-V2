@@ -149,6 +149,21 @@ public class NetworkedPlayerController : MonoBehaviour
 
 
 
+	[Header("Test Settings")]
+	float vlocityFloat;
+	Vector3 playerVector;
+	private float hDirection;
+	private float vDirection;
+	private Rigidbody m_Rigidbody;
+	public float rotSpeed = 5f;
+	Vector3 m_GroundNormal;
+
+
+	[Header("Speed Settings")]
+	public float speed = 5f;
+
+
+
 
 	private void Awake()
 	{
@@ -417,40 +432,122 @@ public class NetworkedPlayerController : MonoBehaviour
 		if (direction.magnitude >= 0.1)
 		{
 
-			float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y; //How much to rotate the player on the y axis to point in the movement direction. ATan2 is a math function that returns an angle between the x axis and an angle starting 0 and terminating at x,y taking into account unity forward 
-			
-			float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle , ref turnSmoothvelocity, turnSmoothTime); //Smoothed angle of rotaiton 
-
-		
-			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0f, angle, 0f), turningDamp* Time.deltaTime);
+			if (horizontalInput > 0 || horizontalInput < 0 || verticalInput > 0)
+			{
+				//Normal camera setup 
+				//-------> Set Cam Position to behind shoulder
 
 
-
-
-		//	transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-
-			movementSpeed = Mathf.Lerp(movementSpeed, (Input.GetKey(SprintInput) ? sprintSpeed : walkspeed), smoothTime);
-
-
-			Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;        //move in direction of camera
-			controller.Move(moveDir.normalized * movementSpeed * Time.deltaTime);
-
-
-			//m_TurnAmount = Mathf.Atan2(movementDirection.x, movementDirection.z);                                                                     //Return value is the angle between the x-axis and a 2D vector starting at zero and terminating at (x,y).
-			float normalDirection = moveDir.magnitude;
-			m_ForwardAmount = Mathf.Lerp(m_ForwardAmount, normalDirection * movementSpeed * anim_walkSpeed * Time.deltaTime, lerpSpeed * Time.deltaTime * 10);
-
-
-			jumpDirForward = moveDir.normalized.z; //-1 is Backwards, +1 is Forwards
-			jumpDirLeftRight = moveDir.normalized.x; //-1 is Backwards, +1 is Forwards
-
-			//	print("Move Dir Forward" + moveDir.normalized.z + "Move Dir Side" + moveDir.normalized.x);
+				float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y; //How much to rotate the player on the y axis to point in the movement direction. ATan2 is a math function that returns an angle between the x axis and an angle starting 0 and terminating at x,y taking into account unity forward 
+				float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothvelocity, turnSmoothTime); //Smoothed angle of rotaiton 
+																																   //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0f, angle, 0f), turningDamp* Time.deltaTime);
+																																   //	transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
 
 
-			//	jumpDir = 
-			//	print(m_ForwardAmount);
+				float targetAngle2 = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + this.gameObject.transform.eulerAngles.y; //How much to rotate the player on the y axis to point in the movement direction. ATan2 is a math function that returns an angle between the x axis and an angle starting 0 and terminating at x,y taking into account unity forward 
+				float angle2 = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle2, ref turnSmoothvelocity, turnSmoothTime); //Smoothed angle of rotaiton 
+				transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.Euler(0f, angle2, 0f), turningDamp * Time.deltaTime);
+
+
+
+				if (Input.GetKey(SprintInput) == false)
+                {
+					//pressing Up and left / right 
+					if (verticalInput > 0 && horizontalInput < 0 || verticalInput > 0 && horizontalInput > 0)
+					{
+						turnSmoothTime = 0.11f;
+						turningDamp = 24;
+					}
+
+
+					// just left or right
+					if (verticalInput == 0 && horizontalInput < 0 || verticalInput == 0 && horizontalInput > 0)
+					{
+						turnSmoothTime = 0.03f;
+						turningDamp = 4.12f;
+					}
+				}
+
+
+				if (Input.GetKey(SprintInput) == true)
+				{
+					//pressing Up and left / right 
+					if (verticalInput > 0 && horizontalInput < 0 || verticalInput > 0 && horizontalInput > 0)
+					{
+						turnSmoothTime = 0.042f;
+						turningDamp = 14.6f;
+					}
+
+
+					// just left or right
+					if (verticalInput == 0 && horizontalInput < 0 || verticalInput == 0 && horizontalInput > 0)
+					{
+						turnSmoothTime = 0.005f;
+						turningDamp = 3f;
+					}
+				}
+
+
+
+
+
+
+				movementSpeed = Mathf.Lerp(movementSpeed, (Input.GetKey(SprintInput) && verticalInput > 0 ? sprintSpeed : walkspeed), smoothTime);
+
+				Vector3 moveDir = Quaternion.Euler(0f, targetAngle2, 0f) * Vector3.forward;        //move in direction of camera
+
+
+
+
+
+
+
+				controller.Move(moveDir.normalized * movementSpeed * Time.deltaTime);
+
+				//m_TurnAmount = Mathf.Atan2(movementDirection.x, movementDirection.z);                                                                     //Return value is the angle between the x-axis and a 2D vector starting at zero and terminating at (x,y).
+				float normalDirection = moveDir.magnitude;
+				m_ForwardAmount = Mathf.Lerp(m_ForwardAmount, normalDirection * movementSpeed * anim_walkSpeed * Time.deltaTime, lerpSpeed * Time.deltaTime * 10);
+
+
+				jumpDirForward = moveDir.normalized.z; //-1 is Backwards, +1 is Forwards
+				jumpDirLeftRight = moveDir.normalized.x; //-1 is Backwards, +1 is Forwards
+
+				//	print("Move Dir Forward" + moveDir.normalized.z + "Move Dir Side" + moveDir.normalized.x);
+
+
+
+				//	jumpDir = 
+				//	print(m_ForwardAmount);
+			}
+
+
+			if (verticalInput <0)
+            {
+				//Invert the camera
+				//-------> Set Cam Position to facing player
+
+
+
+
+
+				//----> Invert the movement
+
+
+
+			}
+
+
+
+
+
+
+
+
+
+
+
+
 
 			UpdateAnimator();                                                                               //Update the aniumation 
 
@@ -472,7 +569,12 @@ public class NetworkedPlayerController : MonoBehaviour
 
 
 
-void UpdateAnimator()
+
+
+
+
+
+	void UpdateAnimator()
 	{
 		anim.SetFloat(velocityHash, m_ForwardAmount);                                                               // update the velocity animator parameters
 		anim.SetFloat(turningHash, m_TurnAmount);                                                                   // update the turning animator parameters
