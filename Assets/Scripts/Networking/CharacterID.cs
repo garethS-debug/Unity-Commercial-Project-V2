@@ -35,6 +35,18 @@ public class CharacterID : MonoBehaviour
             PV = GetComponent<PhotonView>();
         }
 
+        if (isGhostCharacer == true)
+        {
+            SceneSettings.Instance.ghostPlayer = this.gameObject;
+        }
+
+
+        if (isHumanCharater == true)
+        {
+            SceneSettings.Instance.humanPlayer = this.gameObject;
+        }
+
+
 
 
         if (SceneSettings.Instance.isMultiPlayer == true)
@@ -56,6 +68,9 @@ public class CharacterID : MonoBehaviour
 
                 }
             }
+
+     
+
 
         }
 

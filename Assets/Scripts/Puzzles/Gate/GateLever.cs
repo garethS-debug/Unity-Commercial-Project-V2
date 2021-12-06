@@ -59,9 +59,16 @@ public class GateLever : MonoBehaviour
 
 
 
+    [Header("Key")]
+    public GameObject KeyInScene;
+
+
     // Start is called before the first frame update
     void Start()
     {
+
+        KeyInScene.gameObject.SetActive(false);
+
         if (SceneSettings.Instance.isMultiPlayer == true)
         {
             //Photon
@@ -79,26 +86,32 @@ public class GateLever : MonoBehaviour
 
 
 
-        if (SceneSettings.Instance.DebugMode == true)
-        {
-            print("Debug Mode");
-            brokenGatePiece.gameObject.GetComponent<BoxCollider>().isTrigger = true;
-        }
-
+   
         state = PuzzleState.Inactive;
 
 
-        if (GhostPLayer)
+        if (GhostPLayer & SceneSettings.Instance.DebugMode == false)
         {
             humanBarrier.gameObject.SetActive(true);
             ghostBarrier.gameObject.SetActive(false);
         }
 
-        if (HumanPlayer)
+        if (HumanPlayer && SceneSettings.Instance.DebugMode == false)
         {
             humanBarrier.gameObject.SetActive(false);
             ghostBarrier.gameObject.SetActive(true);
         }
+
+        if (SceneSettings.Instance.DebugMode == true)
+        {
+            print("Debug Mode");
+            brokenGatePiece.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+            humanBarrier.gameObject.SetActive(false);
+            ghostBarrier.gameObject.SetActive(false);
+        }
+
+
+
     }
 
     public void Update()
@@ -286,6 +299,7 @@ public class GateLever : MonoBehaviour
 
                         PhotonView photonView = PhotonView.Get(this);
                         photonView.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                        photonView.RPC("RPC_ShowKey", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
                     }
 
                     if (SceneSettings.Instance.isSinglePlayer == true)
@@ -294,7 +308,7 @@ public class GateLever : MonoBehaviour
                         trigger.CorrectRune();
                         state = PuzzleState.Inactive;
                         correctPieceSelected = true;
-                       
+                        s_ShowKey();
                         FixBridge();
                     }
                     return;
@@ -606,5 +620,16 @@ public class GateLever : MonoBehaviour
         state = PuzzleState.Inactive;
         return;
 
+    }
+
+
+    public void s_ShowKey()
+    {
+        KeyInScene.gameObject.SetActive(true);
+    }
+    [PunRPC]
+    void RPC_ShowKey()
+    {
+        KeyInScene.gameObject.SetActive(true);
     }
 }

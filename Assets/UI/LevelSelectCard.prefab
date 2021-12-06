@@ -294,7 +294,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'level Name
+  m_text: 'Dreams
 
 
 '
@@ -504,6 +504,8 @@ MonoBehaviour:
   - {fileID: 5665723737115513171}
   loadScene:
     m_Handle: 0
+  levelInfo: {fileID: 0}
+  currentScore: 0
   levelToLoad:
     sceneAsset: {fileID: 0}
     scenePath: 

@@ -14,6 +14,22 @@ public class GriefBarDisplay : MonoBehaviour
 
     public RoomManager room;
 
+    /// <summary>
+    /// 
+    /// 
+    /// 
+    /// PLEASE BE AWARE I HAVE CHANGED THE BELOW:
+    /// 
+    /// ADDED A NEW METHOD FOR CALLING THE PLAYER DISTANCE FROM SCENE SETTINGS
+    /// 
+    /// CHANGED THE INTERGER TO FLOAT SO THAT THE CANDLE HEIGHT IS SMOOTHER
+    /// 
+    /// 
+    /// 
+    /// 
+    /// </summary>
+
+
 
     public void Start()
     {
@@ -31,6 +47,7 @@ public class GriefBarDisplay : MonoBehaviour
         var obj = Instantiate(griefBarHuman.griefBarPrefab, Vector3.zero, Quaternion.identity, transform);
         obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
         slider.fillRect = obj.GetComponent<RectTransform>();
+        slider.direction = Slider.Direction.BottomToTop;                                            //G - I have added this line to ensure the slide goes up and down and not left to right
     }
 
     public void CreateGhostCandle()
@@ -38,6 +55,7 @@ public class GriefBarDisplay : MonoBehaviour
         var obj = Instantiate(griefBarGhost.griefBarPrefab, Vector3.zero, Quaternion.identity, transform);
         obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
         slider.fillRect = obj.GetComponent<RectTransform>();
+        slider.direction = Slider.Direction.BottomToTop;                                            //G - I have added this line to ensure the slide goes up and down and not left to right
     }
 
     private void SetMaxGrief(float grief)
@@ -50,10 +68,19 @@ public class GriefBarDisplay : MonoBehaviour
     {
         slider.value = grief;
     }
-
     private void ReduceGriefBar()
     {
         currentGrief -= Time.deltaTime * decreasePerSecond;
+        SetGrief(currentGrief);
+    }
+
+
+    // I have added the below method that links in with 'scenesettings'. The 'sceneSettings' script judges the distance of the players, this is used to determine the length of the candle. 
+
+    public void GriefBasedOnDistance ()
+    {
+        currentGrief = SceneSettings.Instance.playerdistance;
+      //  print(currentGrief);
         SetGrief(currentGrief);
     }
 }
