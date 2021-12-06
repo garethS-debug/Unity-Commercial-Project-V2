@@ -37,4 +37,5 @@ MonoBehaviour:
         Name: 
         Id: 0
       amount: 0
-  twoKeysCollected: 1
+  oneKeyCollected: 0
+  twoKeysCollected: 0
