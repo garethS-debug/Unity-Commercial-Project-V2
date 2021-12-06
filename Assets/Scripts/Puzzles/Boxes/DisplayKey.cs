@@ -17,5 +17,6 @@ public class DisplayKey : MonoBehaviour
     public void AddBox(int _box)
     {
         countBox += _box;
+        Debug.Log("display key" + countBox);
     }
 }
