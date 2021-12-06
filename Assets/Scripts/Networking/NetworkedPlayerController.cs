@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System;
+using Cinemachine;
 
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Animator))]
@@ -83,22 +84,10 @@ public class NetworkedPlayerController : MonoBehaviour
 	[Header("Camera")]
 	public Camera camPrefab;
 	Camera CameraPrefab;
-
+	public GameObject cameraFollowTarget;
 	[HideInInspector] public PlayerCameraController _camControll;
 	public bool SpawnTestCam;
-
-	[Header("Test Camera")]
-	Camera testCameraPrefab;
-	public Camera testCamPrefab;
-	public GameObject camFollowObject;
-	public Vector2 _move;
-	public Vector2 _look;
-	public float rotationPower = 3f;
-	public float rotationLerp = 0.5f;
-	public Quaternion nextRotation;
-	public Vector3 nextPosition;
-	public float aimValue;
-	public float speed = 1f;
+	private CinemachineVirtualCamera vcam;
 
 
 	//Vector3 newPOS;
@@ -141,6 +130,7 @@ public class NetworkedPlayerController : MonoBehaviour
 	public Transform cam;
 	[Range(0, 1)]
 	public float turnSmoothTime = 0.1f;
+	public float turningDamp;
 	float turnSmoothvelocity;
 
 	[Header("Speed Settings")]
@@ -216,7 +206,15 @@ public class NetworkedPlayerController : MonoBehaviour
 			//Camera
 			_camControll = CameraPrefab.GetComponent<PlayerCameraController>();
 			_camControll.parent = this.gameObject;
+
+
 			cam = CameraPrefab.gameObject.transform;
+
+			//V-CAM
+			vcam = cam.GetComponentInChildren<CinemachineVirtualCamera>();
+			vcam.m_Follow = cameraFollowTarget.transform;
+
+
 			//Display the parent's name in the console.
 			//	Debug.Log("Player's Parent: " + CameraPrefab.gameObject.transform.parent.name);
 			controller = this.gameObject.GetComponent<CharacterController>();
@@ -258,8 +256,13 @@ public class NetworkedPlayerController : MonoBehaviour
 			if (PV.IsMine)
 			{
 				CameraPrefab = Instantiate(camPrefab, this.transform.position, camPrefab.transform.rotation);
-				//Camera
-				_camControll = CameraPrefab.GetComponent<PlayerCameraController>();
+
+					//V-CAM
+					vcam = cam.GetComponentInChildren<CinemachineVirtualCamera>();
+					vcam.m_Follow = cameraFollowTarget.transform;
+
+					//Camera
+					_camControll = CameraPrefab.GetComponent<PlayerCameraController>();
 				_camControll.parent = this.gameObject;
 
 				cam = CameraPrefab.gameObject.transform;
@@ -285,7 +288,9 @@ public class NetworkedPlayerController : MonoBehaviour
 					cam = CameraPrefab.gameObject.transform;
 					controller = this.gameObject.GetComponent<CharacterController>();
 
-
+				//V-CAM
+				vcam = cam.GetComponentInChildren<CinemachineVirtualCamera>();
+				vcam.m_Follow = cameraFollowTarget.transform;
 			}
 
 
@@ -325,7 +330,7 @@ public class NetworkedPlayerController : MonoBehaviour
 		//m_Rigidbody.MovePosition(m_Rigidbody.position + transform.TransformDirection(movementWithInversion) * Time.fixedDeltaTime);
 
 		//Move 3 is the current edition 
-		Move5();
+		
 
 		Jump();
 		PerformActionCheck();
@@ -340,8 +345,8 @@ public class NetworkedPlayerController : MonoBehaviour
 
 	void FixedUpdate()
 	{
-	
 
+		Move6();
 
 	}
 
@@ -397,72 +402,71 @@ public class NetworkedPlayerController : MonoBehaviour
 	}
 
 
+
+
+
+
+
 	public void Move6()
 	{
-		#region Player Based Rotation
-		//Move the player based on the X input on the controller
-		//transform.rotation *= Quaternion.AngleAxis(_look.x * rotationPower, Vector3.up);
-		#endregion
+		float horizontalInput = Input.GetAxisRaw("Horizontal"); //-1 and +1 (-1 for left , + 1 for right)
+		float verticalInput = Input.GetAxisRaw("Vertical"); // -1 and +1  (+ 1 up, - 1 down) 
 
-		#region Follow Transform Rotation
+		Vector3 direction = new Vector3(horizontalInput, 0, verticalInput).normalized;
 
-		//Rotate the Follow Target transform based on the input
-		testCamPrefab.transform.rotation *= Quaternion.AngleAxis(_look.x * rotationPower, Vector3.up);
-
-		#endregion
-
-		#region Vertical Rotation
-		testCamPrefab.transform.rotation *= Quaternion.AngleAxis(_look.y * rotationPower, Vector3.right);
-
-		var angles = testCamPrefab.transform.localEulerAngles;
-		angles.z = 0;
-
-		var angle = testCamPrefab.transform.localEulerAngles.x;
-
-		//Clamp the Up/Down rotation
-		if (angle > 180 && angle < 340)
+		if (direction.magnitude >= 0.1)
 		{
-			angles.x = 340;
+
+			float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y; //How much to rotate the player on the y axis to point in the movement direction. ATan2 is a math function that returns an angle between the x axis and an angle starting 0 and terminating at x,y taking into account unity forward 
+			
+			float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle , ref turnSmoothvelocity, turnSmoothTime); //Smoothed angle of rotaiton 
+
+		
+			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0f, angle, 0f), turningDamp* Time.deltaTime);
+
+
+
+
+		//	transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+
+			movementSpeed = Mathf.Lerp(movementSpeed, (Input.GetKey(SprintInput) ? sprintSpeed : walkspeed), smoothTime);
+
+
+			Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;        //move in direction of camera
+			controller.Move(moveDir.normalized * movementSpeed * Time.deltaTime);
+
+
+			//m_TurnAmount = Mathf.Atan2(movementDirection.x, movementDirection.z);                                                                     //Return value is the angle between the x-axis and a 2D vector starting at zero and terminating at (x,y).
+			float normalDirection = moveDir.magnitude;
+			m_ForwardAmount = Mathf.Lerp(m_ForwardAmount, normalDirection * movementSpeed * anim_walkSpeed * Time.deltaTime, lerpSpeed * Time.deltaTime * 10);
+
+
+			jumpDirForward = moveDir.normalized.z; //-1 is Backwards, +1 is Forwards
+			jumpDirLeftRight = moveDir.normalized.x; //-1 is Backwards, +1 is Forwards
+
+			//	print("Move Dir Forward" + moveDir.normalized.z + "Move Dir Side" + moveDir.normalized.x);
+
+
+
+			//	jumpDir = 
+			//	print(m_ForwardAmount);
+
+			UpdateAnimator();                                                                               //Update the aniumation 
+
 		}
-		else if (angle < 180 && angle > 40)
+
+
+
+
+		else
 		{
-			angles.x = 40;
+			m_ForwardAmount = 0;
+			m_TurnAmount = 0;
+			UpdateAnimator();
 		}
 
-
-		testCamPrefab.transform.localEulerAngles = angles;
-		#endregion
-
-
-		nextRotation = Quaternion.Lerp(testCamPrefab.transform.rotation, nextRotation, Time.deltaTime * rotationLerp);
-
-		if (_move.x == 0 && _move.y == 0)
-		{
-			nextPosition = transform.position;
-
-			if (aimValue == 1)
-			{
-				//Set the player rotation based on the look transform
-				transform.rotation = Quaternion.Euler(0, testCamPrefab.transform.rotation.eulerAngles.y, 0);
-				//reset the y rotation of the look transform
-				testCamPrefab.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
-			}
-
-			return;
-		}
-		float moveSpeed = speed / 100f;
-		Vector3 position = (transform.forward * _move.y * moveSpeed) + (transform.right * _move.x * moveSpeed);
-		nextPosition = transform.position + position;
-
-
-		//Set the player rotation based on the look transform
-		transform.rotation = Quaternion.Euler(0, testCamPrefab.transform.rotation.eulerAngles.y, 0);
-		//reset the y rotation of the look transform
-		testCamPrefab.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
-
-
-
-}
+	}
 
 
 
