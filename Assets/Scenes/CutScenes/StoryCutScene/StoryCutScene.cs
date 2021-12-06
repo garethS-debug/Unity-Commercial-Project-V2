@@ -38,6 +38,8 @@ public class StoryCutScene : MonoBehaviour
     [Header("Co-Courtines")]
     Coroutine theCutSceneCoRoutine;
 
+    [Header("Dialog")]
+    public DialogHint dialog;
 
 
     [Header("Scene Ref")]
@@ -102,17 +104,13 @@ public class StoryCutScene : MonoBehaviour
     {
     
 
-        intro.gameObject.SetActive(true);
-        //Print the time of when the function is first called.
-        // Debug.Log("Started IntroSplash Coroutine at timestamp : ".Bold().Color("yellow") + Time.time);
-
-        //yield on a new YieldInstruction that waits for 5 seconds.
+       
         yield return new WaitForSeconds(cutSceneDelayAtStart);
-        intro.gameObject.SetActive(false);
+        dialog.StartDialog();
         //Print the time of when the function is first called.
         //  Debug.Log("Started Cutscene Coroutine at timestamp : ".Bold().Color("yellow") + Time.time);
 
-        trainAnimator.SetBool("StartEntry", true);
+
 
 
         //After we have waited 5 seconds print the time again.
@@ -121,11 +119,9 @@ public class StoryCutScene : MonoBehaviour
         yield return new WaitForSeconds(cutSceneDelay);
 
         //After we have waited 5 seconds print the time again.
-        Debug.Log("Spawn Player after Cutscene Coroutine at timestamp : ".Bold().Color("yellow") + Time.time);
+        Debug.Log("Move to next scene : ".Bold().Color("yellow") + Time.time);
 
         skipButton.gameObject.SetActive(false);
-        lobbyManager.OnTriggerSpawnPlayers();
-
 
     }
 
