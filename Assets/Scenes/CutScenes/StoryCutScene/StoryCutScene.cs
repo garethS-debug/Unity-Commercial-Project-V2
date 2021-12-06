@@ -26,8 +26,7 @@ public class StoryCutScene : MonoBehaviour
     [Header("Intro")]
     public GameObject intro;
     public TMP_Text txt;
-    [TextArea]
-    public string story;
+
    
 
     [Header("Debug")]
@@ -101,7 +100,7 @@ public class StoryCutScene : MonoBehaviour
 
     IEnumerator CutSceneCoRoutine()
     {
-        StartCoroutine("PlayText");
+    
 
         intro.gameObject.SetActive(true);
         //Print the time of when the function is first called.
@@ -134,20 +133,7 @@ public class StoryCutScene : MonoBehaviour
 
 
 
-    IEnumerator PlayText()
-    {
-        foreach (char c in story)
-        {
-            txt.text += c;
-            yield return new WaitForSeconds(0.075f);
 
-            if (c >= story.Length)
-            {
-                print("End Of Story");
-
-            }
-        }
-    }
 
 
 
