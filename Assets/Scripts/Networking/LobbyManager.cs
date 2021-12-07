@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using ExitGames.Client.Photon;
+using System.Linq;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
@@ -89,12 +90,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public PlayerSO playerSOData;
     public GameObject[] Lobby_Room_Player_SpawnPoints;
     public GameObject spawnedLobbyPlayer;
+    List<int> characterSelectedID = new List<int>();   //List of charactersSelected
+    bool uniqueList;
 
     [Header("Debugging")]
     public TMP_Text regionTextbox;
 
     [Header("UI")]
-
     public GameObject lobbyUI;
 
    
@@ -620,9 +622,42 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void OnClickLevelSelect()
     {
-        lobbyPanel.SetActive(false);
-        roomPanel.SetActive(false);
-        levelSelectPanel.SetActive(true);
+
+        Debug.Log("Checking Character".Bold());
+
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            print( " name: " + player.NickName);
+            int characterSelected = ((int)player.CustomProperties["playerAvatar"]);
+            print(" ID: " + characterSelected);
+
+            characterSelectedID.Add(characterSelected);
+
+           
+
+        }
+
+        if (characterSelectedID.Count == characterSelectedID.Distinct().Count())
+        {
+            // Duplicates exist
+            uniqueList = true;
+            Debug.Log("Unique List".Bold());
+
+            lobbyPanel.SetActive(false);
+            roomPanel.SetActive(false);
+
+            levelSelectPanel.SetActive(true);
+        }
+
+        else
+        {
+            uniqueList = false;
+            Debug.Log("not unique Unique List".Bold());
+        }
+
+  
+
+
 
     }
 

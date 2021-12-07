@@ -701,10 +701,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomName: {fileID: 2594070317281013137}
+  roomButton: {fileID: 0}
+  thePasswordDummy: 
   password: {fileID: 8705094606414904242}
   PasswordBox: {fileID: 380899179678559708}
   passwordRequired: 0
-  thePasswordDummy: 
+  isHostVersion: 0
+  DebugMode: 0
 --- !u!1 &4315054097577780377
 GameObject:
   m_ObjectHideFlags: 0

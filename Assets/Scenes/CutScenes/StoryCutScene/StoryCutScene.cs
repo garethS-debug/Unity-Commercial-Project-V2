@@ -33,8 +33,8 @@ public class StoryCutScene : MonoBehaviour
     [Header("Debug")]
     public bool DebugSkipCutScene;
 
-    [Header("UI")]
-    public GameObject skipButton;
+   // [Header("UI")]
+   // public GameObject skipButton;
 
     [Header("Co-Courtines")]
     Coroutine theCutSceneCoRoutine;
@@ -76,7 +76,7 @@ public class StoryCutScene : MonoBehaviour
 
     
 
-        skipButton.gameObject.SetActive(true);
+     //   skipButton.gameObject.SetActive(true);
 
 
     }
