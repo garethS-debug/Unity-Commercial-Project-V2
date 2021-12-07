@@ -21,7 +21,7 @@ public class StoryCutScene : MonoBehaviour
     public Animator treeAnim;
     public Animator whiteBGAnimator;
     public Animator textAnimator;
-
+    public Animator skipcutscene;
 
 
     [Header("Intro")]
@@ -106,11 +106,12 @@ public class StoryCutScene : MonoBehaviour
 
     IEnumerator CutSceneCoRoutine()
     {
-    
 
+        skipcutscene.SetBool("UIAppear", true);
        
         yield return new WaitForSeconds(cutSceneDelayAtStart);
         dialog.StartDialog();
+
         //Print the time of when the function is first called.
         //  Debug.Log("Started Cutscene Coroutine at timestamp : ".Bold().Color("yellow") + Time.time);
 
@@ -156,24 +157,26 @@ public class StoryCutScene : MonoBehaviour
 
     public void SkipTheCutScene()
     {
-        intro.gameObject.SetActive(false);
-
-        StopCoroutine(theCutSceneCoRoutine);
-
+ 
         StartCoroutine(SkipCutscene());
 
-
-
-
-        cutSceneDelayAtStart = 0;
-        cutSceneDelay = 0;
-        skipButton.gameObject.SetActive(false);
+        dialog.DialogExit();
     }
 
     IEnumerator SkipCutscene()
     {
-        yield return new WaitForSeconds(3);
 
-      
+        yield return new WaitForSeconds(1);
+
+        skipcutscene.SetBool("UIDisappear", true);
+        treeAnim.SetBool("Exit", true);
+        whiteBGAnimator.SetBool("Exit", true);
+        textAnimator.SetBool("Exit", true);
+
+
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(levelToLoad);                            //Copy to lobby scene. 
+
+
     }
 }

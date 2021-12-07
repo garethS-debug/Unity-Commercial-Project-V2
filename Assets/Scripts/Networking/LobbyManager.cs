@@ -160,29 +160,26 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
 
  
-            //3D Lobby Settings
+            //--------------------------3D Lobby Settings
+            /*
             Bonfire_SpawnIndex = UnityEngine.Random.Range(0, Lobby_Room_Bonfire_SpawnPoints.Length);      //Choosing a Random Spawn point
-            
             Bonfire_Index = UnityEngine.Random.Range(0, Bonfire_GameObjects.Length);              //Choosing a Random Fireplace
-
             GameObject BonfirePosition = Lobby_Room_Bonfire_SpawnPoints[Bonfire_SpawnIndex];
-
-
             spawnedLobbyPlayer.transform.position = BonfirePosition.transform.position;
-           
             GameObject bonfireSpawn =   spawnedLobbyPlayer.gameObject.GetComponent<NetworkedPlayerController>().bonfireSpawn;
-         
             tempBonfire =  Instantiate(Bonfire_GameObjects[Bonfire_Index], bonfireSpawn.transform.position, Quaternion.identity);
             RoomItem bonfireRoomitem = tempBonfire.gameObject.GetComponent<RoomItem>();
             bonfireRoomitem.roomButton.SetActive(false);
             bonfireRoomitem.bonfireGhost.SetActive(false);
             bonfireRoomitem.isHostVersion = true;
+            */
+
 
            // Access players save date
 
 
             //Max player count is hardcoded at 2 instead of maxPlayerCount
-            CreateRoom(roomInputField.text, /*maxPlayerCount*/ 2, passwordField.text, Bonfire_SpawnIndex, Bonfire_Index, (int)playerproperties["playerAvatar"]);
+            CreateRoom(roomInputField.text, /*maxPlayerCount*/ 2, /*Password*/passwordField.text/*, //3D Lobby -- Bonfire_SpawnIndex, Bonfire_Index, (int)playerproperties["playerAvatar"]*/);
             
             
  
@@ -193,7 +190,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     }
 
-    public void CreateRoom(string _name, int _maxplayers, string _password, int _lobbySpawnIndex, int _bonfire, int _playerType)
+    public void CreateRoom(string _name, int _maxplayers, string _password/*, //3D Lobby -- int _lobbySpawnIndex, int _bonfire, int _playerType */)
     {
 
 
@@ -204,16 +201,20 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //pasword
         custProps.Add("Password", _password);
         
-        //Bonfire 
+        //----------------------Bonfire 
+        /*
         custProps.Add("BonfireSpawnPoint", _lobbySpawnIndex);
         custProps.Add("Bonfire", _bonfire);
-        // player type
+        */
+        //------------------- player type
+        /*
         custProps.Add("playerType", _playerType);
+        */
 
         roomOptions.CustomRoomProperties = custProps;
 
 
-        //Set up custom room properties
+        //-------------------Set up custom room properties
         roomOptions.CustomRoomPropertiesForLobby = new string[] { "Password", "BonfireSpawnPoint", "Bonfire", "playerType" };
       //  Debug.Log(" Room Option = new password ");
 
@@ -272,7 +273,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         ClearRoomListView();
 
-
         roomName.text = "Room Name: " + PhotonNetwork.CurrentRoom.Name;
 
         UpdatePlayerList();
@@ -318,14 +318,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
 
         //Host will be in the room 
-
         //Waiting players will be outside of the room. 
-
         //Setting up room
-
         Bonfire_Index = UnityEngine.Random.Range(0, Bonfire_GameObjects.Length);
         Bonfire_SpawnIndex = UnityEngine.Random.Range(0, Lobby_Room_Bonfire_SpawnPoints.Length);
-        
+
 
         GameObject LobbyRoom = Bonfire_GameObjects[Bonfire_Index];
         GameObject LobbySpawnPoints = Lobby_Room_Bonfire_SpawnPoints[Bonfire_SpawnIndex];
@@ -402,25 +399,27 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             
 
-
+            //---------3D Lobby Settings----------------
             //Bonfire Settings
-
+            /*
             GameObject BonfireGO = Bonfire_GameObjects[(int)info.CustomProperties["Bonfire"]];                              //Getting the bonfire GO from the room information 
             GameObject BonfireSpawnPoint = Lobby_Room_Bonfire_SpawnPoints[(int)info.CustomProperties["BonfireSpawnPoint"]];         //Getting the bonfire spawn point from the room information 
             GameObject bonfireINS = Instantiate(BonfireGO, BonfireSpawnPoint.transform.position, Quaternion.identity);
-
             RoomItem newRoom = bonfireINS.gameObject.GetComponent<RoomItem>();                                              //Get Room Component of bonfire
-            
             bonfiresItems.Add(bonfireINS);                                                                                  // Instantiate Bonfire            
-            
             newRoom.BonfireGO = BonfireGO;
             newRoom.LobbySpawnPoint = BonfireSpawnPoint;
+            */
+            //---------------------------------------------
 
 
+
+            //--------- Room Requirements------------------
             //Room ID required (opposite to joining player)
             //----HUman = 1
             //----Ghost = 2
             // --- When updating room it will spawn the opposite 
+            /*
             if ((int)info.CustomProperties["playerType"] == 1)
             {
                 print("Ghost Needed");
@@ -432,38 +431,32 @@ public class LobbyManager : MonoBehaviourPunCallbacks
                 print("Human Needed");
                 newRoom.remainingPlayerID = 1;   //opposite player required
             }
+            */
+            //---------------------------------------
 
 
             //Room Information
-            //  RoomItem newRoom = Instantiate(RoomItemPrefab, contentObject);         //Instantiate the UI element
+            /* -- remove when 3D lobby is in use */  RoomItem newRoom = Instantiate(RoomItemPrefab, contentObject);         //Instantiate the UI element
             newRoom.SetRoomName(info.Name);                                         //Set toom name in the item
             newRoom.roomInfo = info;
             roomItems.Add(newRoom);                                                 //AddComponentMenu new to list
 
 
 
-   
 
-
-
-            // Password
+            //----------------------------------Password
             Debug.Log(info.ToStringFull());
             Debug.Log("------");
 
             if (info.CustomProperties["Password"] != null)
             {
-            //    Debug.Log("Password is : " + info.CustomProperties["Password"]);
-
                 newRoom.passwordRequired = true;
             }
 
             if (info.CustomProperties["Password"].ToString() == "")
             {
-          //      Debug.Log("No password on room " + info.Name);
                 newRoom.passwordRequired = false;
             }
-
-
             //  roomListEntries.Add(info.Name, newRoom);
         }
     }

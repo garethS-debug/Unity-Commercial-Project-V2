@@ -30,22 +30,26 @@ public class RoomItem : MonoBehaviour
 
 
     [Header("3D Lobby Settings")]
-    public GameObject LobbySpawnPoint;
-    public GameObject BonfireGO;
-    public GameObject bonfireGhost;
-    public GameObject bonfireHuman;
+  //  public GameObject LobbySpawnPoint;
+  //  public GameObject BonfireGO;
+ //   public GameObject bonfireGhost;
+  //  public GameObject bonfireHuman;
     public bool isHostVersion;
 
-    [Header("RequiredPlayer")]
-    public int remainingPlayerID;
-    public int playerCurrentlyInRoom;
-  //  public bool DebugMode;
+    //  [Header("RequiredPlayer")]
+    //  public int remainingPlayerID;
+    //   public int playerCurrentlyInRoom;
+
+    [Header("DebugMode")]
+    public bool DebugMode;
 
 
     private void Start()
     {
         manager = FindObjectOfType<LobbyManager>();
 
+
+        //------- Password --------
         if (passwordRequired)
         {
             PasswordBox.gameObject.SetActive(true);
@@ -60,6 +64,7 @@ public class RoomItem : MonoBehaviour
         {
             PasswordBox.gameObject.SetActive(false);
         }
+        //-----------------------
 
 
       //  Debug.Log(" ROOM ID = " + roomInfo.CustomProperties["3DLobby"]);
@@ -71,6 +76,7 @@ public class RoomItem : MonoBehaviour
         //Room ID required (opposite to joining player)
         //----HUman = 1
         //----Ghost = 2
+        /*
         if (remainingPlayerID == 2)
         {
             bonfireHuman.SetActive(true);
@@ -82,6 +88,7 @@ public class RoomItem : MonoBehaviour
             bonfireHuman.SetActive(false);
             bonfireGhost.SetActive(true);
         }
+        */
     }
 
 
@@ -105,14 +112,15 @@ public class RoomItem : MonoBehaviour
     
 
 
-        //Check for remaining player ID
+        //------------- Check for remaining player ID
         //get your instance of lobby manager
+        /*
         LobbyManager lobbymanager = GameObject.FindGameObjectWithTag("LobbyManager").GetComponent<LobbyManager>();
         print("Your ID is : " + lobbymanager.spawnedLobbyPlayer.GetComponent<CharacterID>().playerSOData.PlayerCharacterChoise + "Remaining ID is " + remainingPlayerID);
 
         if (SceneSettings.Instance.DebugMode == false && lobbymanager.spawnedLobbyPlayer.GetComponent<CharacterID>().playerSOData.PlayerCharacterChoise == remainingPlayerID)
         {
-
+        */
         
 
         if (passwordRequired)
@@ -144,7 +152,8 @@ public class RoomItem : MonoBehaviour
                 PasswordBox.gameObject.SetActive(false);
 
             }
-        }
+        
+       // }
 
         if (SceneSettings.Instance.DebugMode == true) 
         
