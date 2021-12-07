@@ -24,7 +24,7 @@ public class BonFire_Trigger : MonoBehaviour
          //   other.gameObject.GetComponent<NetworkedPlayerController>().
 
             BookCamTrigger.gameObject.SetActive(true);
-
+            StartCoroutine(CutSceneCoRoutine());
             //Open UI
             //------ Characcter ID check
             /*
@@ -36,7 +36,7 @@ public class BonFire_Trigger : MonoBehaviour
                 if (charID.isHumanCharater == true || charID.isGhostCharacer == true)
                 {
              */
-            lobbyManager.lobbyUI.gameObject.SetActive(true);
+       
               //  }
               //  else
               //  {
@@ -48,6 +48,16 @@ public class BonFire_Trigger : MonoBehaviour
 
     }
 
+
+    IEnumerator CutSceneCoRoutine()
+    {
+
+
+        yield return new WaitForSeconds(3.5f);
+
+        lobbyManager.lobbyUI.gameObject.SetActive(true);
+
+    }
 
     public void OnTriggerExit(Collider other)
     {

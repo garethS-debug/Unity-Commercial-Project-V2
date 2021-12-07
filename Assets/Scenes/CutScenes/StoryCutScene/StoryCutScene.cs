@@ -108,7 +108,7 @@ public class StoryCutScene : MonoBehaviour
     {
 
         skipcutscene.SetBool("UIAppear", true);
-       
+        skipcutscene.SetBool("UIDisappear", false);
         yield return new WaitForSeconds(cutSceneDelayAtStart);
         dialog.StartDialog();
 
@@ -168,7 +168,9 @@ public class StoryCutScene : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
+        skipcutscene.SetBool("UIAppear", false);
         skipcutscene.SetBool("UIDisappear", true);
+
         treeAnim.SetBool("Exit", true);
         whiteBGAnimator.SetBool("Exit", true);
         textAnimator.SetBool("Exit", true);

@@ -261,7 +261,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
 
-     
+
         lobbyPanel.SetActive(false);
         roomPanel.SetActive(true);
 
@@ -277,6 +277,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         UpdatePlayerList();
     }
+
+
+
+
+
 
     //Called automaticlaly when there is a change in room list
     public override void OnRoomListUpdate(List<RoomInfo> _roomList)
