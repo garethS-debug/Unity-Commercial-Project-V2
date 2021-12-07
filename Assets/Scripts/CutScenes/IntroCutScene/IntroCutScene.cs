@@ -68,7 +68,7 @@ public class IntroCutScene : MonoBehaviour
             lobbyManager.OnTriggerSpawnPlayers();
         }
 
-        skipButton.gameObject.SetActive(true);
+       // skipButton.gameObject.SetActive(true);
 
 
     }

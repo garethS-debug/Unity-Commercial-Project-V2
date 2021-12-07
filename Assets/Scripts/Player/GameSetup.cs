@@ -166,9 +166,15 @@ public class GameSetup : MonoBehaviour
 			selectCharacterUI.SetActive(true);
 			StartUI.SetActive(false);
 			*/
+			///SELECT_CHILDCHARACTER();
+			PlayerCharacter = 1;                                            //Human = 1
+			playerSOData.PlayerCharacterChoise = PlayerCharacter;
+			//Debug.Log("Saving....");
+			playerName = ChildNameInput.text;
+			SaveGameManager.Save();
 
 			///---- StartTutorialCutScene--->
-			///SELECT_CHILDCHARACTER();
+			
 			tutorialCutscene.gamesetup = this.gameObject.GetComponent<GameSetup>();
 			tutorialCutscene.start_StartTutorialCutscene();
 		}

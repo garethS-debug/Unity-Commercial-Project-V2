@@ -513,7 +513,7 @@ MonoBehaviour:
   toRot: {x: 0, y: 0, z: 0}
   lerpSpeed: 0.5
   durationTime: 0
-  camPrefab: {fileID: 1006456702666912181, guid: 7b3eb5d14b972f14aa5e6d81bb61b390,
+  camPrefab: {fileID: 6377242864174932651, guid: 8137a39b9308c4a4fb9f9c42322bfaf2,
     type: 3}
   cameraFollowTarget: {fileID: 3202662227833583563}
   _camControll: {fileID: 0}
@@ -526,7 +526,7 @@ MonoBehaviour:
   turnSmoothTime: 0.112
   turningDamp: 0
   anim_walkSpeed: 4.12
-  sprintSpeed: 19
+  sprintSpeed: 13
   walkspeed: 7.37
   smoothTime: 0.15
   PerformAction: 102
