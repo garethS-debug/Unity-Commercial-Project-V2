@@ -15,4 +15,4 @@ MonoBehaviour:
   PlayerCharacterChoise: 2
   PlayerName: ghost
   AutoConnect: 1
-  SingleOrMultiPlayer: 1
+  SingleOrMultiPlayer: 2
