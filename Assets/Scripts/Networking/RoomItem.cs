@@ -30,17 +30,15 @@ public class RoomItem : MonoBehaviour
 
 
     [Header("3D Lobby Settings")]
-  //  public GameObject LobbySpawnPoint;
-  //  public GameObject BonfireGO;
- //   public GameObject bonfireGhost;
-  //  public GameObject bonfireHuman;
+   public GameObject LobbySpawnPoint;
+    public GameObject BonfireGO;
+    public GameObject bonfireGhost;
+    public GameObject bonfireHuman;
     public bool isHostVersion;
 
-    //  [Header("RequiredPlayer")]
-    //  public int remainingPlayerID;
-    //   public int playerCurrentlyInRoom;
-
-    [Header("DebugMode")]
+    [Header("RequiredPlayer")]
+    public int remainingPlayerID;
+    public int playerCurrentlyInRoom;
     public bool DebugMode;
 
 
@@ -69,7 +67,7 @@ public class RoomItem : MonoBehaviour
 
       //  Debug.Log(" ROOM ID = " + roomInfo.CustomProperties["3DLobby"]);
 
-        roomButton.SetActive(false);
+       // roomButton.SetActive(false);
         PasswordBox.gameObject.SetActive(false);
 
 

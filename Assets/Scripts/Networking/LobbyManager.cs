@@ -655,7 +655,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             Debug.Log("not unique Unique List".Bold());
         }
 
-  
+        characterSelectedID.Clear();
 
 
 
