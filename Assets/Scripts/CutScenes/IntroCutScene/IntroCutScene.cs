@@ -81,15 +81,17 @@ public class IntroCutScene : MonoBehaviour
 
     IEnumerator CutSceneCoRoutine()
     {
-        StartCoroutine("PlayText");
+        skipButton.gameObject.SetActive(false);
+        //StartCoroutine("PlayText");
+        // intro.gameObject.SetActive(true);
+        intro.gameObject.SetActive(false);
 
-        intro.gameObject.SetActive(true);
         //Print the time of when the function is first called.
-       // Debug.Log("Started IntroSplash Coroutine at timestamp : ".Bold().Color("yellow") + Time.time);
+        // Debug.Log("Started IntroSplash Coroutine at timestamp : ".Bold().Color("yellow") + Time.time);
 
         //yield on a new YieldInstruction that waits for 5 seconds.
-        yield return new WaitForSeconds(cutSceneDelayAtStart);
-        intro.gameObject.SetActive(false);
+       // yield return new WaitForSeconds(cutSceneDelayAtStart);
+      
         //Print the time of when the function is first called.
       //  Debug.Log("Started Cutscene Coroutine at timestamp : ".Bold().Color("yellow") + Time.time);
 
@@ -104,7 +106,7 @@ public class IntroCutScene : MonoBehaviour
         //After we have waited 5 seconds print the time again.
         Debug.Log("Spawn Player after Cutscene Coroutine at timestamp : ".Bold().Color("yellow") + Time.time);
 
-        skipButton.gameObject.SetActive(false);
+   
         lobbyManager.OnTriggerSpawnPlayers();
 
 

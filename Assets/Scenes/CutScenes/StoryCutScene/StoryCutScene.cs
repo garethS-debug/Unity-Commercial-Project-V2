@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class StoryCutScene : MonoBehaviour
 {
 
@@ -18,10 +18,11 @@ public class StoryCutScene : MonoBehaviour
     public float cutSceneDelay = 5;
 
     [Header("References")]
-    public Animator trainAnimator;
-    public LobbyManager lobbyManager;
+    public Animator treeAnim;
+    public Animator whiteBGAnimator;
+    public Animator textAnimator;
 
-    public GameObject trainFollowCube;
+
 
     [Header("Intro")]
     public GameObject intro;
@@ -73,10 +74,7 @@ public class StoryCutScene : MonoBehaviour
             theCutSceneCoRoutine = StartCoroutine(CutSceneCoRoutine());
         }
 
-        if (DebugSkipCutScene == true)
-        {
-            lobbyManager.OnTriggerSpawnPlayers();
-        }
+    
 
         skipButton.gameObject.SetActive(true);
 
@@ -98,6 +96,12 @@ public class StoryCutScene : MonoBehaviour
         // cutsceneCamera.transform.LookAt(trainFollowCube.transform);
         // Move the object forward along its z axis 1 unit/second.
        train.transform.Translate(Vector3.forward  * Time.deltaTime * trainspeed);
+
+        if (dialog.isEndofEntireDialog)
+        {
+            StartCoroutine(EndofScene());
+        }
+
     }
 
     IEnumerator CutSceneCoRoutine()
@@ -121,12 +125,29 @@ public class StoryCutScene : MonoBehaviour
         //After we have waited 5 seconds print the time again.
         Debug.Log("Move to next scene : ".Bold().Color("yellow") + Time.time);
 
-        skipButton.gameObject.SetActive(false);
+        //  skipButton.gameObject.SetActive(false);
 
+
+      //  yield return new WaitForSeconds(3);
+
+   
     }
 
 
+    IEnumerator EndofScene()
+    {
+        yield return new WaitForSeconds(3);
 
+        treeAnim.SetBool("Exit", true);
+        whiteBGAnimator.SetBool("Exit", true);
+        textAnimator.SetBool("Exit", true);
+
+
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(levelToLoad);                            //Copy to lobby scene. 
+
+
+    }
 
 
 
@@ -136,7 +157,6 @@ public class StoryCutScene : MonoBehaviour
     public void SkipTheCutScene()
     {
         intro.gameObject.SetActive(false);
-        trainAnimator.SetBool("StartEntry", true);
 
         StopCoroutine(theCutSceneCoRoutine);
 
@@ -154,6 +174,6 @@ public class StoryCutScene : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
 
-        lobbyManager.OnTriggerSpawnPlayers();
+      
     }
 }

@@ -19,10 +19,11 @@ public class DialogHint : MonoBehaviour
     public KeyCode DialogueInput = KeyCode.Return;
 
     [Header("Bools")]
-    public bool _isStringBeingRevealed = false;
-    public bool _isDialoguePlaying = false;
-    public bool _isEndOfDialogue = false;
-
+    private bool _isStringBeingRevealed = false;
+    private bool _isDialoguePlaying = false;
+    private bool _isEndOfDialogue = false;
+    public bool isIntroScene;
+    public bool isEndofEntireDialog;
     [TextArea]
     public string[] DialogueStrings;
 
@@ -35,6 +36,11 @@ public class DialogHint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        if (isIntroScene == true)
+        {
+            this.gameObject.SetActive(false);
+        }
         //testing
      //   DialogEntry();
    //     HideIcons();
@@ -54,12 +60,20 @@ public class DialogHint : MonoBehaviour
 
     public void StartDialog()
     {
+        if (isIntroScene == true)
+        {
+            this.gameObject.SetActive(true);
+        }
 
         anim.SetBool("DialogEntry", true);
         anim.SetBool("DialogExit", false);
         
+
+
+
         if (!_isDialoguePlaying)
         {
+            isEndofEntireDialog = false;
             _isDialoguePlaying = true;
             StartCoroutine(StartDialogue());
 
@@ -71,7 +85,7 @@ public class DialogHint : MonoBehaviour
     public void DialogExit()
     {
         Debug.Log("Dialog Exit");
-
+        isEndofEntireDialog = true;
        anim.SetBool("DialogEntry", false);
         anim.SetBool("DialogExit", true);
     }
@@ -177,6 +191,10 @@ public class DialogHint : MonoBehaviour
             //  StopIcon.SetActive(true);
             Debug.Log("Dialog Exit call");
             DialogExit();
+
+
+
+
             return;
         }
     
