@@ -24,6 +24,8 @@ public class BonFire_Trigger : MonoBehaviour
          //   other.gameObject.GetComponent<NetworkedPlayerController>().
 
             BookCamTrigger.gameObject.SetActive(true);
+            lobbyManager.bookCamera = BookCamTrigger;
+           // lobbyManager.exitUI.gameObject.GetComponent<Animator>().SetBool("UIAppear", true);
             StartCoroutine(CutSceneCoRoutine());
             //Open UI
             //------ Characcter ID check
@@ -64,7 +66,7 @@ public class BonFire_Trigger : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             //Close UI
-            lobbyManager.lobbyUI.gameObject.SetActive(false);
+           // lobbyManager.lobbyUI.gameObject.SetActive(false);
         }
     }
 
