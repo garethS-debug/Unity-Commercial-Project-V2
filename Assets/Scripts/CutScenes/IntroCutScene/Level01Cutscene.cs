@@ -55,10 +55,13 @@ public class Level01Cutscene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Fadeout = Fadeout.GetComponent<Image>();
-        fadeanimator = fadeanimator.GetComponent<Animator>();
 
-        skipButton.gameObject.SetActive(true);
+        //Disabiling Cutscene for now ---------- > 07/12/2021
+
+    //    Fadeout = Fadeout.GetComponent<Image>();
+   //     fadeanimator = fadeanimator.GetComponent<Animator>();
+
+   //     skipButton.gameObject.SetActive(true);
 
 
     }
@@ -111,7 +114,7 @@ public class Level01Cutscene : MonoBehaviour
         yield return new WaitForSeconds(cameraandFogDelay);
 
         // lobbyManager.OnTriggerSpawnPlayers();
-        roomManager.spawnPlayers();
+     //   roomManager.spawnPlayers(); --- Remmoved 07/12/2021
         intro.gameObject.SetActive(false);
         skipButton.gameObject.SetActive(false);
     }

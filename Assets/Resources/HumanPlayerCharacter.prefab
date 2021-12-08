@@ -518,12 +518,13 @@ MonoBehaviour:
   cameraFollowTarget: {fileID: 3202662227833583563}
   _camControll: {fileID: 0}
   SpawnTestCam: 0
+  vcam: {fileID: 0}
   isInLobby: 0
   speedMove4: 0
   controller: {fileID: 0}
   SprintInput: 304
   cam: {fileID: 0}
-  turnSmoothTime: 0.112
+  turnSmoothTime: 0.297
   turningDamp: 0
   anim_walkSpeed: 4.12
   sprintSpeed: 13

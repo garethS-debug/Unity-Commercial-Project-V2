@@ -98,8 +98,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     [Header("UI")]
     public GameObject lobbyUI;
-
-   
+    [HideInInspector] public Camera bookCamera;
+   // public GameObject exitUI;
 
     public void Awake()
     {
@@ -825,6 +825,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         SpawnLobbyPlayer();
     }
+
+
+    public void select_ExitShrine()
+    {
+       // exitUI.gameObject.GetComponent<Animator>().SetBool("UIAppear", false);
+      //  exitUI.gameObject.GetComponent<Animator>().SetBool("UIDisappear", true);
+
+        bookCamera.gameObject.SetActive(false);
+        lobbyUI.gameObject.SetActive(false);
+    }
+
 }
 
     
