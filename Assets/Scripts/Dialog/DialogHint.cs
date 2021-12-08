@@ -77,7 +77,8 @@ public class DialogHint : MonoBehaviour
 
     public void StartDialog()
     {
-        
+        _isDialoguePlaying = false;
+
         if (isIntroScene == true)
         {
             this.gameObject.SetActive(true);
@@ -108,8 +109,8 @@ public class DialogHint : MonoBehaviour
         anim.SetBool("DialogExit", true);
         
       //  _isStringBeingRevealed = false;
-      //  _isEndOfDialogue = false;
-      //  _isDialoguePlaying = false;
+       _isEndOfDialogue = false;
+    //    _isDialoguePlaying = false;
       //  _textComponent.text = "";
       //  dialogList.Clear();
 
@@ -120,7 +121,7 @@ public class DialogHint : MonoBehaviour
     private IEnumerator StartDialogue()
     {
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2f);
 
         //int dialogueLength = DialogueStrings.Length;
         int dialogueLength = dialogList.Count;
@@ -140,7 +141,9 @@ public class DialogHint : MonoBehaviour
                 {
                     _isEndOfDialogue = true;
                     Debug.Log("End of Dialog".Bold());
-                       ShowIcon();
+         
+
+                    ShowIcon();
                
                 }
             }
