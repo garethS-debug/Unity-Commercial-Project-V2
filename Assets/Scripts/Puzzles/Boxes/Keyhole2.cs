@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Keyhole2 : MonoBehaviour
 {
+    public Material[] keyholeMat;
     private MeshRenderer keyholeRend;
     public InventoryObject humanInventory;
     public InventoryObject ghostInventory;
@@ -11,13 +12,17 @@ public class Keyhole2 : MonoBehaviour
     private void Awake()
     {
         keyholeRend = GetComponent<MeshRenderer>();
+
+        //No key collected, red keyhole
+        keyholeRend.material = keyholeMat[0];
     }
 
     void Update()
     {
+        //Two key collected, green keyhole
         if (humanInventory.twoKeysCollected || ghostInventory.twoKeysCollected)
         {
-            keyholeRend.material.color = Color.green;
+            keyholeRend.material = keyholeMat[1];
         }
     }
 }
