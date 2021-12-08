@@ -524,7 +524,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   SprintInput: 304
   cam: {fileID: 0}
-  turnSmoothTime: 0.423
+  turnSmoothTime: 0.297
   turningDamp: 0
   anim_walkSpeed: 4.12
   sprintSpeed: 13
