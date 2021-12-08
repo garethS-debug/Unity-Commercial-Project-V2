@@ -15,7 +15,7 @@ public class InventoryObject : ScriptableObject
     public PlayerSO playerSO;
     public Inventory Container;
 
-
+    public bool oneKeyCollected = false;
     public bool twoKeysCollected = false;
 
     public void AddItem(Item _item, int _amount)
@@ -30,8 +30,14 @@ public class InventoryObject : ScriptableObject
                 if (_item.Name == "GoldenKey")
                 {
                     twoKeysCollected = true;
+                    oneKeyCollected = false;
                 }
                 return;
+            }
+
+            else if (_item.Name == "GoldenKey")
+            {
+                oneKeyCollected = true;
             }
         }
 
@@ -94,10 +100,7 @@ public class InventoryObject : ScriptableObject
 
                 //Instantiate an item on the ground
                 GameObject prefab = database.GetItem[_item.Id].prefabItem;
-                Instantiate(prefab, positionPrefab, Quaternion.identity);
-
-                //Need to work on multiplayer spawn
-                //PhotonNetwork.Instantiate(prefab.name, positionPrefab, Quaternion.identity);
+                PhotonNetwork.Instantiate(prefab.name, positionPrefab, Quaternion.identity);
 
             }
         }
