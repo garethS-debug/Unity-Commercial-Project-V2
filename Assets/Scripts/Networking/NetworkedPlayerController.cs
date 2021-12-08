@@ -213,6 +213,14 @@ public class NetworkedPlayerController : MonoBehaviour
 			SceneSettings.Instance.RemoveMultiplayerScript(this.gameObject);
 		}
 
+		if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1) // Ghost
+        {
+			Debug.Log("I am a ghost");
+			turnSmoothTime = 0.5f;
+        }
+
+		// turn smooth time for ghost is : 0.497
+
 
 
 		if (isInLobby && SpawnTestCam == false)
@@ -386,7 +394,11 @@ public class NetworkedPlayerController : MonoBehaviour
 			transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
 
-			movementSpeed = Mathf.Lerp(movementSpeed, (Input.GetKey(SprintInput) ? sprintSpeed : walkspeed), smoothTime);
+			if (controller.isGrounded || rayHitGround == true)
+            {
+				movementSpeed = Mathf.Lerp(movementSpeed, (Input.GetKey(SprintInput) ? sprintSpeed : walkspeed), smoothTime);
+			}
+		
 
 			
 			Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;        //move in direction of camera
@@ -401,9 +413,30 @@ public class NetworkedPlayerController : MonoBehaviour
 			 jumpDirForward = moveDir.normalized.z; //-1 is Backwards, +1 is Forwards
 			 jumpDirLeftRight = moveDir.normalized.x; //-1 is Backwards, +1 is Forwards
 
-		//	print("Move Dir Forward" + moveDir.normalized.z + "Move Dir Side" + moveDir.normalized.x);
-		
+			//	print("Move Dir Forward" + moveDir.normalized.z + "Move Dir Side" + moveDir.normalized.x);
 
+			//pressing Up and left / right 
+			if (verticalInput < 0 )
+			{
+				if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1) // Ghost
+				{
+					Debug.Log("I am a ghost");
+					turnSmoothTime = 1;
+				}
+			}
+
+			else
+            {
+				if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1) // Ghost
+				{
+					Debug.Log("I am a ghost");
+					turnSmoothTime = 0.5f;
+				}
+			}
+
+
+
+		
 
 			//	jumpDir = 
 			//	print(m_ForwardAmount);
