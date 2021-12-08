@@ -33,8 +33,8 @@ public class StoryCutScene : MonoBehaviour
     [Header("Debug")]
     public bool DebugSkipCutScene;
 
-   // [Header("UI")]
-   // public GameObject skipButton;
+    [Header("UI")]
+    public GameObject skipButton;
 
     [Header("Co-Courtines")]
     Coroutine theCutSceneCoRoutine;
@@ -157,7 +157,7 @@ public class StoryCutScene : MonoBehaviour
 
     public void SkipTheCutScene()
     {
- 
+        skipButton.gameObject.SetActive(false);
         StartCoroutine(SkipCutscene());
 
         dialog.DialogExit();
@@ -170,7 +170,7 @@ public class StoryCutScene : MonoBehaviour
 
         skipcutscene.SetBool("UIAppear", false);
         skipcutscene.SetBool("UIDisappear", true);
-
+     
         treeAnim.SetBool("Exit", true);
         whiteBGAnimator.SetBool("Exit", true);
         textAnimator.SetBool("Exit", true);

@@ -359,7 +359,7 @@ public class NetworkedPlayerController : MonoBehaviour
 		//Move 3 is the current edition 
 		
 
-		Jump();
+		
 		PerformActionCheck();
 
 	}
@@ -374,7 +374,7 @@ public class NetworkedPlayerController : MonoBehaviour
 	{
 
 		Move5();
-
+		Jump();
 	}
 
 
