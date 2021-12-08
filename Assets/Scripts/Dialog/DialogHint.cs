@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
 using UnityEngine.UI;
-
+using Photon.Realtime;
 public class DialogHint : MonoBehaviour
 {
+    private static DialogHint _instance;
+
+    public static DialogHint Instance { get { return _instance; } }
+
 
     public Animator anim;
 
@@ -19,25 +24,37 @@ public class DialogHint : MonoBehaviour
     public KeyCode DialogueInput = KeyCode.Return;
 
     [Header("Bools")]
-    private bool _isStringBeingRevealed = false;
-    private bool _isDialoguePlaying = false;
-    private bool _isEndOfDialogue = false;
+    public bool _isStringBeingRevealed = false;
+    public bool _isDialoguePlaying = false;
+    public bool _isEndOfDialogue = false;
     public bool isIntroScene;
     public bool isEndofEntireDialog;
     [TextArea]
     public string[] DialogueStrings;
 
+    public List<string> dialogList = new List<string>();
 
-  //  [Header("Icons")]
-  //  public GameObject ContinueIcon;
- //   public GameObject StopIcon;
+    //  [Header("Icons")]
+    //  public GameObject ContinueIcon;
+    //   public GameObject StopIcon;
 
 
     // Start is called before the first frame update
     void Start()
     {
 
-        if (isIntroScene == true)
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+
+
+
+            if (isIntroScene == true)
         {
             this.gameObject.SetActive(false);
         }
@@ -60,6 +77,8 @@ public class DialogHint : MonoBehaviour
 
     public void StartDialog()
     {
+        _isDialoguePlaying = false;
+
         if (isIntroScene == true)
         {
             this.gameObject.SetActive(true);
@@ -85,16 +104,28 @@ public class DialogHint : MonoBehaviour
     public void DialogExit()
     {
         Debug.Log("Dialog Exit");
-        isEndofEntireDialog = true;
-       anim.SetBool("DialogEntry", false);
+     //   isEndofEntireDialog = true;
+        anim.SetBool("DialogEntry", false);
         anim.SetBool("DialogExit", true);
+        
+      //  _isStringBeingRevealed = false;
+       _isEndOfDialogue = false;
+    //    _isDialoguePlaying = false;
+      //  _textComponent.text = "";
+      //  dialogList.Clear();
+
     }
 
 
 
     private IEnumerator StartDialogue()
     {
-        int dialogueLength = DialogueStrings.Length;
+
+        yield return new WaitForSeconds(2f);
+
+        //int dialogueLength = DialogueStrings.Length;
+        int dialogueLength = dialogList.Count;
+
         int currentDialogueIndex = 0;
 
         while (currentDialogueIndex < dialogueLength || !_isStringBeingRevealed)
@@ -102,11 +133,18 @@ public class DialogHint : MonoBehaviour
             if (!_isStringBeingRevealed)
             {
                 _isStringBeingRevealed = true;
-                StartCoroutine(DisplayString(DialogueStrings[currentDialogueIndex++]));
+
+                // StartCoroutine(DisplayString(DialogueStrings[currentDialogueIndex++]));
+                StartCoroutine(DisplayString(dialogList[currentDialogueIndex++]));
 
                 if (currentDialogueIndex >= dialogueLength)
                 {
                     _isEndOfDialogue = true;
+                    Debug.Log("End of Dialog".Bold());
+         
+
+                    ShowIcon();
+               
                 }
             }
 
@@ -163,13 +201,13 @@ public class DialogHint : MonoBehaviour
 
         while (true)
         {
-            // if (Input.GetKeyDown(DialogueInput))
-            //  {
-            yield return new WaitForSeconds(2);
+           //  if (Input.GetKeyDown(DialogueInput))
+           //   {
+            yield return new WaitForSeconds(1);
             break;
-          //  }
+           // }
 
-            yield return 0;
+           // yield return 0;
         }
 
         HideIcons();
@@ -189,7 +227,7 @@ public class DialogHint : MonoBehaviour
         if (_isEndOfDialogue)
         {
             //  StopIcon.SetActive(true);
-            Debug.Log("Dialog Exit call");
+            Debug.Log("Dialog Exit call".Bold());
             DialogExit();
 
 
@@ -199,6 +237,25 @@ public class DialogHint : MonoBehaviour
         }
     
         //   ContinueIcon.SetActive(true);
+    }
+
+
+
+    [PunRPC]
+   public void TriggerDialogOnAllClients(List<string> dialog)
+    {
+        ///Need some text to populate
+        ///DialogueStrings
+        Debug.Log("Running Dialog");
+
+
+        dialogList.Clear();
+
+        foreach (string dilaog in dialog)
+        {
+            dialogList.Add(dilaog);
+        }
+        StartDialog();
     }
 
 

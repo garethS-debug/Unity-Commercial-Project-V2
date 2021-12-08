@@ -54,6 +54,7 @@ MonoBehaviour:
   - RPC_SelectPuzzlePiece
   - RandomizePuzzlePieces
   - RPC_ShowKey
+  - TriggerDialogOnAllClients
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
