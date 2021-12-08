@@ -518,6 +518,7 @@ MonoBehaviour:
   cameraFollowTarget: {fileID: 3202662227833583563}
   _camControll: {fileID: 0}
   SpawnTestCam: 0
+  vcam: {fileID: 0}
   isInLobby: 0
   speedMove4: 0
   controller: {fileID: 0}

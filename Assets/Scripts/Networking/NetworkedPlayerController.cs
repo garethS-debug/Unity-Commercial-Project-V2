@@ -87,7 +87,7 @@ public class NetworkedPlayerController : MonoBehaviour
 	public GameObject cameraFollowTarget;
 	[HideInInspector] public PlayerCameraController _camControll;
 	public bool SpawnTestCam;
-	private CinemachineVirtualCamera vcam;
+	public CinemachineVirtualCamera vcam;
 
 
 	//Vector3 newPOS;
@@ -228,6 +228,7 @@ public class NetworkedPlayerController : MonoBehaviour
 			//V-CAM
 			vcam = cam.GetComponentInChildren<CinemachineVirtualCamera>();
 			vcam.m_Follow = cameraFollowTarget.transform;
+			vcam.m_LookAt = cameraFollowTarget.transform;
 
 
 			//Display the parent's name in the console.
@@ -270,17 +271,20 @@ public class NetworkedPlayerController : MonoBehaviour
 
 			if (PV.IsMine)
 			{
-				CameraPrefab = Instantiate(camPrefab, this.transform.position, camPrefab.transform.rotation);
+					CameraPrefab = Instantiate(camPrefab, this.transform.position, camPrefab.transform.rotation);
+
+
+					//Camera
+					_camControll = CameraPrefab.GetComponent<PlayerCameraController>();
+					_camControll.parent = this.gameObject;
+
+					cam = CameraPrefab.gameObject.transform;
 
 					//V-CAM
 					vcam = cam.GetComponentInChildren<CinemachineVirtualCamera>();
 					vcam.m_Follow = cameraFollowTarget.transform;
 
-					//Camera
-					_camControll = CameraPrefab.GetComponent<PlayerCameraController>();
-				_camControll.parent = this.gameObject;
-
-				cam = CameraPrefab.gameObject.transform;
+			
 				controller = this.gameObject.GetComponent<CharacterController>();
 			}
 
@@ -361,7 +365,7 @@ public class NetworkedPlayerController : MonoBehaviour
 	void FixedUpdate()
 	{
 
-		Move6();
+		Move5();
 
 	}
 
