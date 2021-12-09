@@ -89,7 +89,16 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
                             Debug.Log("-------------------");
                             Debug.Log("found our boy");
 
-                            if (SceneSettings.Instance.isMultiPlayer == true)
+                            //remove pieces from inventory 
+                            foreach (InventorySlot items in inventory.inventory.Container.Items)
+                            {
+                                items.ID = -1;
+                                items.amount = 0;
+                                items.item.Id = 0;
+                                items.item.Name = "";
+                            }
+
+                                if (SceneSettings.Instance.isMultiPlayer == true)
                             {
                                 PhotonView photonView = PhotonView.Get(this);
                                 photonView.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );

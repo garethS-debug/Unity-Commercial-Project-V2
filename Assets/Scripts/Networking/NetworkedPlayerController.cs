@@ -741,15 +741,15 @@ public class NetworkedPlayerController : MonoBehaviour
 						// Does the ray intersect any objects excluding the player layer
 						if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, JumpForce-6, layerMask))
 						{
-							Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
-							Debug.Log("Did Hit");
+						//	Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
+							//Debug.Log("Did Hit");
 
 						rayHitGround = true;
 					}
 						else
 						{
-							Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000, Color.white);
-							Debug.Log("Did not Hit");
+						//	Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000, Color.white);
+							//Debug.Log("Did not Hit");
 						rayHitGround = false;
 						}
 

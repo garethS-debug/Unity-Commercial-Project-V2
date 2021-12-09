@@ -3303,6 +3303,7 @@ MonoBehaviour:
   blurBackground: {fileID: 8814190567495863614}
   resolutionDropdown: {fileID: 8814190567286706006}
   disableOnStart: 1
+  isHomeScreen: 0
 --- !u!1 &8814190568060431755
 GameObject:
   m_ObjectHideFlags: 0

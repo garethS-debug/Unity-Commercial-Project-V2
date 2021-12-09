@@ -148,14 +148,25 @@ public class MenuOptions : MonoBehaviour
 
     public void setResolution (int resolutionIndex)
     {
-        Resolution res = resolutions[resolutionIndex];
-        Screen.SetResolution(res.width, res.height, Screen.fullScreen);
-    }
+    
+        if (resolutions != null)
+        {
+            Resolution res = resolutions[resolutionIndex];
+            Screen.SetResolution(res.width, res.height, Screen.fullScreen);
+        }
+
+        if (resolutions == null)
+        {
+            Debug.LogError("resoluation == null");
+        }
+
+        }
 
     public void onclick_Back()
     {
-        menuLayer.SetActive(true);
         settingsLayer.SetActive(false);
+        menuLayer.SetActive(true);
+     
     }
 
 }
