@@ -82,12 +82,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode LoadSceneMode)
     {
-  
-        //start evtry scene 
 
+        //start evtry scene ---- > removed 07/12/2021
+        //LevelIntro.gameObject.GetComponent<Level01Cutscene>().StartCoroutine("CutSceneCoRoutine");
         //then spawn in players
 
-        LevelIntro.gameObject.GetComponent<Level01Cutscene>().StartCoroutine("CutSceneCoRoutine");
+       spawnPlayers();
 
     }
 
