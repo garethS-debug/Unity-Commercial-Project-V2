@@ -359,7 +359,7 @@ public class NetworkedPlayerController : MonoBehaviour
 		//Move 3 is the current edition 
 		
 
-		Jump();
+		
 		PerformActionCheck();
 
 	}
@@ -374,7 +374,7 @@ public class NetworkedPlayerController : MonoBehaviour
 	{
 
 		Move5();
-
+		Jump();
 	}
 
 
@@ -425,8 +425,29 @@ public class NetworkedPlayerController : MonoBehaviour
 				}
 			}
 
-			else
+
+			if (Input.GetKey(SprintInput))
             {
+				if (verticalInput > 0 && horizontalInput < 0 || verticalInput > 0 && horizontalInput > 0)
+				{
+					turnSmoothTime = 0.3f;
+
+				}
+
+				//pressing down and left / right 
+				if (verticalInput < 0 && horizontalInput < 0 || verticalInput < 0 && horizontalInput > 0)
+				{
+					turnSmoothTime = 0.6f;
+					
+				}
+			}
+		
+
+
+
+
+			else
+			{
 				if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1) // Ghost
 				{
 					Debug.Log("I am a ghost");
@@ -720,15 +741,15 @@ public class NetworkedPlayerController : MonoBehaviour
 						// Does the ray intersect any objects excluding the player layer
 						if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, JumpForce-6, layerMask))
 						{
-							Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
-							Debug.Log("Did Hit");
+						//	Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
+							//Debug.Log("Did Hit");
 
 						rayHitGround = true;
 					}
 						else
 						{
-							Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000, Color.white);
-							Debug.Log("Did not Hit");
+						//	Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000, Color.white);
+							//Debug.Log("Did not Hit");
 						rayHitGround = false;
 						}
 
