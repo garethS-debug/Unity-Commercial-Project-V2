@@ -18,6 +18,12 @@ public class InventoryObject : ScriptableObject
     public bool oneKeyCollected = false;
     public bool twoKeysCollected = false;
 
+    public void ResetKeys()
+    {
+        oneKeyCollected = false;
+        twoKeysCollected = false;
+    }
+
     public void AddItem(Item _item, int _amount)
     {
         // Check if item is already in inventory
@@ -88,27 +94,29 @@ public class InventoryObject : ScriptableObject
                 Vector3 positionPrefab = new Vector3();
                 Vector3 offsetPrefab = new Vector3(0, 2f, -5f);
 
-                if (playerSO.PlayerCharacterChoise == 1)
+                if (playerSO.PlayerCharacterChoise == 0)
                 {
                     positionPrefab = GameObject.Find("HumanPlayerCharacter(Clone)").transform.position + offsetPrefab;
                 }
 
-                if (playerSO.PlayerCharacterChoise == 2)
+                if (playerSO.PlayerCharacterChoise == 1)
                 {
                     positionPrefab = GameObject.Find("GhostCharacter(Clone)").transform.position + offsetPrefab;
                 }
 
                 //Instantiate an item on the ground
                 GameObject prefab = database.GetItem[_item.Id].prefabItem;
-                PhotonNetwork.Instantiate(prefab.name, positionPrefab, Quaternion.identity);
+                if (SceneSettings.Instance.isMultiPlayer == true)
+                {
+                    PhotonNetwork.Instantiate(prefab.name, positionPrefab, Quaternion.identity);
+                }
 
+                else if (SceneSettings.Instance.isSinglePlayer == true)
+                {
+                    Instantiate(prefab, positionPrefab, Quaternion.identity);
+                }
             }
         }
-    }
-
-    public void PlayerPosition()
-    {
-
     }
 
     public void SaveInventory()

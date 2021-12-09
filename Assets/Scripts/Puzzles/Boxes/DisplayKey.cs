@@ -8,7 +8,7 @@ public class DisplayKey : MonoBehaviour
 
     void Update()
     {
-        if (countBox == 2)
+        if (countBox == 8)
         {
             gameObject.SetActive(false);
         }

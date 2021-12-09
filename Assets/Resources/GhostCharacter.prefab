@@ -412,6 +412,7 @@ GameObject:
   - component: {fileID: 2043882406953346576}
   - component: {fileID: 5234310911718442505}
   - component: {fileID: -8947702004218800124}
+  - component: {fileID: -4718569233101370391}
   m_Layer: 8
   m_Name: GhostCharacter
   m_TagString: Player
@@ -665,6 +666,20 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &-4718569233101370391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648103272126973518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0171c6be824c83d419ccee307fdcdceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pushPower: 3
+  forceMagnitude: 1
 --- !u!1 &1729794143952959833
 GameObject:
   m_ObjectHideFlags: 0
