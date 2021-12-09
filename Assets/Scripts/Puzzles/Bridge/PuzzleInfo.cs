@@ -34,7 +34,7 @@ public class PuzzleInfo : MonoBehaviour
             {
                 myPlayer = other.gameObject;
                 //Invert of Lever Choice
-                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 && leverInfo.HumanPlayer == true)
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 0 && leverInfo.HumanPlayer == true)
                 {
                     correctPlayerinTriggerZone = true;
                 }
@@ -56,7 +56,7 @@ public class PuzzleInfo : MonoBehaviour
                 myPlayer = other.gameObject;
                 // myPlayer = SceneSettings.Instance.myPlayer.gameObject;
                 //Invert of Lever Choice
-                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 && leverInfo.HumanPlayer == true)
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 0 && leverInfo.HumanPlayer == true)
                 {
                     correctPlayerinTriggerZone = true;
                 }

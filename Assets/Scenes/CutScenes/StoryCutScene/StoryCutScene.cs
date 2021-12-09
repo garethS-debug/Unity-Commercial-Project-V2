@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+
 public class StoryCutScene : MonoBehaviour
 {
 
@@ -33,8 +34,8 @@ public class StoryCutScene : MonoBehaviour
     [Header("Debug")]
     public bool DebugSkipCutScene;
 
-   // [Header("UI")]
-   // public GameObject skipButton;
+    [Header("UI")]
+    public GameObject skipButton;
 
     [Header("Co-Courtines")]
     Coroutine theCutSceneCoRoutine;
@@ -157,7 +158,8 @@ public class StoryCutScene : MonoBehaviour
 
     public void SkipTheCutScene()
     {
- 
+        skipButton.GetComponentInChildren<TMP_Text>().text = "";
+        skipButton.gameObject.SetActive(false);
         StartCoroutine(SkipCutscene());
 
         dialog.DialogExit();
@@ -170,7 +172,7 @@ public class StoryCutScene : MonoBehaviour
 
         skipcutscene.SetBool("UIAppear", false);
         skipcutscene.SetBool("UIDisappear", true);
-
+     
         treeAnim.SetBool("Exit", true);
         whiteBGAnimator.SetBool("Exit", true);
         textAnimator.SetBool("Exit", true);
