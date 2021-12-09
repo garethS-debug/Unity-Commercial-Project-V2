@@ -78,44 +78,48 @@ public class BridgePuzzle_CheckForPiece : MonoBehaviour
 
                 
 
-            if (inventory.inventory.database.Items.Length > 0)
-            {
-                for (int i = 0; i < inventory.inventory.database.Items.Length ; i++)
-                {
-                    Debug.Log("-------------------");
-                    Debug.Log("Looping through inv");
-
-                    //  Debug.Log("inventory.inventory.database.Items[i] = " + inventory.inventory.database.Items[i]);       //Key Object
-                    //   Debug.Log("missingItem.item =  " + missingItem.item);       //Key Object
-                    
-                    if (inventory.inventory.Container.Items[i].ID == missingItem.item.Id)
-
+                    foreach (InventorySlot item in inventory.inventory.Container.Items)
                     {
+                        print(item.ID);
                         Debug.Log("-------------------");
-                        Debug.Log("found our boy");
+                        Debug.Log("Looping through inv");
 
-                        if (SceneSettings.Instance.isMultiPlayer == true)
+                        if (item.ID == missingItem.item.Id)
                         {
-                            PhotonView photonView = PhotonView.Get(this);
-                            photonView.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
-                            photonView.RPC("RPC_ShowKey", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
-                        }
+                            Debug.Log("-------------------");
+                            Debug.Log("found our boy");
 
-                        if (SceneSettings.Instance.isSinglePlayer == true)
-                        {
-                            FixBridge();
-                            s_ShowKey();
+                            if (SceneSettings.Instance.isMultiPlayer == true)
+                            {
+                                PhotonView photonView = PhotonView.Get(this);
+                                photonView.RPC("RPC_PropChangeModel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                                photonView.RPC("RPC_ShowKey", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+                            }
+
+                            if (SceneSettings.Instance.isSinglePlayer == true)
+                            {
+                                FixBridge();
+                                s_ShowKey();
+                            }
+
                         }
-             
+                        else
+                        {
+                            Debug.Log("Does not match Inventory");
+                        }
                     }
+                    
 
-                   
-                        
-                }
+
+
+
+
+
+
+
+
             }
-
-            }
-
+            
 
             //    inventory.inventory
 

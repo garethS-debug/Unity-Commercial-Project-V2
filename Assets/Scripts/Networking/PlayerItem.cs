@@ -43,10 +43,10 @@ public class PlayerItem : MonoBehaviourPunCallbacks
 
         if (playerSOData.AutoConnect == true)
         {
-            playerproperties["playerAvatar"] = playerSOData.PlayerCharacterChoise;
+         //   playerproperties["playerAvatar"] = playerSOData.PlayerCharacterChoise;
             print("PLayer ID = " + (int)playerproperties["playerAvatar"]);
-            leftArrowButton.SetActive(false);
-            rightArrowButton.SetActive(false);
+         //   leftArrowButton.SetActive(false);
+         //   rightArrowButton.SetActive(false);
         }
 
         print("Start ID = " + (int)playerproperties["playerAvatar"]);
@@ -74,6 +74,7 @@ public class PlayerItem : MonoBehaviourPunCallbacks
         else if (!PhotonNetwork.IsMasterClient)
         {
           //  KickButton.gameObject.SetActive(true);
+          
         }
     }
 
@@ -112,6 +113,7 @@ public class PlayerItem : MonoBehaviourPunCallbacks
         {
             playerAvatar.sprite = avatars[(int)player.CustomProperties["playerAvatar"]];                //player avatar will get changed on all player controllers
             playerproperties["playerAvatar"] = (int)player.CustomProperties["playerAvatar"];            //keep player avater
+                                                                                                        
         }
 
         else
@@ -162,8 +164,23 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     public void OnClick_Kick()
     {
 
-      //  PhotonNetwork.CloseConnection(player);
-        //Remove player item card
+        //  PhotonNetwork.CloseConnection(player);
+        //Remove player item car
+        //d
         //refresh for everyone
+
+      
+
+
+      //  As earlier I was catching the property in :
+
+      
+
+
     }
+
+
+    
+
+
 }
