@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerPush : MonoBehaviour
 {
-    float pushPower = 4.0f;
+    [SerializeField] private float pushPower = 3.0f;
+    [SerializeField] private float forceMagnitude;
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -12,9 +13,15 @@ public class PlayerPush : MonoBehaviour
         {
             Rigidbody boxRb = hit.collider.attachedRigidbody;
 
-            Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+            //Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+            //boxRb.velocity = pushDir * pushPower;
 
-            boxRb.velocity = pushDir * pushPower;
+            Vector3 forceDirection = hit.gameObject.transform.position - transform.position;
+            forceDirection.y = 0;
+            forceDirection.Normalize();
+
+            boxRb.AddForceAtPosition(forceDirection * forceMagnitude, transform.position, ForceMode.Impulse);
+
         }
     }
 }

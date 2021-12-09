@@ -24,12 +24,12 @@ public class DisplayInventory : MonoBehaviour
 
     private void Start()
     {
-        if (playerSO.PlayerCharacterChoise == 1)
+        if (playerSO.PlayerCharacterChoise == 0)
         {
             CreateDisplay(inventoryHuman);
         }
 
-        if (playerSO.PlayerCharacterChoise == 2)
+        if (playerSO.PlayerCharacterChoise == 1)
         {
             CreateDisplay(inventoryGhost);
         }
@@ -37,12 +37,12 @@ public class DisplayInventory : MonoBehaviour
 
     public void Update()
     {
-        if (playerSO.PlayerCharacterChoise == 1)
+        if (playerSO.PlayerCharacterChoise == 0)
         {
             UpdateDisplay(inventoryHuman);
         }
 
-        if (playerSO.PlayerCharacterChoise == 2)
+        if (playerSO.PlayerCharacterChoise == 1)
         {
             UpdateDisplay(inventoryGhost);
         }
