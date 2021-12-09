@@ -425,8 +425,29 @@ public class NetworkedPlayerController : MonoBehaviour
 				}
 			}
 
-			else
+
+			if (Input.GetKey(SprintInput))
             {
+				if (verticalInput > 0 && horizontalInput < 0 || verticalInput > 0 && horizontalInput > 0)
+				{
+					turnSmoothTime = 0.3f;
+
+				}
+
+				//pressing down and left / right 
+				if (verticalInput < 0 && horizontalInput < 0 || verticalInput < 0 && horizontalInput > 0)
+				{
+					turnSmoothTime = 0.6f;
+					
+				}
+			}
+		
+
+
+
+
+			else
+			{
 				if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1) // Ghost
 				{
 					Debug.Log("I am a ghost");
