@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+
 public class StoryCutScene : MonoBehaviour
 {
 
@@ -157,6 +158,7 @@ public class StoryCutScene : MonoBehaviour
 
     public void SkipTheCutScene()
     {
+        skipButton.GetComponentInChildren<TMP_Text>().text = "";
         skipButton.gameObject.SetActive(false);
         StartCoroutine(SkipCutscene());
 
