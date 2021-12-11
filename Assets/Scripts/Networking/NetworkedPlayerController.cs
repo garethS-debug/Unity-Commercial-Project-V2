@@ -366,15 +366,19 @@ public class NetworkedPlayerController : MonoBehaviour
 			}
 		}
 
+		//--- moved Move and Jump here to stop camera null error 11/12/2021
+		Move5();
+		Jump();
 
 		//Existing Movement Script
 		//m_Rigidbody.MovePosition(m_Rigidbody.position + transform.TransformDirection(movementWithInversion) * Time.fixedDeltaTime);
 
 		//Move 3 is the current edition 
-		
 
-		
+
+
 		PerformActionCheck();
+
 
 	}
 
@@ -386,9 +390,8 @@ public class NetworkedPlayerController : MonoBehaviour
 
 	void FixedUpdate()
 	{
-
-		Move5();
-		Jump();
+		//movied --- Move5(); and Jump(); from here to update to remove juddering camera 11/12/2021
+	
 	}
 
 
