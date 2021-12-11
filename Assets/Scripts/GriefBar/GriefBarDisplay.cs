@@ -10,26 +10,9 @@ public class GriefBarDisplay : MonoBehaviour
     public GriefBarObject griefBarGhost;
     public float maxGrief = 100f;
     public float currentGrief;
-    public float decreasePerSecond = 1f;
+    private float decreasePerSecond = 0.1f;
 
     public RoomManager room;
-
-    /// <summary>
-    /// 
-    /// 
-    /// 
-    /// PLEASE BE AWARE I HAVE CHANGED THE BELOW:
-    /// 
-    /// ADDED A NEW METHOD FOR CALLING THE PLAYER DISTANCE FROM SCENE SETTINGS
-    /// 
-    /// CHANGED THE INTERGER TO FLOAT SO THAT THE CANDLE HEIGHT IS SMOOTHER
-    /// 
-    /// 
-    /// 
-    /// 
-    /// </summary>
-
-
 
     public void Start()
     {
@@ -47,7 +30,7 @@ public class GriefBarDisplay : MonoBehaviour
         var obj = Instantiate(griefBarHuman.griefBarPrefab, Vector3.zero, Quaternion.identity, transform);
         obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
         slider.fillRect = obj.GetComponent<RectTransform>();
-        slider.direction = Slider.Direction.BottomToTop;                                            //G - I have added this line to ensure the slide goes up and down and not left to right
+        slider.direction = Slider.Direction.BottomToTop;
     }
 
     public void CreateGhostCandle()
@@ -55,7 +38,7 @@ public class GriefBarDisplay : MonoBehaviour
         var obj = Instantiate(griefBarGhost.griefBarPrefab, Vector3.zero, Quaternion.identity, transform);
         obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
         slider.fillRect = obj.GetComponent<RectTransform>();
-        slider.direction = Slider.Direction.BottomToTop;                                            //G - I have added this line to ensure the slide goes up and down and not left to right
+        slider.direction = Slider.Direction.BottomToTop;
     }
 
     private void SetMaxGrief(float grief)
@@ -79,8 +62,10 @@ public class GriefBarDisplay : MonoBehaviour
 
     public void GriefBasedOnDistance ()
     {
-        currentGrief = SceneSettings.Instance.playerdistance;
-      //  print(currentGrief);
-        SetGrief(currentGrief);
+        if (SceneSettings.Instance.isMultiPlayer == true)
+        {
+            currentGrief = SceneSettings.Instance.playerdistance;
+            SetGrief(currentGrief);           
+        }
     }
 }

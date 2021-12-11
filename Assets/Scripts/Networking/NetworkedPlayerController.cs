@@ -88,6 +88,8 @@ public class NetworkedPlayerController : MonoBehaviour
 	[HideInInspector] public PlayerCameraController _camControll;
 	public bool SpawnTestCam;
 	public CinemachineVirtualCamera vcam;
+	public CinemachineFreeLook fcam;
+
 
 
 	//Vector3 newPOS;
@@ -234,9 +236,21 @@ public class NetworkedPlayerController : MonoBehaviour
 			cam = CameraPrefab.gameObject.transform;
 
 			//V-CAM
-			vcam = cam.GetComponentInChildren<CinemachineVirtualCamera>();
-			vcam.m_Follow = cameraFollowTarget.transform;
-			vcam.m_LookAt = cameraFollowTarget.transform;
+			if (camPrefab.GetComponentInChildren<CinemachineVirtualCamera>())
+			{
+				vcam = cam.GetComponentInChildren<CinemachineVirtualCamera>();
+				vcam.m_Follow = cameraFollowTarget.transform;
+				vcam.m_LookAt = cameraFollowTarget.transform;
+			}
+
+
+			if (camPrefab.GetComponentInChildren<CinemachineFreeLook>())
+            {
+				fcam = cam.GetComponentInChildren<CinemachineFreeLook>();
+				fcam.m_Follow = cameraFollowTarget.transform;
+				fcam.m_LookAt = cameraFollowTarget.transform;
+			}
+
 
 
 			//Display the parent's name in the console.
@@ -359,7 +373,7 @@ public class NetworkedPlayerController : MonoBehaviour
 		//Move 3 is the current edition 
 		
 
-		Jump();
+		
 		PerformActionCheck();
 
 	}
@@ -374,7 +388,7 @@ public class NetworkedPlayerController : MonoBehaviour
 	{
 
 		Move5();
-
+		Jump();
 	}
 
 
@@ -413,7 +427,11 @@ public class NetworkedPlayerController : MonoBehaviour
 			 jumpDirForward = moveDir.normalized.z; //-1 is Backwards, +1 is Forwards
 			 jumpDirLeftRight = moveDir.normalized.x; //-1 is Backwards, +1 is Forwards
 
+
+
+			// ------------> removed 10/12/2021 to revert back to original player controller.
 			//	print("Move Dir Forward" + moveDir.normalized.z + "Move Dir Side" + moveDir.normalized.x);
+			/*
 
 			//pressing Up and left / right 
 			if (verticalInput < 0 )
@@ -425,8 +443,29 @@ public class NetworkedPlayerController : MonoBehaviour
 				}
 			}
 
-			else
+
+			if (Input.GetKey(SprintInput))
             {
+				if (verticalInput > 0 && horizontalInput < 0 || verticalInput > 0 && horizontalInput > 0)
+				{
+					turnSmoothTime = 0.3f;
+
+				}
+
+				//pressing down and left / right 
+				if (verticalInput < 0 && horizontalInput < 0 || verticalInput < 0 && horizontalInput > 0)
+				{
+					turnSmoothTime = 0.6f;
+					
+				}
+			}
+		
+
+
+
+
+			else
+			{
 				if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1) // Ghost
 				{
 					Debug.Log("I am a ghost");
@@ -435,7 +474,7 @@ public class NetworkedPlayerController : MonoBehaviour
 			}
 
 
-
+			*/
 		
 
 			//	jumpDir = 
@@ -720,15 +759,15 @@ public class NetworkedPlayerController : MonoBehaviour
 						// Does the ray intersect any objects excluding the player layer
 						if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, JumpForce-6, layerMask))
 						{
-							Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
-							Debug.Log("Did Hit");
+						//	Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
+							//Debug.Log("Did Hit");
 
 						rayHitGround = true;
 					}
 						else
 						{
-							Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000, Color.white);
-							Debug.Log("Did not Hit");
+						//	Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000, Color.white);
+							//Debug.Log("Did not Hit");
 						rayHitGround = false;
 						}
 

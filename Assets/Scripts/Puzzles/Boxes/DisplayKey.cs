@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class DisplayKey : MonoBehaviour
 {
-    int countBox = 0;
+    private int countBox = 0;
+    [SerializeField] public int nbOfBoxes = 8;
 
     void Update()
     {
-        if (countBox == 8)
+        Debug.Log("countbox " + countBox);
+        if (countBox == nbOfBoxes)
         {
             gameObject.SetActive(false);
         }

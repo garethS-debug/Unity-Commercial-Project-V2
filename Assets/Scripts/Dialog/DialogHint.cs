@@ -77,6 +77,10 @@ public class DialogHint : MonoBehaviour
 
     public void StartDialog()
     {
+
+        isEndofEntireDialog = false;
+        //  InteruptDialogCeck();
+
         _isDialoguePlaying = false;
 
         if (isIntroScene == true)
@@ -120,7 +124,7 @@ public class DialogHint : MonoBehaviour
 
     private IEnumerator StartDialogue()
     {
-
+    
         yield return new WaitForSeconds(2f);
 
         //int dialogueLength = DialogueStrings.Length;
@@ -201,9 +205,18 @@ public class DialogHint : MonoBehaviour
 
         while (true)
         {
-           //  if (Input.GetKeyDown(DialogueInput))
-           //   {
+            //  if (Input.GetKeyDown(DialogueInput))
+            //   {
+            print("BREAK");
+
             yield return new WaitForSeconds(1);
+            if (_isEndOfDialogue)
+            {
+                //  StopIcon.SetActive(true);
+                Debug.Log("Dialog Exit call".Bold());
+
+                StartCoroutine(EndTheDialog());
+            }
             break;
            // }
 
@@ -228,8 +241,8 @@ public class DialogHint : MonoBehaviour
         {
             //  StopIcon.SetActive(true);
             Debug.Log("Dialog Exit call".Bold());
-            DialogExit();
 
+          //  StartCoroutine(EndTheDialog());
 
 
 
@@ -240,8 +253,16 @@ public class DialogHint : MonoBehaviour
     }
 
 
+    private IEnumerator EndTheDialog()
+    {
+        isEndofEntireDialog = true;
+        yield return new WaitForSeconds(0);
+        DialogExit();
+    }
 
-    [PunRPC]
+
+
+        [PunRPC]
    public void TriggerDialogOnAllClients(List<string> dialog)
     {
         ///Need some text to populate
@@ -259,8 +280,24 @@ public class DialogHint : MonoBehaviour
     }
 
 
+    /*
+    public void InteruptDialogCeck()
+    {
+        ///Need some text to populate
+        ///DialogueStrings
+        if (_isDialoguePlaying)
+        {
+            Debug.Log("Ending Dialog Early ");
 
 
+            StopCoroutine(StartDialogue());
+            StopCoroutine(DisplayString(""));
+
+
+        }
+    }
+
+    */
 }
 
 
