@@ -12,11 +12,11 @@ public class DisplayInventory : MonoBehaviour
     public InventoryObject inventoryHuman;
     public InventoryObject inventoryGhost;
     public PlayerSO playerSO;
-    public int xStart;
-    public int xSpaceBetweenItems;
-    public int yStart;
-    public int ySpaceBetweenItems;
-    public int numberOfColumns;
+    private int xStart = -175;
+    private int xSpaceBetweenItems = 350;
+    private int yStart = 80;
+    private int ySpaceBetweenItems = 171;
+    private int numberOfColumns = 2;
 
     public MouseItem mouseItem = new MouseItem();
 
