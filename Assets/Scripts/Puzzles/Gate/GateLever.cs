@@ -458,7 +458,7 @@ public class GateLever : MonoBehaviour
 
                 if (PV.IsMine)
                 {
-                    if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1 && HumanPlayer == true && PuzzleGuideShowing == false)
+                    if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 0 /*&& HumanPlayer == true*/ && PuzzleGuideShowing == false)
                     {
                         print("Performing human Action");
                         PuzzleGuide.gameObject.SetActive(true);
@@ -480,7 +480,7 @@ public class GateLever : MonoBehaviour
                         return;
                     }
 
-                    if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 && GhostPLayer == true && PuzzleGuideShowing == false)
+                    if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1 /*&& GhostPLayer == true */&& PuzzleGuideShowing == false)
                     {
                         print("Performing ghost Action");
                         PuzzleGuide.gameObject.SetActive(true);
@@ -511,12 +511,17 @@ public class GateLever : MonoBehaviour
                         //  performingLeverAction = false;
                         return;
                     }
+
+                    else
+                    {
+                        print("Try again");
+                    }
                 }
             }
 
             if (SceneSettings.Instance.isSinglePlayer == true)
             {
-                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1 && HumanPlayer == true && PuzzleGuideShowing == false)
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 0 && HumanPlayer == true && PuzzleGuideShowing == false)
                 {
                     print("Performing human Action");
                     PuzzleGuide.gameObject.SetActive(true);
@@ -525,7 +530,7 @@ public class GateLever : MonoBehaviour
                     return;
                 }
 
-                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 && GhostPLayer == true && PuzzleGuideShowing == false)
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1 && GhostPLayer == true && PuzzleGuideShowing == false)
                 {
                     print("Performing ghost Action");
                     PuzzleGuide.gameObject.SetActive(true);
@@ -540,6 +545,11 @@ public class GateLever : MonoBehaviour
                     PuzzleGuideShowing = false;
                     //  performingLeverAction = false;
                     return;
+                }
+
+                else
+                {
+                    print("Try again");
                 }
             }
 

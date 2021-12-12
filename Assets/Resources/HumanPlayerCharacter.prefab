@@ -527,9 +527,9 @@ MonoBehaviour:
   cam: {fileID: 0}
   turnSmoothTime: 0.297
   turningDamp: 0
-  anim_walkSpeed: 4.12
-  sprintSpeed: 13
-  walkspeed: 7.37
+  anim_walkSpeed: 2.53
+  sprintSpeed: 14
+  walkspeed: 5
   smoothTime: 0.15
   PerformAction: 102
   PermormingAction: 0
