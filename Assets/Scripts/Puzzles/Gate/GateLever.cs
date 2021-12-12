@@ -438,13 +438,14 @@ public class GateLever : MonoBehaviour
 
             if (SceneSettings.Instance.DebugMode == true)
             {
-                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1)
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 0)
                 {
                     print("SettingBoolBasedon Debug human");
                     HumanPlayer = true;
                 }
 
-                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2)
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1
+      )
                 {
                     print("SettingBoolBasedon Debug ghost");
                     GhostPLayer = true;

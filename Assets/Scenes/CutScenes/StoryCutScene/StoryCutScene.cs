@@ -138,6 +138,7 @@ public class StoryCutScene : MonoBehaviour
 
     IEnumerator EndofScene()
     {
+        skipButton.gameObject.SetActive(false);
         yield return new WaitForSeconds(3);
 
         treeAnim.SetBool("Exit", true);
@@ -167,7 +168,7 @@ public class StoryCutScene : MonoBehaviour
 
     IEnumerator SkipCutscene()
     {
-
+        skipButton.gameObject.SetActive(false);
         yield return new WaitForSeconds(1);
 
         skipcutscene.SetBool("UIAppear", false);
@@ -176,7 +177,7 @@ public class StoryCutScene : MonoBehaviour
         treeAnim.SetBool("Exit", true);
         whiteBGAnimator.SetBool("Exit", true);
         textAnimator.SetBool("Exit", true);
-
+        skipButton.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(5);
         SceneManager.LoadScene(levelToLoad);                            //Copy to lobby scene. 

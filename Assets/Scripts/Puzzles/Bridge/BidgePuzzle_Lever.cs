@@ -229,6 +229,8 @@ public class BidgePuzzle_Lever : MonoBehaviour
     public void InteractionWithPuzzle()
     {
 
+
+
     }
 
     void OnEnable()
@@ -250,17 +252,19 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
 
 
+
+
             //event ending here
 
 
             if (SceneSettings.Instance.DebugMode == true)
             {
-                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1)
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 0)
                 {
                     HumanPlayer = true;
                 }
 
-                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2)
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1)
                 {
                     GhostPLayer = true;
                 }
