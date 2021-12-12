@@ -15,4 +15,4 @@ MonoBehaviour:
   PlayerCharacterChoise: 0
   PlayerName: 
   AutoConnect: 1
-  SingleOrMultiPlayer: 1
+  SingleOrMultiPlayer: 2

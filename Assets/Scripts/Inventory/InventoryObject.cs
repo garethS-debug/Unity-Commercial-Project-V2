@@ -88,12 +88,12 @@ public class InventoryObject : ScriptableObject
                 Vector3 positionPrefab = new Vector3();
                 Vector3 offsetPrefab = new Vector3(0, 2f, -5f);
 
-                if (playerSO.PlayerCharacterChoise == 1)
+                if (playerSO.PlayerCharacterChoise == 0)
                 {
                     positionPrefab = GameObject.Find("HumanPlayerCharacter(Clone)").transform.position + offsetPrefab;
                 }
 
-                if (playerSO.PlayerCharacterChoise == 2)
+                if (playerSO.PlayerCharacterChoise == 1)
                 {
                     positionPrefab = GameObject.Find("GhostCharacter(Clone)").transform.position + offsetPrefab;
                 }

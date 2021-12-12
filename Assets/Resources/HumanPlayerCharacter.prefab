@@ -529,7 +529,7 @@ MonoBehaviour:
   turningDamp: 0
   anim_walkSpeed: 2.53
   sprintSpeed: 14
-  walkspeed: 4.97
+  walkspeed: 5.01
   smoothTime: 0.15
   PerformAction: 102
   PermormingAction: 0
