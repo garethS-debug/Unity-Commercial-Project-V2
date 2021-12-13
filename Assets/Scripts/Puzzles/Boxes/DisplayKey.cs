@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class DisplayKey : MonoBehaviour
 {
-    private int countBox = 0;
+    [SerializeField] private int countBox = 0;
     [SerializeField] public int nbOfBoxes = 8;
 
     void Update()
