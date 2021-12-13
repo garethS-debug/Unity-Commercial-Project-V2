@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Keyhole1 : MonoBehaviour
 {
@@ -23,6 +24,11 @@ public class Keyhole1 : MonoBehaviour
         if (humanInventory.oneKeyCollected || ghostInventory.oneKeyCollected || humanInventory.twoKeysCollected || ghostInventory.twoKeysCollected)
         {
             keyholeRend.material = keyholeMat[1];
+        }
+
+        else
+        {
+            keyholeRend.material = keyholeMat[0];
         }
     }
 }
