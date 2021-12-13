@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6819691740294161622
 Transform:
   m_ObjectHideFlags: 0
@@ -43,9 +43,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b3f096585f0efe41803f10014bc7689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cutsceneCamera: {fileID: 0}
+  camAnim: {fileID: 0}
+  fogAnim: {fileID: 0}
   skipButton: {fileID: 0}
+  Fadeout: {fileID: 0}
+  fadeanimator: {fileID: 0}
   intro: {fileID: 0}
   txt: {fileID: 0}
+  textObj: {fileID: 0}
   story: 
   cutSceneDelayAtStart: 2
   cutSceneDelay: 5
+  cameraandFogDelay: 5
+  roomManager: {fileID: 0}

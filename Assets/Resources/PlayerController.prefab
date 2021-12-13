@@ -176,30 +176,36 @@ MonoBehaviour:
   anim: {fileID: 0}
   DampTime: 1.1
   turning: 0
-  m_Rigidbody: {fileID: 0}
   m_Capsule: {fileID: 0}
-  rotSpeed: 5
   m_TurnAmount: 0
-  mouseSensitivity: 0
-  sprintSpeed: 8
-  walkSpeed: 5
-  jumpForce: 750
-  smoothTime: 0.15
-  speed: 5
-  sneakHash: 0
-  againstWallHash: 0
+  gravity: 15
+  JumpForce: 10
+  JumpInput: 32
   grounded: 0
-  MovementInversion: 1
+  bonfireSpawn: {fileID: 0}
   toRot: {x: 0, y: 0, z: 0}
   lerpSpeed: 0.5
   durationTime: 0
   camPrefab: {fileID: 5581449300400985643, guid: ce1e677b9d2d7ac43b853fb4b0912843,
     type: 3}
+  cameraFollowTarget: {fileID: 0}
   _camControll: {fileID: 0}
-  CamYOffset: 10
-  CamZOffset: 5
-  camFollowDistance: 10
-  camSmoothing: 0.1
+  SpawnTestCam: 0
+  isInLobby: 0
+  speedMove4: 0
+  controller: {fileID: 0}
+  SprintInput: 304
+  cam: {fileID: 0}
+  turnSmoothTime: 0.1
+  turningDamp: 0
+  anim_walkSpeed: 0
+  sprintSpeed: 8
+  walkspeed: 8
+  smoothTime: 0.15
+  PerformAction: 102
+  PermormingAction: 0
+  rotSpeed: 5
+  speed: 5
 --- !u!114 &-6651870371191580712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,3 +425,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef170ac75c86f444c9abc77e9fedf114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}

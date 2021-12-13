@@ -8,8 +8,9 @@ public class GriefBarDisplay : MonoBehaviour
     public Slider slider;
     public GriefBarObject griefBarHuman;
     public GriefBarObject griefBarGhost;
-    public float maxGrief = 100;
+    public float maxGrief = 100f;
     public float currentGrief;
+    public float decreasePerSecond = 1f;
 
     public RoomManager room;
 
@@ -38,13 +39,7 @@ public class GriefBarDisplay : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            ReduceGriefBar(20);
-        }
-
-        GriefBasedOnDistance();
-
+        ReduceGriefBar();
     }
 
     public void CreateHumanCandle()
@@ -73,12 +68,9 @@ public class GriefBarDisplay : MonoBehaviour
     {
         slider.value = grief;
     }
-
-    private void ReduceGriefBar(float reduction)
+    private void ReduceGriefBar()
     {
-
-
-        currentGrief -= reduction;
+        currentGrief -= Time.deltaTime * decreasePerSecond;
         SetGrief(currentGrief);
     }
 

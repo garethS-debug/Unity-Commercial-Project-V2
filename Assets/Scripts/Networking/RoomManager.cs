@@ -28,26 +28,44 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public GameObject LevelIntro;
 
 
+    [Header("LoadingBetweenScenes")]
+    private PhotonView PhotonView;
+    private int PlayersInGame = 0;
 
     private void Awake()
     {
         if (Instance)                                   //If room manager already in scene
         {
             Destroy(gameObject);                        //If yes destroy
+            print("Destroying this copy");
             return;
+
         }
 
+        else
+        {
+            Instance = this;
+            print("I am the only 1");
+
+        }
+       
         DontDestroyOnLoad(gameObject);                      //I am the only 1
 
 
-        Instance = this;
+        if (SceneSettings.Instance.isMultiPlayer == true)
+        {
+            PhotonView = GetComponent<PhotonView>();
+        }
+
+
+
     }
 
 
     public void Start()
     {
 
-
+        DontDestroyOnLoad(gameObject);                      //I am the only 1
         //   CreatePlayer();                                   //Works but not on Claire's version
 
 
@@ -82,13 +100,44 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode LoadSceneMode)
     {
-  
-        //start evtry scene 
 
+        //start evtry scene ---- > removed 07/12/2021
+        //LevelIntro.gameObject.GetComponent<Level01Cutscene>().StartCoroutine("CutSceneCoRoutine");
         //then spawn in players
 
-        LevelIntro.gameObject.GetComponent<Level01Cutscene>().StartCoroutine("CutSceneCoRoutine");
+         //Added 13/12/2021
+         /*
+    if (scene.name != "Lobby")
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                MasterLoadedGame();
+            }
+            else
+            {
+                NonMasterLoadedGame();
+            }
+        }
 
+     */  
+
+        //-----ERROR created when switching scenes moved on 13/12/2021
+
+    if (PhotonNetwork.IsConnected)
+        {
+            spawnPlayers();
+        }
+
+        if (!PhotonNetwork.IsConnected)
+        {
+            Debug.Log("Not Connected ".Color("red"));
+        }
+
+
+        if (PhotonNetwork.CurrentRoom == null || PhotonNetwork.CurrentRoom.Players == null) { }
+        {
+            Debug.Log("Not Connected to room or no current players".Color("red"));
+        }
     }
 
     public void spawnPlayers()
@@ -126,6 +175,42 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     }
 
+
+    private void MasterLoadedGame()
+    {
+        print("masterLoaded-Game");
+        PlayersInGame = 1;
+        PhotonView.RPC("RPC_LoadGameOthers", RpcTarget.Others);
+              //  photonView.RPC("RandomizePuzzlePieces", RpcTarget.All, index);
+    }
+ 
+    private void NonMasterLoadedGame()
+    {
+        print("non Master Loaded-Game");
+        PhotonView.RPC("RPC_LoadedGameScene", RpcTarget.MasterClient);
+    }
+
+    [PunRPC]
+    private void RPC_LoadGameOthers()
+    {
+        print("Loading Level from - Level to Load");
+        PhotonNetwork.LoadLevel(EndOfLevel.Instance.levelToLoad);
+    }
+
+
+
+    [PunRPC]
+    private void RPC_LoadedGameScene()
+    {
+        PlayersInGame++;
+        print("Players in the scene : " + PlayersInGame);
+
+        if (PlayersInGame == PhotonNetwork.PlayerList.Length) //in number of players in game is the same as the player list 
+        {
+            print("All players are in the game scene");
+        }
+
+    }
 
 }
 

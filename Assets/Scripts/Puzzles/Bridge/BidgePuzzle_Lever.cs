@@ -7,8 +7,8 @@ using Photon.Realtime;
 
 public class BidgePuzzle_Lever : MonoBehaviour
 {
-    [Header("Spawn Piece")]
-    public GameObject missingBridePiece;
+ //   [Header("Spawn Piece")]
+  //  public GameObject[] missingBridePiece;
 
     [Header("Spawn Points")]
     public GameObject SpawnPoint;
@@ -33,7 +33,8 @@ public class BidgePuzzle_Lever : MonoBehaviour
     NetworkedPlayerController controller;
 
     [Header("Missing Item")]
-    [HideInInspector] public GroundItem missingItem;
+     public GroundItem missingItem;
+    public GameObject missingItem2;
     public BridgePuzzle_CheckForPiece bridgePuzzleChecker;
 
     [Header("Photon Settings")]
@@ -144,10 +145,10 @@ public class BidgePuzzle_Lever : MonoBehaviour
                 if (controller.PermormingAction == true)
                 {
                     print("Controller perfmorning action");
-           
+
                         //SEND CALL FOR ACTION - suvscription 
                         //Spawn Bridge Piece
-            
+                        RandomizePuzzlePiece();
                         if (SceneSettings.Instance.isMultiPlayer == true)
                         {
                             //Removed as puzzle pieces are already available. 
@@ -228,6 +229,8 @@ public class BidgePuzzle_Lever : MonoBehaviour
     public void InteractionWithPuzzle()
     {
 
+
+
     }
 
     void OnEnable()
@@ -249,17 +252,19 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
 
 
+
+
             //event ending here
 
 
             if (SceneSettings.Instance.DebugMode == true)
             {
-                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1)
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 0)
                 {
                     HumanPlayer = true;
                 }
 
-                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2)
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1)
                 {
                     GhostPLayer = true;
                 }
@@ -270,7 +275,7 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
                 if (PV.IsMine)
                 {
-                    if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1 && HumanPlayer == true && PuzzleGuideShowing == false)
+                    if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 0 && HumanPlayer == true && PuzzleGuideShowing == false)
                     {
                         print("Performing human Action");
                         PuzzleGuide.gameObject.SetActive(true);
@@ -279,7 +284,7 @@ public class BidgePuzzle_Lever : MonoBehaviour
                         return;
                     }
 
-                    if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 && GhostPLayer == true && PuzzleGuideShowing == false)
+                    if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1 && GhostPLayer == true && PuzzleGuideShowing == false)
                     {
                         print("Performing ghost Action");
                         PuzzleGuide.gameObject.SetActive(true);
@@ -300,7 +305,7 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
             if (SceneSettings.Instance.isSinglePlayer == true)
             {
-                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1 && HumanPlayer == true && PuzzleGuideShowing == false)
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 0 && HumanPlayer == true && PuzzleGuideShowing == false)
                 {
                     print("Performing human Action");
                     PuzzleGuide.gameObject.SetActive(true);
@@ -309,7 +314,7 @@ public class BidgePuzzle_Lever : MonoBehaviour
                     return;
                 }
 
-                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 && GhostPLayer == true && PuzzleGuideShowing == false)
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1 && GhostPLayer == true && PuzzleGuideShowing == false)
                 {
                     print("Performing ghost Action");
                     PuzzleGuide.gameObject.SetActive(true);
@@ -337,11 +342,16 @@ public class BidgePuzzle_Lever : MonoBehaviour
     public void RandomizePuzzlePiece()
     {
 
+
+       
+        Debug.Log("Randomize Puzzle Piece");
         int index;
         index = Random.Range(0, puzzleClues.Length);
         missingItem = puzzleClues[index];
 
         bridgePuzzleChecker.missingItem = missingItem;
+
+      
 
         clueImageContainer.sprite = missingItem.item.uiDisplay;
     }
@@ -353,8 +363,7 @@ public class BidgePuzzle_Lever : MonoBehaviour
         missingItem = puzzleClues[randomNum];
 
          bridgePuzzleChecker.missingItem = missingItem;
-
-        clueImageContainer.sprite = missingItem.item.uiDisplay;
+    clueImageContainer.sprite = missingItem.item.uiDisplay;
     }
 
 
@@ -363,4 +372,6 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
 
 
+
 }
+

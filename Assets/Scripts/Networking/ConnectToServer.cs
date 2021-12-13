@@ -20,6 +20,11 @@ public class ConnectToServer : MonoBehaviourPunCallbacks            //Photon cal
     [Header("Autoconnect")]
     public GameObject AutoConnectUI;
 
+
+    [Header("Scene Ref")]
+    public SceneReference levelToLoad;
+
+
     public void Awake()
     {
         if (playerSOData.AutoConnect == true)
@@ -52,7 +57,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks            //Photon cal
 
     public override void OnConnectedToMaster()
     {
-        SceneManager.LoadScene("Lobby");                            //Copy to lobby scene. 
+        SceneManager.LoadScene(levelToLoad);                            //Copy to lobby scene. 
     }
 
  

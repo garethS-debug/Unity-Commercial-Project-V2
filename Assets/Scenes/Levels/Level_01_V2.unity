@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 2bd8959f5fbd3644aa33af1a155fc147, type: 2}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.469
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5430111, g: 0.7317461, b: 0.9966735, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1526,7 +1526,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
+  m_MaterialTemplate: {fileID: 2100000, guid: 22ff8771d87ef27429e670136399094b, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -1953,7 +1953,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Rigidbody
       value: 
-      objectReference: {fileID: 1043954186}
+      objectReference: {fileID: 0}
     - target: {fileID: 1531644324875848133, guid: 97ff5e5dccbc6c4498a45186ba4cd06a,
         type: 3}
       propertyPath: _camControll
@@ -4314,6 +4314,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 450294612}
     m_Modifications:
+    - target: {fileID: 888867947274537292, guid: 163d1c6a5010434429cf7e1a52e1e084,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5491276357341050185, guid: 163d1c6a5010434429cf7e1a52e1e084,
         type: 3}
       propertyPath: m_RootOrder
@@ -5009,6 +5014,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 450294612}
     m_Modifications:
+    - target: {fileID: -3749980972101626250, guid: 96af37403788b25418cc2bd8f15b1089,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6687839687677279363, guid: 96af37403788b25418cc2bd8f15b1089,
         type: 3}
       propertyPath: m_RootOrder
@@ -5295,12 +5305,6 @@ Animator:
 --- !u!136 &1043954185 stripped
 CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 1531644324875848131, guid: 97ff5e5dccbc6c4498a45186ba4cd06a,
-    type: 3}
-  m_PrefabInstance: {fileID: 454700483}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &1043954186 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 1531644324875848135, guid: 97ff5e5dccbc6c4498a45186ba4cd06a,
     type: 3}
   m_PrefabInstance: {fileID: 454700483}
   m_PrefabAsset: {fileID: 0}
@@ -6007,6 +6011,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 450294612}
     m_Modifications:
+    - target: {fileID: 888867947274537292, guid: 163d1c6a5010434429cf7e1a52e1e084,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5491276357341050185, guid: 163d1c6a5010434429cf7e1a52e1e084,
         type: 3}
       propertyPath: m_RootOrder
@@ -7974,7 +7983,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e031ca0058a82164fac08e7445f0631b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 11400000, guid: 5dea348939dc7a84ba7f335378ccea4f, type: 2}
+  inventoryPrefab: {fileID: 0}
+  inventoryHuman: {fileID: 0}
+  inventoryGhost: {fileID: 0}
+  playerSO: {fileID: 0}
   xStart: -210
   xSpaceBetweenItems: 350
   yStart: 80

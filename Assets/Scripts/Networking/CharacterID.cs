@@ -82,6 +82,7 @@ public class CharacterID : MonoBehaviour
             {
                 if (gameObject.GetComponent<NetworkedPlayerController>().isInLobby == false)
                 {
+                    
                     griefBar.GetComponent<GriefBarDisplay>().CreateGhostCandle();
                 }
             }
