@@ -532,6 +532,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()      //Join master server when leaving a lobby. 
     {
+        //Added 13/12/2021
+        print("Connected to master");
+        PhotonNetwork.AutomaticallySyncScene = true;
+
+
         PhotonNetwork.JoinLobby();
     }
 
