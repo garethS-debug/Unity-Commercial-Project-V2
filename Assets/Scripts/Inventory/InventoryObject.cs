@@ -61,7 +61,7 @@ public class InventoryObject : ScriptableObject
             }
         }
 
-        //Needs to work on solution when inventory is full
+        //Need to work on solution when inventory is full
         return null;
     }
 
@@ -82,6 +82,12 @@ public class InventoryObject : ScriptableObject
                 if (Container.Items[i].amount == 1)
                 {
                     Container.Items[i].UpdateSlot(-1, null, 0);
+
+                    if (_item.Name == "GoldenKey")
+                    {
+                        twoKeysCollected = false;
+                        oneKeyCollected = false;
+                    }
                 }
 
                 //If more than one item in inventory, remove one of them
@@ -89,10 +95,17 @@ public class InventoryObject : ScriptableObject
                 {
                     int newAmount = Container.Items[i].amount - 1;
                     Container.Items[i].UpdateSlot(Container.Items[i].ID, Container.Items[i].item, newAmount);
+
+                    if (_item.Name == "GoldenKey")
+                    {
+                        twoKeysCollected = false;
+                        oneKeyCollected = true;
+                    }
                 }
 
                 Vector3 positionPrefab = new Vector3();
-                Vector3 offsetPrefab = new Vector3(0, 2f, -5f);
+                Vector3 offsetPrefab = new Vector3(0f, 2f, -5f);
+                Vector3 rotationPrefab = new Vector3(0f, 135f, 90f);
 
                 if (playerSO.PlayerCharacterChoise == 0)
                 {
@@ -113,7 +126,7 @@ public class InventoryObject : ScriptableObject
 
                 else if (SceneSettings.Instance.isSinglePlayer == true)
                 {
-                    Instantiate(prefab, positionPrefab, Quaternion.identity);
+                    Instantiate(prefab, positionPrefab, Quaternion.Euler(rotationPrefab));
                 }
             }
         }
