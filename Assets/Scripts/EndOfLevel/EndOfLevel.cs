@@ -8,7 +8,7 @@ using ExitGames.Client.Photon;
 
 public class EndOfLevel : MonoBehaviourPunCallbacks
 {
-
+    public static EndOfLevel Instance;
 
     public SceneReference levelToLoad;
 
@@ -22,10 +22,29 @@ public class EndOfLevel : MonoBehaviourPunCallbacks
     public GameObject tree;
 
 
+    private void Awake()
+    {
+        if (Instance)                                   //If room manager already in scene
+        {
+            Destroy(gameObject);                        //If yes destroy
+            print("Destroying this copy");
+            return;
+
+        }
+
+        else
+        {
+            Instance = this;
+            print("I am the only 1");
+
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
-        thankYouUI.gameObject.SetActive(false);
+       // thankYouUI.gameObject.SetActive(false);
+
+
     }
 
     // Update is called once per frame
@@ -120,13 +139,28 @@ public class EndOfLevel : MonoBehaviourPunCallbacks
 
     IEnumerator DoSwitchLevel(string level)
     {
+        yield return new WaitForSeconds(0.1f);
         Debug.Log("Running Switch Level Co-routine");
-        PhotonNetwork.Disconnect();
+        //PhotonNetwork.Disconnect();
    
-        while (PhotonNetwork.IsConnected)
-            yield return null;
+       // while (PhotonNetwork.IsConnected)
+       //     yield return null;
         Debug.Log("Running Switch level");
-        SceneManager.LoadScene(levelToLoad);
+
+        if (SceneSettings.Instance.isSinglePlayer)
+        {
+            SceneManager.LoadScene(levelToLoad);
+        }
+
+        if (SceneSettings.Instance.isMultiPlayer)
+        {
+            Debug.Log("Running Switch level - multiplayer");
+            PhotonNetwork.AutomaticallySyncScene = true;
+
+            Debug.Log("Running Switch level - PhotonNetworkLevelToLoad");
+            PhotonNetwork.LoadLevel(levelToLoad);
+        }
+
     }
 
 

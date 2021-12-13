@@ -56,6 +56,8 @@ MonoBehaviour:
   - RPC_ShowKey
   - TriggerDialogOnAllClients
   - RPC_SwitchLevel
+  - RPC_LoadedGameScene
+  - RPC_LoadGameOthers
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
