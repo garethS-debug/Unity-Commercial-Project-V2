@@ -13,6 +13,7 @@ public class BoxMovement : MonoBehaviour
         if (other.gameObject.CompareTag("TargetTrigger"))
         {
             displayKey.AddBox(1);
+            Debug.Log("box +1");
         }
     }
 
@@ -21,6 +22,7 @@ public class BoxMovement : MonoBehaviour
         if (other.gameObject.CompareTag("TargetTrigger"))
         {
             displayKey.AddBox(-1);
+            Debug.Log("box -1");
         }
     }
 }
