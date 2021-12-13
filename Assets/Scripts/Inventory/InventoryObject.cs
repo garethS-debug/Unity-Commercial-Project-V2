@@ -18,6 +18,12 @@ public class InventoryObject : ScriptableObject
     public bool oneKeyCollected = false;
     public bool twoKeysCollected = false;
 
+    public void ResetKeys()
+    {
+        oneKeyCollected = false;
+        twoKeysCollected = false;
+    }
+
     public void AddItem(Item _item, int _amount)
     {
         // Check if item is already in inventory
@@ -100,15 +106,17 @@ public class InventoryObject : ScriptableObject
 
                 //Instantiate an item on the ground
                 GameObject prefab = database.GetItem[_item.Id].prefabItem;
-                PhotonNetwork.Instantiate(prefab.name, positionPrefab, Quaternion.identity);
+                if (SceneSettings.Instance.isMultiPlayer == true)
+                {
+                    PhotonNetwork.Instantiate(prefab.name, positionPrefab, Quaternion.identity);
+                }
 
+                else if (SceneSettings.Instance.isSinglePlayer == true)
+                {
+                    Instantiate(prefab, positionPrefab, Quaternion.identity);
+                }
             }
         }
-    }
-
-    public void PlayerPosition()
-    {
-
     }
 
     public void SaveInventory()

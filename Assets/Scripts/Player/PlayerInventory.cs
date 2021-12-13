@@ -12,6 +12,11 @@ public class PlayerInventory : MonoBehaviour
     [Header("Photon Settings")]
     PhotonView PV;                                              //Setting up photon view 
 
+    private void Start()
+    {
+        inventory.ResetKeys();
+    }
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.K))
