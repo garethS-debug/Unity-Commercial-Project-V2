@@ -168,8 +168,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -282, y: -135}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -261, y: -227.33}
+  m_SizeDelta: {x: 15.3352, y: 61.0818}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1401286932918723767
 CanvasRenderer:
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300192, guid: 1e627bcafe9e32d40ad554880f36b5eb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3092b1508db1d16498896cc83f485dba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -346,9 +346,18 @@ MonoBehaviour:
   _isStringBeingRevealed: 0
   _isDialoguePlaying: 0
   _isEndOfDialogue: 0
+  isIntroScene: 1
+  isEndofEntireDialog: 0
   DialogueStrings:
-  - "Welcome to the train\t"
-  - Yes the train
+  - Today is the 18th anniverary of my father's death.
+  - After he died, we went on a journey together.
+  - I wrote down our adventure in a journal and
+  - 'every year I return to relive our adventure we had. '
+  dialogList:
+  - Today is the 19th anniversary of my father's death.
+  - 'After he died, we went on one final journey together. '
+  - I documented our adventure in a journal so that every year I could go back
+  - to the place where it all began to relive those precious moments.
 --- !u!95 &1401286933888604620
 Animator:
   serializedVersion: 3

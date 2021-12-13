@@ -759,7 +759,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             Transform spawnPoint = Lobby_Room_Player_SpawnPoints[randomNumber].transform;
 
             //Access Save File 
-            GameObject playerToSpawn = playerPrefabs[2]; //Choosing Ghost
+            GameObject playerToSpawn = playerPrefabs[0]; //Choosing Human
 
             spawnedLobbyPlayer = Instantiate(playerToSpawn, spawnPoint.position, spawnPoint.rotation);
             spawnedLobbyPlayer.gameObject.GetComponent<NetworkedPlayerController>().isInLobby = true;
