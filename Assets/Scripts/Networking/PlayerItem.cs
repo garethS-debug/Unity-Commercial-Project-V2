@@ -33,6 +33,12 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     [Header("SO")]
     public PlayerSO playerSOData;
 
+    //[Header("Photon")]
+   // private PhotonView photon;
+
+
+
+
     private void Start()
     {
         // backgroundImage = GetComponent<Image>();
@@ -49,11 +55,18 @@ public class PlayerItem : MonoBehaviourPunCallbacks
          //   rightArrowButton.SetActive(false);
         }
 
+     //   photon = GetComponent<PhotonView>();
+
         print("Start ID = " + (int)playerproperties["playerAvatar"]);
 
             PhotonNetwork.SetPlayerCustomProperties(playerproperties);
             KickButton.gameObject.SetActive(false);
 
+        //left and right button
+       // leftArrowButton.SetActive(false);
+       // rightArrowButton.SetActive(false);
+
+  
         //Kick Buttong
         if (PhotonNetwork.IsMasterClient)
         {
@@ -146,6 +159,7 @@ public class PlayerItem : MonoBehaviourPunCallbacks
 
     public void OnclickArrowRight()
     {
+       
         if ((int)playerproperties["playerAvatar"] == avatars.Length - 1)
         {
             playerproperties["playerAvatar"] = 0;

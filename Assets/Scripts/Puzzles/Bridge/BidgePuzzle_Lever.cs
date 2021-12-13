@@ -34,7 +34,7 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
     [Header("Missing Item")]
      public GroundItem missingItem;
-    public GameObject missingItem2;
+  //  public GameObject missingItem2;
     public BridgePuzzle_CheckForPiece bridgePuzzleChecker;
 
     [Header("Photon Settings")]
@@ -60,7 +60,13 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
         if (SceneSettings.Instance.isMultiPlayer == true)
         {
+            /*
+            int index;
+            index = Random.Range(0, puzzleClues.Length);
 
+            PhotonView photonView = PhotonView.Get(this);
+            photonView.RPC("RandomizePuzzlePieces", RpcTarget.All, index);
+            */
         }
   
 
@@ -164,17 +170,23 @@ public class BidgePuzzle_Lever : MonoBehaviour
                     {
                         if (controller.PermormingAction == true)
                         {
-                            print("Controller perfmorning action");
-                           
+                            if (PuzzleGuideShowing == false) {
+
+                                /*
+                                // UI is not active
+                                print("Controller perfmorning action");
+
                                 int index;
                                 index = Random.Range(0, puzzleClues.Length);
-                                
+
                                 PhotonView photonView = PhotonView.Get(this);
                                 photonView.RPC("RandomizePuzzlePieces", RpcTarget.All, index);
 
                                 //SEND CALL FOR ACTION - suvscription 
                                 //Spawn Bridge Piece
-                           
+                                */
+                             //   m_RandomPuzzle();
+                            }
                             
                             
                         }
@@ -233,6 +245,20 @@ public class BidgePuzzle_Lever : MonoBehaviour
 
     }
 
+    private void m_RandomPuzzle()
+    {
+        print("Controller perfmorning action");
+
+        int index;
+        index = Random.Range(0, puzzleClues.Length);
+
+        PhotonView photonView = PhotonView.Get(this);
+        photonView.RPC("RandomizePuzzlePieces", RpcTarget.All, index);
+
+        //SEND CALL FOR ACTION - suvscription 
+        //Spawn Bridge Piece
+    }
+
     void OnEnable()
     {
         NetworkedPlayerController.myEvent += PrintStuff;
@@ -280,7 +306,7 @@ public class BidgePuzzle_Lever : MonoBehaviour
                         print("Performing human Action");
                         PuzzleGuide.gameObject.SetActive(true);
                         PuzzleGuideShowing = true;
-                        // performingLeverAction = false;
+                        m_RandomPuzzle();// performingLeverAction = false;
                         return;
                     }
 
@@ -289,7 +315,7 @@ public class BidgePuzzle_Lever : MonoBehaviour
                         print("Performing ghost Action");
                         PuzzleGuide.gameObject.SetActive(true);
                         PuzzleGuideShowing = true;
-                        //  performingLeverAction = false;
+                        m_RandomPuzzle(); //  performingLeverAction = false;
                         return;
                     }
 

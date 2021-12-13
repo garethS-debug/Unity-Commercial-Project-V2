@@ -506,7 +506,7 @@ MonoBehaviour:
   turning: 0
   m_Capsule: {fileID: 0}
   m_TurnAmount: 0
-  gravity: 13
+  gravity: 20
   JumpForce: 12
   JumpInput: 32
   grounded: 0
@@ -679,8 +679,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0171c6be824c83d419ccee307fdcdceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushPower: 3
-  forceMagnitude: 1
 --- !u!1 &1729794143952959833
 GameObject:
   m_ObjectHideFlags: 0
