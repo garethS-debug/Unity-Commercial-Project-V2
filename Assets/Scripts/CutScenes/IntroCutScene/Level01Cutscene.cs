@@ -130,7 +130,7 @@ public class Level01Cutscene : MonoBehaviour
     {
         intro.gameObject.SetActive(false);
         skipButton.gameObject.SetActive(false);
-        roomManager.spawnPlayers();
+       // roomManager.spawnPlayers();
 
 
     }
