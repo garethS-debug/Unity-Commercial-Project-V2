@@ -9,6 +9,7 @@ public abstract class ItemObject : ScriptableObject
     public Sprite uiDisplay;
     public ItemType type;
     public string description;
+    public GameObject prefabItem;
 }
 
 public enum ItemType

@@ -33,6 +33,12 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     [Header("SO")]
     public PlayerSO playerSOData;
 
+    //[Header("Photon")]
+   // private PhotonView photon;
+
+
+
+
     private void Start()
     {
         // backgroundImage = GetComponent<Image>();
@@ -43,17 +49,24 @@ public class PlayerItem : MonoBehaviourPunCallbacks
 
         if (playerSOData.AutoConnect == true)
         {
-            playerproperties["playerAvatar"] = playerSOData.PlayerCharacterChoise;
+         //   playerproperties["playerAvatar"] = playerSOData.PlayerCharacterChoise;
             print("PLayer ID = " + (int)playerproperties["playerAvatar"]);
-            leftArrowButton.SetActive(false);
-            rightArrowButton.SetActive(false);
+         //   leftArrowButton.SetActive(false);
+         //   rightArrowButton.SetActive(false);
         }
+
+     //   photon = GetComponent<PhotonView>();
 
         print("Start ID = " + (int)playerproperties["playerAvatar"]);
 
             PhotonNetwork.SetPlayerCustomProperties(playerproperties);
             KickButton.gameObject.SetActive(false);
 
+        //left and right button
+       // leftArrowButton.SetActive(false);
+       // rightArrowButton.SetActive(false);
+
+  
         //Kick Buttong
         if (PhotonNetwork.IsMasterClient)
         {
@@ -74,6 +87,7 @@ public class PlayerItem : MonoBehaviourPunCallbacks
         else if (!PhotonNetwork.IsMasterClient)
         {
           //  KickButton.gameObject.SetActive(true);
+          
         }
     }
 
@@ -112,6 +126,7 @@ public class PlayerItem : MonoBehaviourPunCallbacks
         {
             playerAvatar.sprite = avatars[(int)player.CustomProperties["playerAvatar"]];                //player avatar will get changed on all player controllers
             playerproperties["playerAvatar"] = (int)player.CustomProperties["playerAvatar"];            //keep player avater
+                                                                                                        
         }
 
         else
@@ -144,6 +159,7 @@ public class PlayerItem : MonoBehaviourPunCallbacks
 
     public void OnclickArrowRight()
     {
+       
         if ((int)playerproperties["playerAvatar"] == avatars.Length - 1)
         {
             playerproperties["playerAvatar"] = 0;
@@ -162,8 +178,23 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     public void OnClick_Kick()
     {
 
-      //  PhotonNetwork.CloseConnection(player);
-        //Remove player item card
+        //  PhotonNetwork.CloseConnection(player);
+        //Remove player item car
+        //d
         //refresh for everyone
+
+      
+
+
+      //  As earlier I was catching the property in :
+
+      
+
+
     }
+
+
+    
+
+
 }

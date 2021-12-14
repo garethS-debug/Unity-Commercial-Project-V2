@@ -131,7 +131,7 @@ public class GatePuzzleObjectTrigger : MonoBehaviour
 
                 if (PV.IsMine)
                 {
-                    if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1)
+                    if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 0)
                     {
                         state = PuzzleObjectState.Active;
 
@@ -146,7 +146,7 @@ public class GatePuzzleObjectTrigger : MonoBehaviour
                         return;
                     }
 
-                    if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 )
+                    if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1 )
                     {
                         state = PuzzleObjectState.Active;
                         MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
@@ -160,7 +160,7 @@ public class GatePuzzleObjectTrigger : MonoBehaviour
 
             if (SceneSettings.Instance.isSinglePlayer == true)
             {
-                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1)
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 0)
                 {
                     state = PuzzleObjectState.Active;
                     MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
@@ -169,7 +169,7 @@ public class GatePuzzleObjectTrigger : MonoBehaviour
                     return;
                 }
 
-                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 2 )
+                if (SceneSettings.Instance.playerSOData.PlayerCharacterChoise == 1 )
                 {
                     state = PuzzleObjectState.Active;
                     MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();

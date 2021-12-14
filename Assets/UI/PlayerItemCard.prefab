@@ -328,9 +328,8 @@ MonoBehaviour:
   rightArrowButton: {fileID: 7811040097278284772}
   playerAvatar: {fileID: 7811040095426152701}
   avatars:
-  - {fileID: 21300000, guid: 6d76a67eba80d5d4780d445ea8d6af9c, type: 3}
-  - {fileID: 21300000, guid: 4b86ac945c0616e4ba7db2a213d3541e, type: 3}
-  - {fileID: 21300000, guid: 9297f8d9d30ad4642896a178a06a4c39, type: 3}
+  - {fileID: 21300000, guid: 3bcf73a984011bf4ab681da941b604ad, type: 3}
+  - {fileID: 21300000, guid: 6e58486bdf7fd104c8b1e542f1167dfa, type: 3}
   KickButton: {fileID: 5666742609160195068}
   playerSOData: {fileID: 11400000, guid: f6bbc180c160720489c9048e80112be2, type: 2}
 --- !u!1 &7811040095426152703
@@ -769,7 +768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7811040097259933445
 RectTransform:
   m_ObjectHideFlags: 0
@@ -787,7 +786,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -79, y: 0}
+  m_AnchoredPosition: {x: -79, y: -89}
   m_SizeDelta: {x: 38.0093, y: 32.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7811040097259933442
@@ -902,7 +901,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7811040097278284771
 RectTransform:
   m_ObjectHideFlags: 0
@@ -920,7 +919,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 84, y: 0}
+  m_AnchoredPosition: {x: 84, y: -88.999916}
   m_SizeDelta: {x: 38.0093, y: 32.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7811040097278284768

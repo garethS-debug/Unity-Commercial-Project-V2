@@ -38,7 +38,8 @@ public class GameSetup : MonoBehaviour
 	[Header("SO")]
 	public PlayerSO playerSOData;
 
- 
+	[Header("Tutorial")]
+	public MainMenu_Cutscene tutorialCutscene;
 
 	// Start is called before the first frame update
 	void Start()
@@ -118,7 +119,7 @@ public class GameSetup : MonoBehaviour
 	public void SELECT_CHILDCHARACTER()
     {
 
-		PlayerCharacter = 1;                                            //Human = 1
+		PlayerCharacter = 0;                                            //Human = 1
 		playerSOData.PlayerCharacterChoise = PlayerCharacter;
 		//Debug.Log("Saving....");
 		playerName = ChildNameInput.text;
@@ -129,7 +130,7 @@ public class GameSetup : MonoBehaviour
 
 	public void SELECT_GHOSTCHARACTER()
 	{
-		PlayerCharacter = 2;										//Ghost = 2
+		PlayerCharacter = 1;										//Ghost = 2
 		playerSOData.PlayerCharacterChoise = PlayerCharacter;
 		//Debug.Log("Saving....");
 		playerName = GhostNameInput.text;
@@ -141,22 +142,41 @@ public class GameSetup : MonoBehaviour
 	public void m_START_GAME()
     {
 	 bool isSave =	SaveGameManager.CheckforSaveGame();
-
 	if (isSave)
         {
 		//	Debug.Log("Continue to game with your character...");
 			SaveGameManager.Load();
 
-			UpdatePlayerSaveSO(1);						//1 = multiplayer
+			UpdatePlayerSaveSO(1);                      //1 = multiplayer
 
-			SceneManager.LoadScene(levelToLoad);
+			///---- StartTutorialCutScene--->
+			///SELECT_CHILDCHARACTER();
+			tutorialCutscene.gamesetup = this.gameObject.GetComponent<GameSetup>();
+			tutorialCutscene.continue_StartTutorialCutscene();
+		
 		}
+
+
+
+
 	else
         {
-		//	Debug.Log("Choose A Character");
+			//Moving character select to lobby creation -------------> 
+			/*
 			selectCharacterUI.SetActive(true);
 			StartUI.SetActive(false);
+			*/
+			///SELECT_CHILDCHARACTER();
+			PlayerCharacter = 0;                                            //Human = 0
+			playerSOData.PlayerCharacterChoise = PlayerCharacter;
+			//Debug.Log("Saving....");
+			playerName = ChildNameInput.text;
+			SaveGameManager.Save();
 
+			///---- StartTutorialCutScene--->
+			
+			tutorialCutscene.gamesetup = this.gameObject.GetComponent<GameSetup>();
+			tutorialCutscene.start_StartTutorialCutscene();
 		}
 
 	}
@@ -171,13 +191,24 @@ public class GameSetup : MonoBehaviour
 			//	Debug.Log("Continue to game with your character...");
 			SaveGameManager.Load();
 			UpdatePlayerSaveSO(2);                  //2 = Single Player
-			SceneManager.LoadScene(levelToLoad);
+
+			///---- StartTutorialCutScene--->
+			///SELECT_CHILDCHARACTER();
+			tutorialCutscene.gamesetup = this.gameObject.GetComponent<GameSetup>();
+			tutorialCutscene.continue_StartTutorialCutscene();
 		}
 		else
 		{
-			//	Debug.Log("Choose A Character");
+			//Moving character select to lobby creation -------------> 
+			/*
 			selectCharacterUI.SetActive(true);
 			StartUI.SetActive(false);
+			*/
+
+			///---- StartTutorialCutScene--->
+			///SELECT_CHILDCHARACTER();
+			tutorialCutscene.gamesetup = this.gameObject.GetComponent<GameSetup>();
+			tutorialCutscene.start_StartTutorialCutscene();
 
 		}
 
@@ -197,5 +228,10 @@ public class GameSetup : MonoBehaviour
 
 		
 
+	}
+
+	public void LoadNextScene()
+    {
+		SceneManager.LoadScene(levelToLoad);
 	}
 }
