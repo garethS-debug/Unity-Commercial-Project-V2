@@ -99,6 +99,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [Header("UI")]
     public GameObject lobbyUI;
     [HideInInspector] public Camera bookCamera;
+    public GameObject ghosthumanWarning;
    // public GameObject exitUI;
 
     public void Awake()
@@ -129,8 +130,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             playerproperties["playerAvatar"] = playerSOData.PlayerCharacterChoise;
             //print("PLayer ID = " + (int)playerproperties["playerAvatar"]);
         }
-
-        roomPanel.SetActive(false); //set to false in case
+            ghosthumanWarning.gameObject.SetActive(false);
+            roomPanel.SetActive(false); //set to false in case
 
         // if (!PhotonNetwork.IsConnected)
         // {
@@ -562,10 +563,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             PlayerItem newPlayerItem = Instantiate(playerItemPrefeb, playerItemParent);
             newPlayerItem.Setplayerinfo(player.Value);
 
+            //buttons
+          // newPlayerItem.GetComponent<PlayerItem>().leftArrowButton.SetActive(false);
+         //   newPlayerItem.GetComponent<PlayerItem>().rightArrowButton.SetActive(false);
+
+
             if (player.Value == PhotonNetwork.LocalPlayer) //checking if this is the local player in question
             {
                 newPlayerItem.ApplyLocalChanges();
+       
             }
+
             playerItemsList.Add(newPlayerItem);
         }
     }
@@ -650,14 +658,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
             lobbyPanel.SetActive(false);
             roomPanel.SetActive(false);
-
+            ghosthumanWarning.gameObject.SetActive(false);
             levelSelectPanel.SetActive(true);
         }
 
         else
         {
             uniqueList = false;
+
             Debug.Log("not unique Unique List".Bold());
+            ghosthumanWarning.gameObject.SetActive(true);
         }
 
         characterSelectedID.Clear();

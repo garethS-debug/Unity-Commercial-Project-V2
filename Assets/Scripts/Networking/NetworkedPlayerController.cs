@@ -49,6 +49,7 @@ public class NetworkedPlayerController : MonoBehaviour
 	public float gravity = 15.0f;
 	public float JumpForce = 10.0f;
 	public KeyCode JumpInput = KeyCode.Space;
+	bool isJumping;
 	[SerializeField] bool grounded;
 	//	Vector3 smoothMoveVelocity;
 	int jumpHash;
@@ -680,6 +681,7 @@ public class NetworkedPlayerController : MonoBehaviour
 
 					if (Input.GetKey(JumpInput))
 					{
+
 						print("Jumping");
 						verticalVelocity = JumpForce;
 						anim.SetBool("anim_Jumping", true); // Set jumping 
@@ -747,7 +749,9 @@ public class NetworkedPlayerController : MonoBehaviour
 
 				if (PV.IsMine)
 				{
-					print("Controller grounded status " + controller.isGrounded);
+						
+					
+						print("Controller grounded status " + controller.isGrounded);
 
 
 					
@@ -766,7 +770,7 @@ public class NetworkedPlayerController : MonoBehaviour
 							//Debug.Log("Did Hit");
 
 						rayHitGround = true;
-					}
+						}
 						else
 						{
 						//	Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000, Color.white);
@@ -781,10 +785,11 @@ public class NetworkedPlayerController : MonoBehaviour
 
 
 						if (rayHitGround == true)
-					{
-
-						if (Input.GetKey(JumpInput) || Input.GetKeyDown(JumpInput))
 						{
+
+						if (Input.GetKey(JumpInput) && isJumping == false|| Input.GetKeyDown(JumpInput) && isJumping == false)
+						{
+							isJumping = true;
 							verticalVelocity = JumpForce;
 							anim.SetBool("anim_Jumping", true); // Set jumping 
 
@@ -796,6 +801,11 @@ public class NetworkedPlayerController : MonoBehaviour
 							}
 
 
+						}
+
+						if (Input.GetKeyUp(JumpInput))
+                        {
+							isJumping = false;
 						}
 					}
 
