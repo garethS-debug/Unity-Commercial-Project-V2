@@ -58,6 +58,12 @@ public class EndOfLevel : MonoBehaviourPunCallbacks
         if (other.gameObject.tag == "Player")
         {
             StartCoroutine("CutSceneCoRoutine");
+            if (SceneSettings.Instance.isMultiPlayer)
+            {
+                // PhotonNetwork.LeaveRoom();
+                PhotonNetwork.LoadLevel(levelToLoad);
+                Debug.Log("Running Switch Level call");
+            }
         }
        
     }
@@ -112,7 +118,8 @@ public class EndOfLevel : MonoBehaviourPunCallbacks
             // PhotonNetwork.LeaveRoom();
 
             SwitchLevel();
-          //  photonView.RPC("RPC_SwitchLevel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+            //  photonView.RPC("RPC_SwitchLevel", RpcTarget.All/* tempHit.GetPhotonView().viewID*/ );
+            PhotonNetwork.LoadLevel(levelToLoad);
             Debug.Log("Running Switch Level call");
         }
 

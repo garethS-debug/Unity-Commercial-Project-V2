@@ -25,7 +25,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     [Header("Intro")]
 
-    public GameObject LevelIntro;
+   // public GameObject LevelIntro;
 
 
     [Header("LoadingBetweenScenes")]
@@ -134,30 +134,39 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
 
 
-        if (PhotonNetwork.CurrentRoom == null || PhotonNetwork.CurrentRoom.Players == null) { }
+        if (PhotonNetwork.CurrentRoom == null ) 
         {
-            Debug.Log("Not Connected to room or no current players".Color("red"));
+            Debug.Log("Not Connected to room".Color("red"));
+        }
+
+        if (PhotonNetwork.CurrentRoom.Players == null)
+        {
+            Debug.Log("no current players".Color("red"));
         }
     }
 
+    //running 3 times
     public void spawnPlayers()
     {
 
 
         if (SceneSettings.Instance.isMultiPlayer == true)
         {
+            //running 3 times
             networkedPlayerManager = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
             Debug.Log("Game Is Multiplayer : ".Bold().Color("green"));
+            return;
         }
 
         else
         {
             Debug.Log("Game Is Single Player : ".Bold().Color("white"));
             s_CreatePlayer();
+            return;
         }
 
 
-        LevelIntro.gameObject.SetActive(false);
+     //   LevelIntro.gameObject.SetActive(false);
 
 
     }
